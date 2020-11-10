@@ -1,19 +1,16 @@
 # ProjetSalonLudus
-Realisation d'un projet jeux serieux sur salon v
+Pour faire fonctionner le Git :
 
+  1) Avoir WampServer
+  2) Clone le repo dans un dossier dans le Dossier www de WampServer.
+  
+Pour faire fonctionner le projet : 
 
-
-
-
-
-Règle du GIT : 
-
-1: une branche par groupe 
-2: une branche par personne 
-3: Master est un projet TOUJOURS FONCTIONNEL 
-4:
-
-
+  1) Avoir lancer wamp
+  2) Wamp est vert
+  3) Allez jusquaux repo via wamp
+  4) Bien verifier que l'url est juste ( contient bien local host )
+ 
 
 
 
