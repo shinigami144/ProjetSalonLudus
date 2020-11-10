@@ -6,12 +6,26 @@
     <title>Stand n°1</title>
 </head>
 <body>
-    <p>Nom</p>
-    <image src="https://fakeimg.pl/300/"></image>
-    <p>description</p>
-    <p>Email</p>
-    <p>site</p>
-    <p>tel</p>
+    <div id="divInformationEntreprise">
+        <image id="logoEntreprise" src="https://fakeimg.pl/300/"></image>
+        <p id="nomEntreprise" contenteditable="false">Nom</p>
+        <textarea id="descriptionEntreprise" contenteditable="false">description</textarea>
+        <address id="adresseEntreprise" contenteditable="false"> Rue des Coquelico 87 </address>
+        <p  id="emailEntreprise" contenteditable="false">Email</p>
+        <p  id="siteEntreprise" contenteditable="false">site</p>
+        <p  id="telEntreprise" contenteditable="false" onclick="ChangeContentEditable(this)">tel</p>
+    </div>
     
 </body>
+<script>
+    function ChangeContentEditable(element){
+        element.setAttribute('contenteditable','true')
+        console.log("OK ?");
+        // mettre le focus sur l'element 
+    }
+
+
+</script>
+
+
 </html>
