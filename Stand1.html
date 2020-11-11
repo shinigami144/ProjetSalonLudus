@@ -4,16 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
+    
+    <style>
+        a{
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <div id="divInformationEntreprise">
         <image id="logoEntreprise" src="https://fakeimg.pl/300/"></image>
         <p id="nomEntreprise" contenteditable="false">Nom</p>
-        <textarea id="descriptionEntreprise" contenteditable="false">description</textarea>
+        <p id="descriptionEntreprise" contenteditable="false">description</p>
         <address id="adresseEntreprise" contenteditable="false"> Rue des Coquelico 87 </address>
-        <p  id="emailEntreprise" contenteditable="false">Email</p>
+        <input type="email"  id="emailEntreprise" contenteditable="false">Email</p>
         <p  id="siteEntreprise" contenteditable="false">site</p>
-        <p  id="telEntreprise" contenteditable="false" onclick="ChangeContentEditable(this)">tel</p>
+        <p  id="telEntreprise" contenteditable="false" onclick="ChangeContentEditable(this)" type="telephone">tel</p>
+    </div>
+    <div id="divFileAttente">
+        <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d'attente</p>
+        <div id="listeFileAttente">
+            <a>Persone 1</a>
+            <a>Personne 2</a>
+        </div>
+        <button id="boutonAjoutFileAttente">
+            S'ajouter a la file d'attente de rendez-vous;
+        </button>
     </div>
     
 </body>
