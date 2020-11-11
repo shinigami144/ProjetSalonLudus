@@ -16,10 +16,10 @@
         <image id="logoEntreprise" src="https://fakeimg.pl/300/"></image>
         <p id="nomEntreprise" contenteditable="false">Nom</p>
         <p id="descriptionEntreprise" contenteditable="false">description</p>
-        <address id="adresseEntreprise" contenteditable="false"> Rue des Coquelico 87 </address>
-        <input type="email"  id="emailEntreprise" contenteditable="false">Email</p>
-        <p  id="siteEntreprise" contenteditable="false">site</p>
-        <p  id="telEntreprise" contenteditable="false" onclick="ChangeContentEditable(this)" type="telephone">tel</p>
+        <address id="adresseEntreprise" onclick="ChangeContentEditable(this)" contenteditable="false"> Rue des Coquelico 87 </address>
+        <p type="email"  id="emailEntreprise" contenteditable="false">Email</p>
+        <a  id="siteEntreprise" contenteditable="false"></a>
+        <p  id="telEntreprise" contenteditable="false"  >tel</p>
     </div>
     <div id="divFileAttente">
         <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d'attente</p>
@@ -34,8 +34,43 @@
     
 </body>
 <script>
-    function ChangeContentEditable(element){
+    // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
+    // variable user
+    var userPermission;
+    
+    // partie divInformationEntreprise
+    
+    var logoEntreprise = document.getElementById("logoEntreprise");
+    var nomEntreprise = document.getElementById("nomEntreprise");
+    var descriptionEntreprise = document.getElementById("descriptionEntreprise");
+    var adresseEntreprise  = document.getElementById("adresseEntreprise");
+    var emailEntreprise = document.getElementById("emailEntreprise");
+    var siteEntreprise = document.getElementById("siteEntreprise");
+    var telEntreprise = document.getElementById("telEntreprise");
+
+
+    // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
+
+    //initialisation des different onclickListener
+    
+    logoEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    nomEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    descriptionEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    adresseEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    siteEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    telEntreprise.addEventListener("dblclick",ChangeContentEditable);
+
+    // initialisation des onchangeListener
+
+
+
+
+
+    function ChangeContentEditable(){
+        var element = document.getElementById(event.currentTarget.id);
         element.setAttribute('contenteditable','true')
+        element.focus();
         console.log("OK ?");
         // mettre le focus sur l'element 
     }
