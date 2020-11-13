@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Profil</title>
+    <title>Document</title>
 </head>
 <body>
 
     <button>Supprimer compte</button>
 
-    <a href="./pageListSalon.html">Vers la liste des salons</a>
+    <a href="PageListSalon.html">Vers la liste des salons</a>
 
     <div id="informationContainer">
         <img src="">
-        <p>Mail :</p>
-        <p>Nom :</p>
-        <p>Prenom :</p>
-        <p>Adresse :</p>
-        <p>Code postal :</p>
-        <p>Ville :</p>
-        <p>Pays :</p>
-        <p>Telephone :</p>
+        <p>Mail</p>
+        <p>Nom</p>
+        <p>Prenom</p>
+        <p>Adresse</p>
+        <p>Code postal</p>
+        <p>Ville</p>
+        <p>Pays</p>
+        <p>Telephone</p>
     </div>
 
-    <form>
+    <form id="modificationForm">
         <input type="button" value="changer la photo de profil" name="profilePicture">
         <label for="email">E-mail : </label>
         <input type="email" name="email" required>
@@ -270,6 +270,37 @@
         <label for="phoneNumber">Téléphone : </label>
         <input type="tel" name="phoneNumber">
         <input type="submit" value="Enregistrer">
+        <input type="button" value="annuler" id="cancelModif">
     </form>
 </body>
+<script>
+
+    var infoContainer = document.getElementById("informationContainer");
+    var modifFrom = document.getElementById("modificationForm");
+
+    document.getElementById("cancelModif").addEventListener("click",exitModifMode);
+
+    modifFrom.style.display = "none";
+    modifFrom.addEventListener("submit", sendChange);
+
+    for(var i = 0; i < infoContainer.children.length; i++){
+        infoContainer.children[i].addEventListener("dblclick", enterModifMode);
+    }
+
+    function enterModifMode(e){
+        infoContainer.style.display = "none";
+        modifFrom.style.display = "block";
+        //remplir le form des information
+    }
+
+    function exitModifMode(e){
+        modifFrom.style.display = "none";
+        infoContainer.style.display = "block";
+    }
+
+    function sendChange(e){
+        //envoie des changements vers le serveur
+    }
+
+</script>
 </html>
