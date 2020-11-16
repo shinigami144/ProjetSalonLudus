@@ -21,6 +21,13 @@
         <p  id="siteEntreprise" contenteditable="false">site</p>
         <p  id="telEntreprise" contenteditable="false" onclick="ChangeContentEditable(this)" type="telephone">tel</p>
     </div>
+
+    <form id="UploadForm" action="" method="post" enctype="multipart/form-data">
+        <title for="fileToUpload"> Brochure </title> 
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload File" name="submit">
+    </form>
+
     <div id="divFileAttente">
         <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d'attente</p>
         <div id="listeFileAttente">
