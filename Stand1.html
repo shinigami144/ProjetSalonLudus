@@ -14,7 +14,7 @@
         <input type="text" placeholder="81 rue des moule" id="adresseEntreprise" readonly>
         <input type="email" placeholder="truc@tucr.com" id="emailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" >
         <input type="text"  placeholder="https://www.w3schools.com/" id="siteEntreprise" readonly>
-        <input type="tel"  placeholder="+2486442727" id="telEntreprise" readonly>
+        <input type="tel"  placeholder="+2486442727" id="telEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
     </form>
     <form id="UploadForm" action="" method="post" enctype="multipart/form-data">
         <title for="fileToUpload"> Brochure </title> 
