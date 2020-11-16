@@ -12,7 +12,7 @@
         <input type="text" placeholder="NomEntreprise" id="nomEntreprise" readonly>
         <input type="text" placeholder="description de l'entreprise" id="descriptionEntreprise"  readonly>
         <input type="text" placeholder="81 rue des moule" id="adresseEntreprise" readonly>
-        <input type="email" placeholder="truc@tucr.com" id="emailEntreprise" readonly>
+        <input type="email" placeholder="truc@tucr.com" id="emailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" >
         <input type="text"  placeholder="https://www.w3schools.com/" id="siteEntreprise" readonly>
         <input type="tel"  placeholder="+2486442727" id="telEntreprise" readonly>
     </form>
@@ -66,7 +66,6 @@
     siteEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     telEntreprise.addEventListener("change",SaveChangeButtonDisplay);
 
-    // Ajout des label sur les champs.
 
 
 
