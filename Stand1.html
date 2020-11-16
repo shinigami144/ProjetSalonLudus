@@ -5,22 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
     
-    <style>
-        a{
-            display: block;
-        }
-    </style>
 </head>
 <body>
-    <div id="divInformationEntreprise">
-        <image id="logoEntreprise" src="https://fakeimg.pl/300/"></image>
-        <p id="nomEntreprise" contenteditable="false">Nom</p>
-        <p id="descriptionEntreprise" contenteditable="false">description</p>
-        <address id="adresseEntreprise" contenteditable="false"> Rue des Coquelico 87 </address>
-        <input type="email"  id="emailEntreprise" contenteditable="false">Email</p>
-        <p  id="siteEntreprise" contenteditable="false">site</p>
-        <p  id="telEntreprise" contenteditable="false" onclick="ChangeContentEditable(this)" type="telephone">tel</p>
-    </div>
+    <form id="divInformationEntreprise">
+        <input type="image" id="logoEntreprise" src="https://fakeimg.pl/300/" readonly>
+        <input type="text" placeholder="NomEntreprise" id="nomEntreprise" readonly>
+        <input type="text" placeholder="description de l'entreprise" id="descriptionEntreprise"  readonly>
+        <input type="text" placeholder="81 rue des moule" id="adresseEntreprise" readonly>
+        <input type="email" placeholder="truc@tucr.com" id="emailEntreprise" readonly>
+        <input type="text"  placeholder="https://www.w3schools.com/" id="siteEntreprise" readonly>
+        <input type="tel"  placeholder="+2486442727" id="telEntreprise" readonly>
+    </form>
     <div id="divFileAttente">
         <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d'attente</p>
         <div id="listeFileAttente">
@@ -34,10 +29,61 @@
     
 </body>
 <script>
-    function ChangeContentEditable(element){
-        element.setAttribute('contenteditable','true')
-        console.log("OK ?");
-        // mettre le focus sur l'element 
+    // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
+    // variable user
+    var userPermission;
+    
+    // partie divInformationEntreprise
+    
+    var logoEntreprise = document.getElementById("logoEntreprise");
+    var nomEntreprise = document.getElementById("nomEntreprise");
+    var descriptionEntreprise = document.getElementById("descriptionEntreprise");
+    var adresseEntreprise  = document.getElementById("adresseEntreprise");
+    var emailEntreprise = document.getElementById("emailEntreprise");
+    var siteEntreprise = document.getElementById("siteEntreprise");
+    var telEntreprise = document.getElementById("telEntreprise");
+
+
+    // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
+
+    //initialisation des different onclickListener
+    
+    logoEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    nomEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    descriptionEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    adresseEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    siteEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    telEntreprise.addEventListener("dblclick",ChangeContentEditable);
+
+    // initialisation des onchangeListener
+
+    logoEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    nomEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    descriptionEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    adresseEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    emailEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    siteEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    telEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+
+    // Ajout des label sur les champs.
+
+
+
+
+
+
+    function SaveChangeButtonDisplay(){
+        // button apeart
+    }
+
+
+    function ChangeContentEditable(){
+        var element = document.getElementById(event.currentTarget.id);
+        console.log(element.readOnly);
+        element.readOnly = false;
+        element.focus();
+        console.log(element.readOnly);
     }
 
 
