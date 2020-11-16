@@ -62,14 +62,11 @@
     telEntreprise.addEventListener("dblclick",ChangeContentEditable);
 	
 	//RECUPERER LES VALUES DE LA BDD
-	let nbrWaiting = 1;
+	let nbrWaiting = 2;
 	let isInWaitList = false;
 	updateWaitList();
+	setInterval(function(){ removeFromWaitList() }, 1500);
     // initialisation des onchangeListener
-
-
-
-
 
     function ChangeContentEditable(){
         var element = document.getElementById(event.currentTarget.id);
@@ -83,10 +80,20 @@
 	{
 		let divWaiting = document.getElementById('nbrWaiting');
 		let divTextWaiting = document.getElementById('textWaiting');
+		if(nbrWaiting < 0)
+			nbrWaiting = 0;
 		if(isInWaitList)
 		{
-			divTextWaiting.innerHTML = "Nombre de personne avant vous dans la liste d'attente :";
-			divWaiting.innerHTML = nbrWaiting - 1;
+			if(nbrWaiting > 1)
+			{
+				divTextWaiting.innerHTML = "Nombre de personne avant vous dans la liste d'attente :";
+				divWaiting.innerHTML = nbrWaiting - 1;
+			}
+			else
+			{
+				divTextWaiting.innerHTML = "C'est à vous!";
+				divWaiting.innerHTML = "";
+			}
 		}
 		else
 		{
