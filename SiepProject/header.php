@@ -23,7 +23,7 @@ if((<?php echo $attente; ?> == 1)&&(<?php echo $position; ?> ==1)){
 
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#FF0000';
+    ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0,canvas.width ,canvas.height);
     ctx.clearRect(0, 0,canvas.width ,canvas.height);
 
@@ -64,7 +64,7 @@ if((<?php echo $attente; ?> == 1)&&(<?php echo $position; ?> ==1)){
     if((<?php echo $position ?> > 1)&&(<?php echo $attente ?> == 1)){
         var canvas = document.getElementById('canvas');
         var ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#FF0000';
+        ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0,canvas.width ,canvas.height);
         ctx.clearRect(0, 0,canvas.width ,canvas.height);
 
