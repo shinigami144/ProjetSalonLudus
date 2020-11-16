@@ -1,12 +1,26 @@
 <?php
-$attente = 1;
-$position = 15;
+    session_start();
+    $bdd = mysqli_connect("localhost","root","","salonvirtuel");
+    $attente = 1;
+    $position = 15;
 ?>
 <body>
 
 <div id="profilePic" class="card" >
-    <img src="../SiepProject/css/profile.png" >
-    <h1>Julie Morand</h1>
+    <?php
+        // Affichage din
+        $requete = 'SELECT photoUtilisateur FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"';
+        $resultat = mysqli_query($bdd,$requete); 
+        $ligne = mysqli_fetch_array($resultat, MYSQLI_ASSOC);
+        echo '<img src="css/'.$ligne['photoUtilisateur'].'.png" >';
+        // Affichage dinamique du nom + prenom
+        $requete = 'SELECT nomUtilisateur, prenomUtilisateur FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"';
+        $resultat = mysqli_query($bdd,$requete); 
+        $ligne = mysqli_fetch_array($resultat, MYSQLI_ASSOC);
+
+        echo "<h1>".$ligne['prenomUtilisateur']." ".$ligne['nomUtilisateur']."</h1>";
+    ?>
+
     <?php // condion d'etre dans une liste d'attente
     if($attente == 1){ ?>
         <canvas id='canvas' style='width:100%;'></canvas><p><button>Retour a la file d'attente</button></p>
