@@ -24,11 +24,11 @@
     <div id="divFileAttente">
         <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d'attente</p>
         <div id="listeFileAttente">
-            <a>Persone 1</a>
-            <a>Personne 2</a>
+            <p><span id="textWaiting"></span>
+			<span id="nbrWaiting">0</span> </p>
         </div>
-        <button id="boutonAjoutFileAttente">
-            S'ajouter a la file d'attente de rendez-vous;
+        <button id="boutonAjoutFileAttente" onclick="addMeToWaitList()">
+            S'ajouter a la file d'attente de rendez-vous
         </button>
     </div>
     
@@ -60,7 +60,11 @@
     emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
     siteEntreprise.addEventListener("dblclick",ChangeContentEditable);
     telEntreprise.addEventListener("dblclick",ChangeContentEditable);
-
+	
+	//RECUPERER LES VALUES DE LA BDD
+	let nbrWaiting = 1;
+	let isInWaitList = false;
+	updateWaitList();
     // initialisation des onchangeListener
 
 
@@ -75,6 +79,41 @@
         // mettre le focus sur l'element 
     }
 
+	function updateWaitList()
+	{
+		let divWaiting = document.getElementById('nbrWaiting');
+		let divTextWaiting = document.getElementById('textWaiting');
+		if(isInWaitList)
+		{
+			divTextWaiting.innerHTML = "Nombre de personne avant vous dans la liste d'attente :";
+			divWaiting.innerHTML = nbrWaiting - 1;
+		}
+		else
+		{
+			divTextWaiting.innerHTML = "Nombre de personne en liste d'attente : ";
+			divWaiting.innerHTML = nbrWaiting;
+		}
+	}
+
+	function addMeToWaitList()
+	{
+		if(isInWaitList) return;
+		isInWaitList = true;
+		addToWaitList();
+		
+	}
+	
+	function addToWaitList()
+	{
+		nbrWaiting++;
+		updateWaitList();
+	}
+	
+	function removeFromWaitList()
+	{
+		nbrWaiting--;
+		updateWaitList();
+	}
 
 </script>
 
