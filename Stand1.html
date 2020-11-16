@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
-    
+
 </head>
 <body>
     <form id="divInformationEntreprise">
@@ -15,9 +15,10 @@
         <input type="email" placeholder="truc@tucr.com" id="emailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" >
         <input type="text"  placeholder="https://www.w3schools.com/" id="siteEntreprise" readonly>
         <input type="tel"  placeholder="+2486442727" id="telEntreprise" readonly>
+        <input type="submit" name="btnModifStand" id="submitBtnChangeStand" value="Mettre à jour les informations du Stand">
     </form>
     <form id="UploadForm" action="" method="post" enctype="multipart/form-data">
-        <title for="fileToUpload"> Brochure </title> 
+        <title for="fileToUpload"> Brochure </title>
         <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" value="Upload File" name="submit">
     </form>
@@ -31,15 +32,15 @@
             S'ajouter a la file d'attente de rendez-vous;
         </button>
     </div>
-    
+
 </body>
 <script>
     // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
     // variable user
     var userPermission;
-    
+
     // partie divInformationEntreprise
-    
+
     var logoEntreprise = document.getElementById("logoEntreprise");
     var nomEntreprise = document.getElementById("nomEntreprise");
     var descriptionEntreprise = document.getElementById("descriptionEntreprise");
@@ -47,12 +48,13 @@
     var emailEntreprise = document.getElementById("emailEntreprise");
     var siteEntreprise = document.getElementById("siteEntreprise");
     var telEntreprise = document.getElementById("telEntreprise");
+    var submitBtnModifStand = document.querySelector('#submitBtnChangeStand'); // Button Submit
 
 
     // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
 
     //initialisation des different onclickListener
-    
+
     logoEntreprise.addEventListener("dblclick",ChangeContentEditable);
     nomEntreprise.addEventListener("dblclick",ChangeContentEditable);
     descriptionEntreprise.addEventListener("dblclick",ChangeContentEditable);
@@ -60,6 +62,9 @@
     emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
     siteEntreprise.addEventListener("dblclick",ChangeContentEditable);
     telEntreprise.addEventListener("dblclick",ChangeContentEditable);
+
+    // Appuie sur le bouton submit du form
+    submitBtnModifStand.addEventListener('click', ModifStand);
 
     // initialisation des onchangeListener
 
@@ -70,11 +75,6 @@
     emailEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     siteEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     telEntreprise.addEventListener("change",SaveChangeButtonDisplay);
-
-
-
-
-
 
 
     function SaveChangeButtonDisplay(){
@@ -90,7 +90,9 @@
         console.log(element.readOnly);
     }
 
-
+    function ModifStand(){
+      console.log("Votre stand a été modifié !");
+    }
 </script>
 
 
