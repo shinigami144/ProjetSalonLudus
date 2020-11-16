@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
-    
+
     <style>
         a{
             display: block;
         }
     </style>
 </head>
-<body>
+<body onload="init()">
     <div id="divInformationEntreprise">
         <image id="logoEntreprise" src="https://fakeimg.pl/300/"></image>
         <p id="nomEntreprise" contenteditable="false">Nom</p>
@@ -31,16 +31,27 @@
             S'ajouter a la file d'attente de rendez-vous;
         </button>
     </div>
-    
+    <div id="submitAndModifStand">
+      <input type="submit" name="btnModifStand" id="submitBtnChangeStand" value="Mettre à jour les informations du Stand">
+    </div>
+
 </body>
 <script>
     function ChangeContentEditable(element){
         element.setAttribute('contenteditable','true')
         console.log("OK ?");
-        // mettre le focus sur l'element 
+        // mettre le focus sur l'element
     }
 
+    function init(){
+      let submitBtnModifStand = document.querySelector('#submitBtnChangeStand');
 
+      submitBtnModifStand.addEventListener('click', ModifStand);
+    }
+
+    function ModifStand(){
+      console.log("Votre stand a été modifié !");
+    }
 </script>
 
 
