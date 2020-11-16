@@ -5,22 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
     
-    <style>
-        a{
-            display: block;
-        }
-    </style>
 </head>
 <body>
-    <div id="divInformationEntreprise">
-        <image id="logoEntreprise" src="https://fakeimg.pl/300/"></image>
-        <p id="nomEntreprise" contenteditable="false">Nom</p>
-        <p id="descriptionEntreprise" contenteditable="false">description</p>
-        <address id="adresseEntreprise" onclick="ChangeContentEditable(this)" contenteditable="false"> Rue des Coquelico 87 </address>
-        <p type="email"  id="emailEntreprise" contenteditable="false">Email</p>
-        <a  id="siteEntreprise" contenteditable="false"></a>
-        <p  id="telEntreprise" contenteditable="false"  >tel</p>
-    </div>
+    <form id="divInformationEntreprise">
+        <input type="image" id="logoEntreprise" src="https://fakeimg.pl/300/" readonly>
+        <input type="text" id="nomEntreprise" readonly>
+        <input type="text" id="descriptionEntreprise"  readonly>
+        <input type="text" id="adresseEntreprise" readonly>
+        <input type="email"  id="emailEntreprise" readonly>
+        <input type="text"  id="siteEntreprise" readonly>
+        <input type="tel"  id="telEntreprise" readonly>
+    </form>
     <div id="divFileAttente">
         <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d'attente</p>
         <div id="listeFileAttente">
@@ -63,16 +58,32 @@
 
     // initialisation des onchangeListener
 
+    logoEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    nomEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    descriptionEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    adresseEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    emailEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    siteEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    telEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+
+    // Ajout des label sur les champs.
 
 
+
+
+
+
+    function SaveChangeButtonDisplay(){
+        // button apeart
+    }
 
 
     function ChangeContentEditable(){
         var element = document.getElementById(event.currentTarget.id);
-        element.setAttribute('contenteditable','true')
+        console.log(element.readOnly);
+        element.readOnly = false;
         element.focus();
-        console.log("OK ?");
-        // mettre le focus sur l'element 
+        console.log(element.readOnly);
     }
 
 
