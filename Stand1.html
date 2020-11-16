@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
+    <style>
+        #submitBtnChangeStand{
+            display: none;
+        }
 
+    </style>
 </head>
 <body>
     <form id="divInformationEntreprise">
@@ -15,15 +20,12 @@
         <input type="email" placeholder="truc@tucr.com" id="emailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" >
         <input type="text"  placeholder="https://www.w3schools.com/" id="siteEntreprise" readonly>
         <input type="tel"  placeholder="+2486442727" id="telEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
-        <input type="submit" name="btnModifStand" id="submitBtnChangeStand" value="Mettre à jour les informations du Stand">
-    </form>
-    <form id="UploadForm" action="" method="post" enctype="multipart/form-data">
         <title for="fileToUpload"> Brochure </title>
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload File" name="submit">
+        <input type="submit" name="btnModifStand" id="submitBtnChangeStand" value="Mettre à jour les informations du Stand">
     </form>
     <div id="divFileAttente">
-        <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d'attente</p>
+        <input id="descriptionFileAttente" readonly>
         <div id="listeFileAttente">
             <p><span id="textWaiting"></span>
 			<span id="nbrWaiting">0</span> </p>
@@ -78,7 +80,8 @@
 
 
     function SaveChangeButtonDisplay(){
-        // button apeart
+        var button = document.getElementById("submitBtnChangeStand");
+        button.style.display = "block";
     }
 
 
