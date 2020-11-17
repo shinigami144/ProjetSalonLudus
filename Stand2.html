@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stand n°1</title>
+    <title>Stand n°2</title>
     <style>
         #submitBtnChangeStand{
             display: none;
@@ -95,7 +95,7 @@
 
 
   	//RECUPERER LES VALUES DE LA BDD
-  	
+
     // initialisation des onchangeListener
 
     function ChangeContentEditable(){
@@ -162,8 +162,8 @@
         var person  = prompt("Please enter reasons of the reject:", "reject for");
         if (person != null && person != "") {
             console.log("sendmail")
-        } 
-        
+        }
+
     }
 
     function removeUserFromWaitingList(){
@@ -175,7 +175,7 @@
     }
 
   	function removeFromWaitList()
-  	{ 
+  	{
   		nbrWaiting--;
   		updateWaitList();
   	}
