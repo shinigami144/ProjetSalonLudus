@@ -3,7 +3,9 @@
     padding: 0;
     font-family: : Century Gathic;
 }
-
+body{
+    padding-top: 6%;
+}
 #Image-cropper{
     max-width: 1000px;
     height: auto;
@@ -75,16 +77,18 @@ canvas{
 }
 nav{
     position: fixed;
-    right: 0;
     top: 0;
+    width: 100%;
 }
 .nav{
+    
     height: 8%;
     background-color: black;
     text-align: center;
     color: white;
     font-size: 16pt;
     position: fixed;
+    top: 0;
 }
 #nav1{
     color: white;
