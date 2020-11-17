@@ -29,11 +29,11 @@
         <div id="listeFileAttente">
             <p><span id="textWaiting"></span>
             <span id="nbrWaiting">0</span></p>
-            <button id="ButtonSupressUserInWaitingList">Next</button>
         </div>
         <button id="boutonAjoutFileAttente" onclick="addMeToWaitList()">
             S'ajouter a la file d'attente de rendez-vous
         </button>
+        <button id="ButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>
     </div>
 
 </body>
@@ -88,10 +88,7 @@
 
 
   	//RECUPERER LES VALUES DE LA BDD
-  	let nbrWaiting = 2;
-  	let isInWaitList = false;
-  	updateWaitList();
-  	setInterval(function(){ removeFromWaitList() }, 1500);
+  	
     // initialisation des onchangeListener
 
     function ChangeContentEditable(){
@@ -105,10 +102,10 @@
     function ModifStand(){
       console.log("Votre stand a été modifié !");
     }
-
+    /*
   	function updateWaitList()
   	{
-  		let divWaiting = document.getElementById('nbrWaiting');
+  		//let divWaiting = document.getElementById('nbrWaiting');
   		let divTextWaiting = document.getElementById('textWaiting');
   		if(nbrWaiting < 0)
   			nbrWaiting = 0;
@@ -130,7 +127,7 @@
   			divTextWaiting.innerHTML = "Nombre de personne en liste d'attente : ";
   			divWaiting.innerHTML = nbrWaiting;
   		}
-  	}
+  	}*/
 
     var tempPositionfortest = 1;
 
@@ -142,19 +139,28 @@
         userText.appendChild(document.createTextNode("userNom" + tempPositionfortest)); // modifier pour changer userNom avec user name from bdd
         lsiteAttente.appendChild(userText);
         tempPositionfortest++;
-  		if(isInWaitList) return;
-  		isInWaitList = true;
-  		addToWaitList();
+  		//if(isInWaitList) return;
+  		//isInWaitList = true;
+  		//addToWaitList();
   	}
-
+      /*
   	function addToWaitList()
   	{
   		nbrWaiting++;
   		updateWaitList();
   	}
+    */
+    function removeUserFromWaitingList(){
+        var lsiteAttente = document.getElementById("listeFileAttente");
+        console.log(lsiteAttente.children[0]);
+        if(lsiteAttente.children[0]){
+            lsiteAttente.children[0].remove(lsiteAttente.children[0]);
+        }
+    }
 
   	function removeFromWaitList()
   	{
+        
   		nbrWaiting--;
   		updateWaitList();
   	}
