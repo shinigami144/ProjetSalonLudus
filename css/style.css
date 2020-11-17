@@ -1,0 +1,62 @@
+*{
+    margin :0;
+    padding: 0;
+    font-family: : Century Gathic;
+}
+
+#Image-cropper{
+    max-width: 1000px;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+
+#profilePic button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+#profilePic button:hover {
+  opacity: 0.7;
+}
+      
+#profilePic{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 25%;
+    margin: auto;
+    background-color: #fff;
+    text-align: center;
+    font-family: arial;
+    position: fixed;
+    top: 0;
+    left: 0;
+        
+    }
+
+
+
+ifram{
+    border: 1px solid black;
+    width: auto;
+    height: auto;
+}
+
+#Header{
+    width: 15%;
+    height: 25%;
+    padding-top: 40px;
+    background-image: url(font1.jpg);
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+

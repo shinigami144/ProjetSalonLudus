@@ -1,12 +1,56 @@
 <?php
-$attente = 1;
-$position = 15;
+    session_start();
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "salonvirtuel";
+
+    $attente = 1;
+    $position = 15;
 ?>
 <body>
 
 <div id="profilePic" class="card" >
-    <img src="../SiepProject/css/profile.png" >
-    <h1>Julie Morand</h1>
+    <?php
+        // Affichage din
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = $conn->prepare('SELECT photoUtilisateur FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
+            $sql->execute();
+
+            $result = $sql->fetchAll();
+
+            foreach ($result as $user) {
+                echo '<img src="css/'.$user['photoUtilisateur'].'.png" >';
+            }
+
+          } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+          }
+
+          $conn = null;
+
+        // Affichage dinamique du nom + prenom
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = $conn->prepare('SELECT nomUtilisateur, prenomUtilisateur FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
+            $sql->execute();
+
+            $result = $sql->fetchAll();
+
+            foreach ($result as $user) {
+                echo "<h1>".$user['prenomUtilisateur']." ".$user['nomUtilisateur']."</h1>";
+            }
+
+          } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+          }
+
+          $conn = null;
+    ?>
+
     <?php // condion d'etre dans une liste d'attente
     if($attente == 1){ ?>
         <canvas id='canvas' style='width:100%;'></canvas><p><button>Retour a la file d'attente</button></p>

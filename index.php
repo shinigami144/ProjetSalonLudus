@@ -1,18 +1,23 @@
-<?php
-echo'
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File</title>
+<html>
+    <head>
+    <title>Siep Project</title>  
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
 </head>
 <body>
-    <p>
-        Vous êtes bien dans le main
+    <div>
+    <?php include 'header.php';?>    
+    </div>
     
-    </p>
-</body>
-</html>';
+    <h1>SiepProjecdfgjnlbdddddddddddddddddddddddddd</h1>
+    <iframe 
+            src="backPage.php"
+            style="width:100%; height:100%;">
+    </iframe>    
+   
+            
+    
 
-?>
+</body>
+</html>
