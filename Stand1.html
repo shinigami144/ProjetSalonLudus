@@ -35,7 +35,8 @@
         </button>
         <button id="ButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>
     </div>
-
+    <button id="BoutonAccepterStand">Stand Accepter</button>
+    <button id="ButtonRefuserStand">Stand Refuser</button>
 </body>
 <script>
     // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
@@ -159,8 +160,7 @@
     }
 
   	function removeFromWaitList()
-  	{
-        
+  	{ 
   		nbrWaiting--;
   		updateWaitList();
   	}
