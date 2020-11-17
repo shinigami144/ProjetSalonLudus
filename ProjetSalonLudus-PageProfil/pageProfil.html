@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Profil</title>
+    <title>Document</title>
+    <style>
+
+    </style>
 </head>
 <body>
 
-    <button>Supprimer compte</button>
+    <button id="supp">Supprimer compte</button>
 
-    <a href="./pageListSalon.html">Vers la liste des salons</a>
+    <a href="PageListSalon.html">Vers la liste des salons</a>
 
     <div id="informationContainer">
         <img src="">
         <p>Mail :</p>
         <p>Nom :</p>
         <p>Prenom :</p>
-        <p>Adresse :</p>
+        <p>Adresse : </p>
         <p>Code postal :</p>
         <p>Ville :</p>
         <p>Pays :</p>
         <p>Telephone :</p>
+        
     </div>
 
-    <form>
+    <form id="modificationForm" method="POST" action="#">
         <input type="button" value="changer la photo de profil" name="profilePicture">
         <label for="email">E-mail : </label>
         <input type="email" name="email" required>
@@ -269,7 +273,90 @@
         </select>
         <label for="phoneNumber">Téléphone : </label>
         <input type="tel" name="phoneNumber">
+        <input type="button" value="changer de mont de passe" id="mdp">
         <input type="submit" value="Enregistrer">
     </form>
+    <button id="modif">modification</button>
 </body>
+<script>
+
+    var infoContainer = document.getElementById("informationContainer");
+    var modifFrom = document.getElementById("modificationForm");
+    var button = document.getElementById("modif");
+    var Supprimer = document.getElementById("supp");
+    var mdp_change = document.getElementById("mdp");
+
+
+    modifFrom.style.display = "none";
+    modifFrom.addEventListener("submit", sendChange);
+
+    mdp_change.addEventListener("click",changerMdp);
+    button.addEventListener("click",enterModifMode);
+    Supprimer.addEventListener("click",deleteUser);
+
+  /*  for(var i = 0; i < infoContainer.children.length; i++){
+        infoContainer.children[i].addEventListener("dblclick", enterModifMode);
+    }  boucle for pour modifier les individuelement les enfants */
+
+    function enterModifMode(e){
+        infoContainer.style.display = "none";
+        modifFrom.style.display = "block";
+        button.innerHTML = "cancel";
+        button.removeEventListener("click",enterModifMode);
+        button.addEventListener("click",exitModifMode);
+        //remplir le form des informations
+    }
+
+    function exitModifMode(e){
+        modifFrom.style.display = "none";
+        infoContainer.style.display = "block";
+        button.innerHTML = "modification";
+        button.removeEventListener("click",exitModifMode);
+        button.addEventListener("click",enterModifMode);
+        //quitte le form des informations
+    }
+
+    function sendChange(e){
+        //envoie des changements vers le serveur
+        console.log("change");
+        return false;
+    }
+
+    function deleteUser(e){
+        //supprime l'user de la table
+        console.log("mort");
+    }
+    function changerMdp(e){
+
+
+        //changer de mot de passe
+        var ancienmdp = prompt("entre votre ancien mdp");
+        if ((ancienmdp == null )||  (ancienmdp == ""))  {
+            
+            return;
+
+
+        }
+        // verification du mot de passe  si bon suite sinon return (a faire)
+
+        while (true) {
+
+        var newmdp =prompt("entre le nouveau mot de passe");
+        if ((newmdp == null )|| (newmdp == "") ) {
+            return;
+        }
+        if (newmdp == ancienmdp) {
+            alert("le nouveau mot de passe ne peux pas etre egale à l'ancien mot de passe");
+            
+        } else if (newmdp == prompt("comfirmer le mot de passe") ) {
+            //changement dans le serveur/bdd
+            return;   
+        }else{
+            alert("erreur comfirmation incorrect");
+            }
+        }
+
+    }
+
+</script>
 </html>
