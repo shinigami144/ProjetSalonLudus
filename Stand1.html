@@ -81,7 +81,7 @@
     submitBtnModifStand.addEventListener('click', ModifStand);
 
     // initialisation des onchangeListener
-
+    logoEntreprise.addEventListener("change",VerifFileLogo);
     nomEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     descriptionEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     adresseEntreprise.addEventListener("change",SaveChangeButtonDisplay);
@@ -111,32 +111,25 @@
     function ModifStand(){
       console.log("Votre stand a été modifié !");
     }
-    /*
-  	function updateWaitList()
-  	{
-  		//let divWaiting = document.getElementById('nbrWaiting');
-  		let divTextWaiting = document.getElementById('textWaiting');
-  		if(nbrWaiting < 0)
-  			nbrWaiting = 0;
-  		if(isInWaitList)
-  		{
-  			if(nbrWaiting > 1)
-  			{
-  				divTextWaiting.innerHTML = "Nombre de personne avant vous dans la liste d'attente :";
-  				divWaiting.innerHTML = nbrWaiting - 1;
-  			}
-  			else
-  			{
-  				divTextWaiting.innerHTML = "C'est à vous!";
-  				divWaiting.innerHTML = "";
-  			}
-  		}
-  		else
-  		{
-  			divTextWaiting.innerHTML = "Nombre de personne en liste d'attente : ";
-  			divWaiting.innerHTML = nbrWaiting;
-  		}
-  	}*/
+    
+    function VerifFileLogo(){
+        file = event.target.files[0];
+        if (!file) {
+            console.log("no file");
+        }
+        else if (!file.type.match('image.*')) {
+            console.log("not a image");
+        }
+        else {
+            const reader = new FileReader();
+            reader.addEventListener('load', event => {
+                document.getElementById("logoEntreprise").src = event.target.result;
+            });
+            reader.readAsDataURL(file);
+
+        }
+        SaveChangeButtonDisplay();
+    }
 
     var tempPositionfortest = 1;
 
@@ -148,17 +141,9 @@
         userText.appendChild(document.createTextNode("userNom" + tempPositionfortest)); // modifier pour changer userNom avec user name from bdd
         lsiteAttente.appendChild(userText);
         tempPositionfortest++;
-  		//if(isInWaitList) return;
-  		//isInWaitList = true;
-  		//addToWaitList();
+  		
   	}
-      /*
-  	function addToWaitList()
-  	{
-  		nbrWaiting++;
-  		updateWaitList();
-  	}
-    */
+    
     function accepterStand(){
         console.log("envoi du mail pour prevenir que le stand est visible")
     }
@@ -179,11 +164,6 @@
         }
     }
 
-  	function removeFromWaitList()
-  	{
-  		nbrWaiting--;
-  		updateWaitList();
-  	}
 
 </script>
 
