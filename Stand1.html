@@ -13,7 +13,12 @@
 </head>
 <body>
     <form id="divInformationEntreprise">
-        <input type="image" id="logoEntreprise" src="https://fakeimg.pl/300/" readonly>
+        <div id="stand_image_container">
+          <label for="LogoEntreprise_UploadBtn"> <!-- Le FOR doit être égal à l'id de l'input type file ci-dessous -->
+            <img src="https://fakeimg.pl/300/" id="logoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
+          </label>
+          <input type="file" name="LogoEntreprise_Upload" value="" id="LogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
+        </div>
         <input type="text" placeholder="NomEntreprise" id="nomEntreprise" readonly>
         <input type="text" placeholder="description de l'entreprise" id="descriptionEntreprise"  readonly>
         <input type="text" placeholder="81 rue des moule" id="adresseEntreprise" readonly>
@@ -22,7 +27,7 @@
         <input type="tel"  placeholder="+2486442727" id="telEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
         <title for="fileToUpload"> Brochure </title>
         <div id="Brochure">
-            <h4>Brochre</h4>
+            <h4>Brochure</h4>
             <a href="./DataFile/Exemple_MainActivity.pdf" download="brochurePDF">
                 <image src="./Graphics/DownloadIcon.png"/>
             </a>
@@ -51,7 +56,7 @@
 
     // partie divInformationEntreprise
 
-    var logoEntreprise = document.getElementById("logoEntreprise");
+    var logoEntreprise = document.getElementById("LogoEntreprise_UploadBtn");
     var nomEntreprise = document.getElementById("nomEntreprise");
     var descriptionEntreprise = document.getElementById("descriptionEntreprise");
     var adresseEntreprise  = document.getElementById("adresseEntreprise");
@@ -65,7 +70,6 @@
 
     //initialisation des different onclickListener
 
-    logoEntreprise.addEventListener("dblclick",ChangeContentEditable);
     nomEntreprise.addEventListener("dblclick",ChangeContentEditable);
     descriptionEntreprise.addEventListener("dblclick",ChangeContentEditable);
     adresseEntreprise.addEventListener("dblclick",ChangeContentEditable);
@@ -78,14 +82,12 @@
 
     // initialisation des onchangeListener
 
-    logoEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     nomEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     descriptionEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     adresseEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     emailEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     siteEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     telEntreprise.addEventListener("change",SaveChangeButtonDisplay);
-
 
     function SaveChangeButtonDisplay(){
         var button = document.getElementById("submitBtnChangeStand");
@@ -95,7 +97,7 @@
 
 
   	//RECUPERER LES VALUES DE LA BDD
-  	
+
     // initialisation des onchangeListener
 
     function ChangeContentEditable(){
@@ -165,8 +167,8 @@
         var person  = prompt("Please enter reasons of the reject:", "reject for");
         if (person != null && person != "") {
             console.log("sendmail")
-        } 
-        
+        }
+
     }
 
     function removeUserFromWaitingList(){
@@ -178,7 +180,7 @@
     }
 
   	function removeFromWaitList()
-  	{ 
+  	{
   		nbrWaiting--;
   		updateWaitList();
   	}
