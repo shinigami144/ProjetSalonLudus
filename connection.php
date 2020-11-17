@@ -1,9 +1,6 @@
 <?php
     session_start();
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "salonvirtuel";
+    require_once('db.php');
 
 
     $cpt = 0;
@@ -29,8 +26,6 @@
     if ($cpt == 2) // Du coup, si les deux ne sont pas vide
     {
         try {
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = $conn->prepare('SELECT mailUtilisateur,	mdpUtilisateur FROM utilisateur WHERE mailUtilisateur = "'.$_POST['mail'].'"');
             $sql->execute();
 
@@ -63,7 +58,6 @@
             echo "Error: " . $e->getMessage();
           }
 
-          $conn = null;
 
     }
 

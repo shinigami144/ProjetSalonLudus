@@ -1,10 +1,7 @@
 <?php
+    require_once("db.php");
     session_start();
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "salonvirtuel";
-
+    
     $cpt = 0;
 
     // --------------------------- VERIFICATIONS --------------------------------
@@ -26,8 +23,7 @@
         {
             // Regard dans la bdd si l'adresse mail n'existe pas deja
             try {
-                $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
                 $sql = $conn->prepare('SELECT mailUtilisateur FROM Utilisateur WHERE mailUtilisateur = "'.$_POST['email'].'"');
                 $sql->execute();
 
@@ -44,7 +40,6 @@
                 echo "Error: " . $e->getMessage();
               }
 
-              $conn = null;
 
         }
         else 
@@ -117,7 +112,7 @@
             echo $sql . "<br>" . $e->getMessage();
           }
           
-          $conn = null;
+          
 
 
         // Variable de session

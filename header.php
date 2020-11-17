@@ -1,9 +1,6 @@
 <?php
+    require_once('db.php');
     session_start();
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "salonvirtuel";
 
     $attente = 1;
     $position = 15;
@@ -14,8 +11,6 @@
     <?php
         // Affichage din
         try {
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = $conn->prepare('SELECT photoUtilisateur FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
             $sql->execute();
 
@@ -29,7 +24,6 @@
             echo "Error: " . $e->getMessage();
           }
 
-          $conn = null;
 
         // Affichage dinamique du nom + prenom
         try {
@@ -47,8 +41,6 @@
           } catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
           }
-
-          $conn = null;
     ?>
 
     <?php // condion d'etre dans une liste d'attente

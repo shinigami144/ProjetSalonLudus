@@ -1,10 +1,6 @@
 <?php
+    require_once('db.php');
     session_start();
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "salonvirtuel";
 
     if(array_key_exists('btnCode', $_POST)) { 
         sendMail(); 
@@ -30,8 +26,6 @@
         unset($_SESSION["code"]);
 
         try {
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
             $sql = "UPDATE `utilisateur` SET `verificationUtilisateur` = '1' WHERE `utilisateur`.`mailUtilisateur` = '".$_SESSION['mail']."' ;";
     
@@ -43,7 +37,6 @@
             echo $sql . "<br>" . $e->getMessage();
         }
         
-        $conn = null;
         
         header('location: index.php');
     }
