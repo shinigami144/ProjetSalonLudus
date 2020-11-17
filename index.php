@@ -8,10 +8,12 @@ echo'
     <title>File</title>
 </head>
 <body>
-    <p>
-        Vous êtes bien dans le main
+    <h1>
+        Liste des stands
+    </h1>
+    <a href="./Stand1.html">Stand n°1</a>
+    <a href="./Stand2.html">Stand n°2</a>
     
-    </p>
 </body>
 </html>';
 
