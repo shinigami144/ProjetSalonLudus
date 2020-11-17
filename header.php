@@ -5,52 +5,54 @@
     $attente = 1;
     $position = 15;
 ?>
-<body>
 
+<body>
+<nav style="position: sticky;" class="nav">
+    <div id="nav1"><a href="#">Salons</a></div>
+    <div id="nav2"><a href="#">Stands</a></div>
+    <div id="nav3"><a href="#">Profil</a></div>
+</nav>
 <div id="profilePic" class="card" >
     <?php
         // Affichage din
-        try {
+        if(isset($_SESSION['mail'])){
             $sql = $conn->prepare('SELECT photoUtilisateur FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
             $sql->execute();
 
             $result = $sql->fetchAll();
 
             foreach ($result as $user) {
-                echo '<img src="css/'.$user['photoUtilisateur'].'.png" >';
+                echo '<img id="img" src="./css/'.$user['photoUtilisateur'].'.png" >';
             }
 
-          } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
           }
 
 
         // Affichage dinamique du nom + prenom
-        try {
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       if(isset($_SESSION['mail'])){
             $sql = $conn->prepare('SELECT nomUtilisateur, prenomUtilisateur FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
             $sql->execute();
 
             $result = $sql->fetchAll();
 
             foreach ($result as $user) {
-                echo "<h1>".$user['prenomUtilisateur']." ".$user['nomUtilisateur']."</h1>";
+                echo "<p>".$user['prenomUtilisateur']." ".$user['nomUtilisateur']."</p>";
             }
 
-          } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
           }
     ?>
 
     <?php // condion d'etre dans une liste d'attente
     if($attente == 1){ ?>
-        <canvas id='canvas' style='width:100%;'></canvas><p><button>Retour a la file d'attente</button></p>
+        <div id="attente">
+            <canvas id='canvas' style='height:102;width:102;' ></canvas>
+        </div>
     <?php } 
     ?>
     
 </div>
 
+<img hidden="true" src="css/groupe.png" id="groupe" />
 <!--faut bd ou atre moyen d'avoir une variable pour la file d'attente-->
 <!-- script pour les 5 minutes de file d'attente -->
     <script>
@@ -58,19 +60,14 @@
 if((<?php echo $attente; ?> == 1)&&(<?php echo $position; ?> ==1)){
 
     var canvas = document.getElementById('canvas');
+    
     var ctx = canvas.getContext('2d');
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0,canvas.width ,canvas.height);
     ctx.clearRect(0, 0,canvas.width ,canvas.height);
 
-    ctx.font = '18px Verdana';
-
-    ctx.fillText('C\'est votre tour',100,50);
-
-    ctx.font = '38px Verdana';
-
-    var seconds = 5;
-    var min = 0;
+    var seconds = 1;
+    var min = 5;
     var a=setInterval(function() {
     ctx.clearRect(0, 0,canvas.width ,canvas.height);
 
@@ -101,12 +98,25 @@ if((<?php echo $attente; ?> == 1)&&(<?php echo $position; ?> ==1)){
         var canvas = document.getElementById('canvas');
         var ctx = canvas.getContext('2d');
         ctx.fillStyle = '#000000';
-        ctx.fillRect(0, 0,canvas.width ,canvas.height);
         ctx.clearRect(0, 0,canvas.width ,canvas.height);
+        var img = document.getElementById("groupe");
+        img.height=100;
+        img.width=100;
+        
+        ctx.drawImage(img,4,0)
+        
+        ctx.beginPath();
+        ctx.fillStyle="#000000"
+        ctx.arc(35, 115, 35, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        ctx.fillStyle="#ff0000"
+        ctx.font = '38px Verdana';
 
-        ctx.font = '18px Verdana';
-
-        ctx.fillText('Vous êtes en position <?php echo $position ?>',40,50);
+        
+        
+        ctx.fillText('<?php echo $position ?>',5,135);
     }
 </script>
+
 </body>

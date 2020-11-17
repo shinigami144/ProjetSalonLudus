@@ -31,20 +31,30 @@
       
 #profilePic{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 25%;
+    width: 10%;
     margin: auto;
     background-color: #fff;
     text-align: center;
     font-family: arial;
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 8%;
+    right: 0;    
+    }
+
+#attente{
+    box-shadow: 0 px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 10%;
+    margin: auto;
+    background-color: #fff;
+    text-align: center;
+    font-family: arial;
+    position: fixed;
+    margin-top: 1px;
+    right: 0;
         
     }
 
-
-
-ifram{
+iframe{
     border: 1px solid black;
     width: auto;
     height: auto;
@@ -59,4 +69,76 @@ ifram{
     background-position: center;
     text-align: center;
 }
-
+canvas{
+    background-image: url("./groupe.png");
+    background-size: 100px 100px;
+}
+nav{
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+.nav{
+    height: 8%;
+    background-color: black;
+    text-align: center;
+    color: white;
+    font-size: 16pt;
+    position: fixed;
+}
+#nav1{
+    color: white;
+    background-color: black;
+    width: 30%;
+    display: inline-block;
+    height: 5%;
+    text-align: center;
+}
+#nav1:hover{
+    color: white;
+    background-color: grey;
+    width: 30%;
+    display: inline-block;
+    height: 5%;
+    text-align: center;
+}
+#nav2{
+    color: white;
+    background-color: black;
+    width: 30%;
+    display: inline-block;
+    height: 5%;
+    text-align: center;
+}
+#nav2:hover{
+    color: white;
+    background-color: grey;
+    width: 30%;
+    display: inline-block;
+    height: 5%;
+    text-align: center;
+}
+#nav3{
+    color: white;
+    background-color: black;
+    width: 30%;
+    display: inline-block;
+    height: 5%;
+    text-align: center;
+}
+#nav3:hover{
+    color: white;
+    background-color: grey;
+    width: 30%;
+    display: inline-block;
+    height: 5%;
+    text-align: center;
+}
+nav div a{
+    margin-top: 10%;
+    color: white;
+    text-align: center;
+}
+#img{
+    width: 50%;
+}
