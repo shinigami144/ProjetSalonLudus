@@ -21,6 +21,12 @@
         <input type="text"  placeholder="https://www.w3schools.com/" id="siteEntreprise" readonly>
         <input type="tel"  placeholder="+2486442727" id="telEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
         <title for="fileToUpload"> Brochure </title>
+        <div id="Brochure">
+            <h4>Brochre</h4>
+            <a href="./DataFile/Exemple_MainActivity.pdf" download="brochurePDF">
+                <image src="./Graphics/DownloadIcon.png"/>
+            </a>
+        </div>
         <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" name="btnModifStand" id="submitBtnChangeStand" value="Mettre à jour les informations du Stand">
     </form>
@@ -36,7 +42,7 @@
         <button id="ButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>
     </div>
     <button id="BoutonAccepterStand">Stand Accepter</button>
-    <button id="ButtonRefuserStand">Stand Refuser</button>
+    <button id="ButtonRefuserStand" onclick="refuserStand()">Stand Refuser</button>
 </body>
 <script>
     // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
@@ -151,6 +157,15 @@
   		updateWaitList();
   	}
     */
+
+    function refuserStand(){
+        var person  = prompt("Please enter reasons of the reject:", "reject for");
+        if (person != null && person != "") {
+            console.log("sendmail")
+        } 
+        
+    }
+
     function removeUserFromWaitingList(){
         var lsiteAttente = document.getElementById("listeFileAttente");
         console.log(lsiteAttente.children[0]);
