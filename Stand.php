@@ -11,7 +11,14 @@ try {
 } catch(PDOException $e) {
   //echo "Connection failed: " . $e->getMessage();
 }
-
+echo "ecco";
+echo "$_POST['idStand']";
+$sql ="SELECT * FROM stand;";
+$req = $conn->prepare($sql);
+$req->execute();
+$data =$req->fetchAll();
+foreach ($data as $users){
+    echo $users;
 ?>
 <!DOCTYPE html>
 <html lang="en">

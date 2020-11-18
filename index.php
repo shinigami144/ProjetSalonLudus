@@ -1,20 +1,25 @@
 <?php
-echo'
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File</title>
-</head>
-<body>
-    <h1>
-        Liste des stands
-    </h1>
-    <a href="./Stand1.html">Stand n°1</a>
-    <a href="./Stand2.html">Stand n°2</a>
-    
-</body>
-</html>';
+$servername = "localhost";
+$username = "root";
+$password = "";
 
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=salonvirtuel", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  //echo "Connected successfully";
+} catch(PDOException $e) {
+  //echo "Connection failed: " . $e->getMessage();
+}
+
+$sql ="SELECT * FROM stand;";
+$req = $conn->prepare($sql);
+$req->execute();
+$data =$req->fetchAll();
+foreach ($data as $users){
+    echo '<form action="Stand.php" method="GET">';
+    echo '<p>'.$users['nomStand'].'</p>';
+    echo '<input type="submit" name=idStand id=idStand value='.$users['idStand'].'>';
+    echo '</form>';
+}
 ?>
