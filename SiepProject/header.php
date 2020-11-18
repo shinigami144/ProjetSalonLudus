@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  
   include('fonctions.php'); 
   $attente = 1;
   $position = 9;

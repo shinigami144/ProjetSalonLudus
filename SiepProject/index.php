@@ -1,3 +1,7 @@
+<?php
+require_once('db.php');
+session_start();
+?>
 <html>
     <head>
     <title>Siep Project</title>  
@@ -18,14 +22,36 @@
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
-        <a href="https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_YTYzYTI5NTktNDAwMC00MGI4LTgxNWEtMjQ2MzQ2NTg4MWRl%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%2522a7dd4082-9c4d-44d0-b8a3-8237e18dd60d%2522%252c%2522Oid%2522%253a%2522323d2f20-895c-4b24-accd-9c0eeca1784a%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=6708e252-6561-4736-8eda-8f975cc20ca0&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true" target="_blank">Rejoindre le meeting teams</a>
+          <?php
+          try {
+              $sql = $conn->prepare('SELECT idStandRDV FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
+              $sql->execute();
+              $result = $sql->fetchAll();
+              foreach ($result as $idstand) {
+                  $idstandrdv = $idstand['idStandRDV'];
+              }
+          }catch(PDOException $e) {
+              echo "Error: " . $e->getMessage();
+          }if(isset($idstandrdv)){
+              $sql = $conn->prepare('SELECT lienAStand FROM adminstand WHERE idStand = "'.$idstandrdv.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          foreach ($result as $lienstand) {
+              $lienrdv = $lienstand['lienAStand'];
+          }
+          echo'
+          <a href="'.$lienrdv.'"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLCY8jUzmtJbvlLiQ9dASd2XsdK-_NwSDmtw&usqp=CAU" />clickez ici pour rejoindre le meeting</a>
+          ';
+          }
+          ?>
       </div>
 
     </div>
     <div>
     <?php include 'header.php';?>    
     </div>
-    <h1>SiepProjecdfgjnlggggggggggggggggggggggggggggggggggdddddddd</h1>
+    <h1>SAAAAAAAAAAAAAAAAAAAAAALLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOON</h1>
+    
     <iframe 
             src="backPage.php"
             style="width:100%; height:100%;">
