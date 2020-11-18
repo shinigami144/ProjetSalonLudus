@@ -1,38 +1,20 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=salonvirtuel", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  //echo "Connected successfully";
-} catch(PDOException $e) {
-  //echo "Connection failed: " . $e->getMessage();
-}
-echo "ecco";
-echo "$_POST['idStand']";
-$sql ="SELECT * FROM stand;";
-$req = $conn->prepare($sql);
-$req->execute();
-$data =$req->fetchAll();
-foreach ($data as $users){
-    echo $users;
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
+    
     <style>
-        #submitBtnChangeStand{
-            display: none;
+        a{
+            display: block;
         }
-
     </style>
 </head>
+<?php
+	require("connect.php");	
+	$conn = connectDB(); 
+?>
 <body>
     <form id="divInformationEntreprise">
         <div id="stand_image_container">
@@ -71,6 +53,22 @@ foreach ($data as $users){
     <button id="BoutonAccepterStand">Stand Accepter</button>
     <button id="ButtonRefuserStand" onclick="refuserStand()">Stand Refuser</button>
 </body>
+<?php
+	$idStand = 
+	$req = "select * from stand";
+	if ($_SERVER["REQUEST_METHOD"] == "GET") {
+		$req = "select * from stand where idStand = " . $_GET["idStand"];
+	}
+	var_dump($req);
+	if(isset($conn))
+	{
+		$table = $conn->query($req);
+		foreach($table as $row)
+		{
+			var_dump($row);
+		}
+	}
+?>
 <script>
     // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
     // variable user
