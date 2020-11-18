@@ -118,8 +118,6 @@ ifram{
     text-align: center;
     color: white;
     font-size: 16pt;
-    position: fixed;
-    top: 0;
 }
 #nav1{
     color: white;
