@@ -1,53 +1,31 @@
 *{
-    margin :0;
-    padding: 0;
     font-family: : Century Gathic;
 }
 
-#Image-cropper{
-    max-width: 1000px;
-    height: auto;
-    position: relative;
-    overflow: hidden;
+
+#profilePic {
+    margin-top:11%;
+    position:fixed;
 }
 
 
-#profilePic button {
-  border: none;
-  outline: 0;
-  padding: 12px;
-  padding: 12px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
   width: 100%;
-  font-size: 18px;
 }
 
-#profilePic button:hover {
-  opacity: 0.7;
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 60px;
 }
-      
-#profilePic{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: auto;
-    background-color: #fff;
-    text-align: center;
-    font-family: arial;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-        
-    }
 
-
-
-ifram{
-    border: 1px solid black;
-    width: auto;
-    height: auto;
-}
 
 #Header{
     width: 15%;

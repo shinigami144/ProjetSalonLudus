@@ -111,7 +111,7 @@
         // Variable de session
         $_SESSION['mail'] = $_POST['email'];
         // La ligne de code ci dessous permet de rediriger vers un autre page, il suffit juste de metre le nom de la page après "location :" 
-        header('location: validationMail.php');
+        header('location: index.php');
    }
 
 ?>
