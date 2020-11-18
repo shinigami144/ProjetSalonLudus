@@ -1,9 +1,31 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=salonvirtuel", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  //echo "Connected successfully";
+} catch(PDOException $e) {
+  //echo "Connection failed: " . $e->getMessage();
+}
+echo "ecco";
+echo "$_POST['idStand']";
+$sql ="SELECT * FROM stand;";
+$req = $conn->prepare($sql);
+$req->execute();
+$data =$req->fetchAll();
+foreach ($data as $users){
+    echo $users;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stand n°2</title>
+    <title>Stand n°1</title>
     <style>
         #submitBtnChangeStand{
             display: none;
@@ -13,16 +35,21 @@
 </head>
 <body>
     <form id="divInformationEntreprise">
-        <input type="image" id="logoEntreprise" src="https://fakeimg.pl/300/" readonly>
+        <div id="stand_image_container">
+          <label for="LogoEntreprise_UploadBtn"> <!-- Le FOR doit être égal à l'id de l'input type file ci-dessous -->
+            <img src="https://fakeimg.pl/300/" id="logoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
+          </label>
+          <input type="file" name="LogoEntreprise_Upload" value="" id="LogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
+        </div>
         <input type="text" placeholder="NomEntreprise" id="nomEntreprise" readonly>
         <input type="text" placeholder="description de l'entreprise" id="descriptionEntreprise"  readonly>
-        <input type="text" placeholder="67 rue des etiennedereine" id="adresseEntreprise" readonly>
-        <input type="email" placeholder="test@test.com" id="emailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" >
+        <input type="text" placeholder="81 rue des moule" id="adresseEntreprise" readonly>
+        <input type="email" placeholder="truc@tucr.com" id="emailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" >
         <input type="text"  placeholder="https://www.w3schools.com/" id="siteEntreprise" readonly>
-        <input type="tel"  placeholder="+33525252" id="telEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
+        <input type="tel"  placeholder="+2486442727" id="telEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
         <title for="fileToUpload"> Brochure </title>
         <div id="Brochure">
-            <h4>Brochre</h4>
+            <h4>Brochure</h4>
             <a href="./DataFile/Exemple_MainActivity.pdf" download="brochurePDF">
                 <image src="./Graphics/DownloadIcon.png"/>
             </a>
@@ -51,7 +78,7 @@
 
     // partie divInformationEntreprise
 
-    var logoEntreprise = document.getElementById("logoEntreprise");
+    var logoEntreprise = document.getElementById("LogoEntreprise_UploadBtn");
     var nomEntreprise = document.getElementById("nomEntreprise");
     var descriptionEntreprise = document.getElementById("descriptionEntreprise");
     var adresseEntreprise  = document.getElementById("adresseEntreprise");
@@ -65,7 +92,6 @@
 
     //initialisation des different onclickListener
 
-    logoEntreprise.addEventListener("dblclick",ChangeContentEditable);
     nomEntreprise.addEventListener("dblclick",ChangeContentEditable);
     descriptionEntreprise.addEventListener("dblclick",ChangeContentEditable);
     adresseEntreprise.addEventListener("dblclick",ChangeContentEditable);
@@ -77,15 +103,13 @@
     submitBtnModifStand.addEventListener('click', ModifStand);
 
     // initialisation des onchangeListener
-
-    logoEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    logoEntreprise.addEventListener("change",VerifFileLogo);
     nomEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     descriptionEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     adresseEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     emailEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     siteEntreprise.addEventListener("change",SaveChangeButtonDisplay);
     telEntreprise.addEventListener("change",SaveChangeButtonDisplay);
-
 
     function SaveChangeButtonDisplay(){
         var button = document.getElementById("submitBtnChangeStand");
@@ -109,32 +133,25 @@
     function ModifStand(){
       console.log("Votre stand a été modifié !");
     }
-    /*
-  	function updateWaitList()
-  	{
-  		//let divWaiting = document.getElementById('nbrWaiting');
-  		let divTextWaiting = document.getElementById('textWaiting');
-  		if(nbrWaiting < 0)
-  			nbrWaiting = 0;
-  		if(isInWaitList)
-  		{
-  			if(nbrWaiting > 1)
-  			{
-  				divTextWaiting.innerHTML = "Nombre de personne avant vous dans la liste d'attente :";
-  				divWaiting.innerHTML = nbrWaiting - 1;
-  			}
-  			else
-  			{
-  				divTextWaiting.innerHTML = "C'est à vous!";
-  				divWaiting.innerHTML = "";
-  			}
-  		}
-  		else
-  		{
-  			divTextWaiting.innerHTML = "Nombre de personne en liste d'attente : ";
-  			divWaiting.innerHTML = nbrWaiting;
-  		}
-  	}*/
+    
+    function VerifFileLogo(){
+        file = event.target.files[0];
+        if (!file) {
+            console.log("no file");
+        }
+        else if (!file.type.match('image.*')) {
+            console.log("not a image");
+        }
+        else {
+            const reader = new FileReader();
+            reader.addEventListener('load', event => {
+                document.getElementById("logoEntreprise").src = event.target.result;
+            });
+            reader.readAsDataURL(file);
+
+        }
+        SaveChangeButtonDisplay();
+    }
 
     var tempPositionfortest = 1;
 
@@ -146,17 +163,12 @@
         userText.appendChild(document.createTextNode("userNom" + tempPositionfortest)); // modifier pour changer userNom avec user name from bdd
         lsiteAttente.appendChild(userText);
         tempPositionfortest++;
-  		//if(isInWaitList) return;
-  		//isInWaitList = true;
-  		//addToWaitList();
+  		
   	}
-      /*
-  	function addToWaitList()
-  	{
-  		nbrWaiting++;
-  		updateWaitList();
-  	}
-    */
+    
+    function accepterStand(){
+        console.log("envoi du mail pour prevenir que le stand est visible")
+    }
 
     function refuserStand(){
         var person  = prompt("Please enter reasons of the reject:", "reject for");
@@ -174,11 +186,6 @@
         }
     }
 
-  	function removeFromWaitList()
-  	{
-  		nbrWaiting--;
-  		updateWaitList();
-  	}
 
 </script>
 

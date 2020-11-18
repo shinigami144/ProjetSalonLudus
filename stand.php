@@ -47,7 +47,7 @@
 		{
 			$table = $conn->query($req);	
 			foreach($table as $row)
-			{
+			{	
 				echo '<script>let divEntreprise = document.getElementById("divInformationEntreprise");</script>';
 				
 				if($row["imageStand"])

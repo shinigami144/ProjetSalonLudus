@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 
 	/*
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -53,9 +54,11 @@
 		</html>';
 	}
 			
+=======
 $servername = "localhost";
 $username = "root";
 $password = "";
+>>>>>>> eec8a09648a8f6d98cff061c7f5b053e97292059
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=salonvirtuel", $username, $password);
