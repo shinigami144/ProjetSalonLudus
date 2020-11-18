@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
-    
     <style>
         a{
             display: block;
+        }
+        #IDSTAND{
+            display:none;
         }
     </style>
 </head>
 <?php
 	require("connect.php");	
-	$conn = connectDB(); 
+    $conn = connectDB(); 
+    
 ?>
 <body>
-    <form id="divInformationEntreprise">
+    <form id="divInformationEntreprise" action="modifStand.php" method="POST">
+        <input type="number" value="2" name="idStand" id="IDSTAND">
         <div id="stand_image_container">
           <label for="LogoEntreprise_UploadBtn"> <!-- Le FOR doit être égal à l'id de l'input type file ci-dessous -->
             <img src="https://fakeimg.pl/300/" id="logoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
           </label>
           <input type="file" name="LogoEntreprise_Upload" value="" id="LogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
         </div>
-        <input type="text" placeholder="NomEntreprise" id="nomEntreprise" readonly>
-        <input type="text" placeholder="description de l'entreprise" id="descriptionEntreprise"  readonly>
+        <input type="text" name="nomEntreprise" placeholder="NomEntreprise" id="nomEntreprise" readonly>
+        <input type="text" name="descriptionEntreprise" placeholder="description de l'entreprise" id="descriptionEntreprise"  readonly>
         <input type="text" placeholder="81 rue des moule" id="adresseEntreprise" readonly>
         <input type="email" placeholder="truc@tucr.com" id="emailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" >
         <input type="text"  placeholder="https://www.w3schools.com/" id="siteEntreprise" readonly>
@@ -53,22 +57,6 @@
     <button id="BoutonAccepterStand">Stand Accepter</button>
     <button id="ButtonRefuserStand" onclick="refuserStand()">Stand Refuser</button>
 </body>
-<?php
-	$idStand = 
-	$req = "select * from stand";
-	if ($_SERVER["REQUEST_METHOD"] == "GET") {
-		$req = "select * from stand where idStand = " . $_GET["idStand"];
-	}
-	var_dump($req);
-	if(isset($conn))
-	{
-		$table = $conn->query($req);
-		foreach($table as $row)
-		{
-			var_dump($row);
-		}
-	}
-?>
 <script>
     // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
     // variable user
