@@ -18,14 +18,13 @@
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+        <a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_M2NmYWE5ZmMtNjRmOS00N2EzLTkxYjktMjliZGFlMzlmOTQ0%40thread.v2/0?context=%7b%22Tid%22%3a%22a7dd4082-9c4d-44d0-b8a3-8237e18dd60d%22%2c%22Oid%22%3a%22323d2f20-895c-4b24-accd-9c0eeca1784a%22%7d" target="_blank">Rejoindre le meeting teams</a>
       </div>
 
     </div>
     <div>
     <?php include 'header.php';?>    
     </div>
-    
     <h1>SiepProjecdfgjnlggggggggggggggggggggggggggggggggggdddddddd</h1>
     <iframe 
             src="backPage.php"
