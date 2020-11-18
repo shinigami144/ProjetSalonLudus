@@ -22,7 +22,7 @@ session_start();
             <a href="#" class="w3-bar-item w3-button w3-col l3">Salon</a>
             <a href="#" class="w3-bar-item w3-button w3-col l3">Stands</a>
             <a href="#" class="w3-bar-item w3-button w3-col l3">Profil</a>
-            <a href="#" class="w3-bar-item w3-button w3-col l3">Deconnexion</a>
+            <a href="deco.php" class="w3-bar-item w3-button w3-col l3">Deconnexion</a>
         </div>
         <div>
         <?php include 'header.php';?>    
