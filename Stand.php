@@ -15,8 +15,8 @@
 </head>
 <?php
 	require("connect.php");	
-    $conn = connectDB(); 
-    
+    $conn = connectDB();
+
 ?>
 <body>
     <form id="divInformationEntreprise" action="modifStand.php" method="POST">
@@ -56,6 +56,34 @@
     </div>
     <button id="BoutonAccepterStand">Stand Accepter</button>
     <button id="ButtonRefuserStand" onclick="refuserStand()">Stand Refuser</button>
+    <body>
+    <div id="divInformationEntreprise">
+        <image id="logoEntreprise" src="https://fakeimg.pl/300/"></image>
+        <p id="nomEntreprise" contenteditable="false">Nom</p>
+        <p id="descriptionEntreprise" contenteditable="false">description</p>
+        <address id="adresseEntreprise" onclick="ChangeContentEditable(this)" contenteditable="false"> Rue des Coquelico 87 </address>
+        <p type="email"  id="emailEntreprise" contenteditable="false">Email</p>
+        <a  id="siteEntreprise" contenteditable="false">SITE</a>
+        <p  id="telEntreprise" contenteditable="false"  >tel</p>
+        <div id="Brochure">
+            <h4>Brochure</h4>
+            <a href="./DataFile/Exemple_MainActivity.pdf" download="brochurePDF">
+                <image src="./Graphics/DownloadIcon.png"/>
+            </a>
+        </div>
+    </div>
+    <div id="divFileAttente">
+        <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d'attente</p>
+        <div id="listeFileAttente">
+            <p><span id="textWaiting"></span>
+			<span id="nbrWaiting">0</span> </p>
+        </div>
+        <button id="boutonAjoutFileAttente" onclick="addMeToWaitList()">
+            S'ajouter a la file d'attente de rendez-vous
+        </button>
+    </div>
+    
+</body>
 </body>
 <script>
     // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
