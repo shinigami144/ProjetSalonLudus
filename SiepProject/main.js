@@ -1,4 +1,3 @@
-
 var nbFile = 9;
 var timer = setInterval(myTimer, 1000);
 
@@ -10,7 +9,6 @@ function myTimer() {
         clearInterval(timer);
         $("#decrementation").html(nbFile);
         modal.css("display","block");
-    
     }
     nbFile--;
     $("#decrementation").html(nbFile);

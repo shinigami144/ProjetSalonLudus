@@ -1,12 +1,13 @@
 <?php
-$attente = 1;
-$position = 9;
+  session_start();
+  include('fonctions.php'); 
+  $attente = 1;
+  $position = 9;
 ?>
 
-
 <div id="profilePic" class="card" >
-  <img src="../SiepProject/css/profile.png" >
-  <h1>Julie Morand</h1>
+  <?php AfficheImageProfil($_SESSION['mail']); ?>
+  <?php AfficheNomPrenom($_SESSION['mail']); ?>
  
   <p>File d'attente en cours</p>
        <div id="decrementation"></div>
