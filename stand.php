@@ -17,13 +17,6 @@
 ?>
 <body>
     <div id="divInformationEntreprise">
-        <image id="logoEntreprise" src="https://fakeimg.pl/300/"></image>
-        <p id="nomEntreprise" contenteditable="false">Nom</p>
-        <p id="descriptionEntreprise" contenteditable="false">description</p>
-        <address id="adresseEntreprise" onclick="ChangeContentEditable(this)" contenteditable="false"> Rue des Coquelico 87 </address>
-        <p type="email"  id="emailEntreprise" contenteditable="false">Email</p>
-        <a  id="siteEntreprise" contenteditable="false"></a>
-        <p  id="telEntreprise" contenteditable="false"  >tel</p>
     </div>
     <div id="divFileAttente">
         <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d'attente</p>
@@ -37,47 +30,117 @@
     </div>
     
 </body>
-<?php
-	$idStand = 
-	$req = "select * from stand";
-	if ($_SERVER["REQUEST_METHOD"] == "GET") {
-		$req = "select * from stand where idStand = " . $_GET["idStand"];
-	}
-	var_dump($req);
-	if(isset($conn))
-	{
-		$table = $conn->query($req);
-		foreach($table as $row)
-		{
-			var_dump($row);
-		}
-	}
-?>
 <script>
     // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
     // variable user
     var userPermission;
-    
-    // partie divInformationEntreprise
-    
-    var logoEntreprise = document.getElementById("logoEntreprise");
-    var nomEntreprise = document.getElementById("nomEntreprise");
-    var descriptionEntreprise = document.getElementById("descriptionEntreprise");
-    var adresseEntreprise  = document.getElementById("adresseEntreprise");
-    var emailEntreprise = document.getElementById("emailEntreprise");
-    var siteEntreprise = document.getElementById("siteEntreprise");
-    var telEntreprise = document.getElementById("telEntreprise");
-
 
     // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
-
+	</script>
+	<?php
+	// partie divInformationEntreprise
+		$req = "select * from stand";
+		if ($_SERVER["REQUEST_METHOD"] == "GET") {
+			$req = "select * from stand where idStand = " . $_GET["idStand"];
+		}
+		if(isset($conn))
+		{
+			$table = $conn->query($req);	
+			foreach($table as $row)
+			{
+				echo '<script>let divEntreprise = document.getElementById("divInformationEntreprise");</script>';
+				
+				if($row["imageStand"])
+				{
+					echo'<script>
+					let logo = document.createElement("img");
+					logo.src = "'. $row["imageStand"] . '" ;
+					logo.id = "imageEntreprise";
+					divEntreprise.appendChild(logo);
+					</script>';
+				}
+				
+				if($row["nomStand"])
+				{
+					echo'<script>
+					let nom = document.createElement("h2");
+					nom.innerHTML = "'.$row["nomStand"].'";
+					nom.id = "nomEntreprise";
+					divEntreprise.appendChild(nom);
+					</script>';
+				}
+				
+				if($row["descriptionStand"])
+				{
+					echo'<script>
+					let description = document.createElement("p");
+					description.innerHTML = "'.$row["descriptionStand"].'";
+					description.id = "descriptionEntreprise";
+					divEntreprise.appendChild(description);
+					</script>';
+				}
+				
+				if($row["adresseStand"])
+				{
+					echo'<script>
+					let adresse = document.createElement("address");
+					adresse.innerHTML = "'.$row["adresseStand"].'";
+					adresse.id = "adresseEntreprise";
+					divEntreprise.appendChild(adresse);
+					</script>';
+				}
+				
+				/*if($row["telephoneStand"])
+				{
+					echo'<script>
+					let adresse = document.createElement("address");
+					adresse.innerHTML = "'.$row["adresseStand"].'";
+					adresse.id = "adresseEntreprise";
+					divEntreprise.appendChild(adresse);
+					</script>';
+				}*/
+				
+				/*if($row["adresseStand"])
+				{
+					echo'<script>
+					let adresse = document.createElement("p");
+					adresse.innerHTML = "'.$row["emailStand"].'";
+					adresse.id = "adresseEntreprise";
+					divEntreprise.appendChild(adresse);
+					</script>';
+				}*/
+				
+				/*if($row["adresseStand"])
+				{
+					echo'<script>
+					let site = document.createElement("p");
+					site.innerHTML = "'.$row["emailStand"].'";
+					site.id = "siteEntreprise";
+					divEntreprise.appendChild(site);
+					</script>';
+				}*/
+				
+				
+			}
+		}
+	?>
+	
+	<script>
     //initialisation des different onclickListener
     
+	var logoEntreprise = document.getElementById("logoEntreprise");
+	var nomEntreprise = document.getElementById("nomEntreprise");
+	var descriptionEntreprise = document.getElementById("descriptionEntreprise");
+	var adresseEntreprise  = document.getElementById("adresseEntreprise");
+	//var emailEntreprise = document.getElementById("emailEntreprise");
+	var siteEntreprise = document.getElementById("siteEntreprise");
+	var telEntreprise = document.getElementById("telEntreprise");
+	
     logoEntreprise.addEventListener("dblclick",ChangeContentEditable);
     nomEntreprise.addEventListener("dblclick",ChangeContentEditable);
     descriptionEntreprise.addEventListener("dblclick",ChangeContentEditable);
     adresseEntreprise.addEventListener("dblclick",ChangeContentEditable);
-    emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    //emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
     siteEntreprise.addEventListener("dblclick",ChangeContentEditable);
     telEntreprise.addEventListener("dblclick",ChangeContentEditable);
 	

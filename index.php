@@ -11,7 +11,8 @@
 	$req = "select * from stand";
 	if(isset($conn))
 	{
-		$table = $conn->query($req);
+		$table = $conn->prepare($req);
+		$table->execute();
 		
 		echo "<table><tr><th>idStand<th>nomStand<th>imageStand<th>pitchStand
 			<th>codePostalStand<th>villeStand<th>idPaysStand<th>descriptionStand
@@ -34,21 +35,20 @@
 			<title>File</title>
 		</head>
 		<body>
-			<p>
-				Vous êtes bien dans le main
-				
-				<h4>Liste des stand</h4>';
-			echo '<form method="get" action="stand.php">
-				<select name = "idStand" 	id="idStand">
-				foreach($table as $row)
-				{
-					<option value="'. $row["idStand"]. '">'. $row["nomStand"] . '</option>
-				}
-				</select>
-				<br/><input type="submit" value="Regarder">
-				</form>';
+		<p>Vous êtes bien dans le main</p>
+			
+		<h4>Liste des stand</h4>';
+		echo '<form method="get" action="stand.php">
+			<select name = "idStand" id="idStand">';
+		$table->execute();	
+			foreach($table as $row)
+			{
+				echo '<option value="'. $row["idStand"]. '">'. $row["nomStand"] . '</option>';
+			}
+			echo '</select>
+			<br/><input type="submit" value="Regarder">
+			</form>';
 		echo '
-			</p>
 		</body>
 		</html>';
 	}

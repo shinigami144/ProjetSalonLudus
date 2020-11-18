@@ -1,7 +1,6 @@
 <?php
 class stand
-{
-		 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
+{ 	 	 	 	 	 	 
 	private $idStand;
 	private $nomStand;
 	private $imageStand;
