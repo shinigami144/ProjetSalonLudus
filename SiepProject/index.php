@@ -7,6 +7,11 @@
     
 </head>
 <body>
+    <nav class="nav">
+    <div id="nav1"><a href="#">Salons</a></div>
+    <div id="nav2"><a href="#">Stands</a></div>
+    <div id="nav3"><a href="#">Profil</a></div>
+    </nav>
     <!-- The Modal -->
     <div id="myModal" class="modal">
 
