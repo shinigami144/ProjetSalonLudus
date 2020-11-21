@@ -2,10 +2,18 @@
 <html >
 <head>
     <title>Liste des Salon</title>
+    <style>
+        #runnerGame {
+            width: 1400px;
+            height: 200px;
+            border: black solid 2px;
+        }
+    </style>
 </head>
 <body>
 
-    <form action="#" method="post" id="rechercheSalon">
+    <form action="#" method="post" id="rechercheSalon"> <!-- recherche de salon -->
+        <label for="rechercher">recherche de votre salon :</label>
         <label for="dateDebut">date de debut</label>
         <input type="date" name="dateDebut" >
         <label for="dateFin">date de fin</label>
@@ -17,7 +25,8 @@
         </select>
         <label for="titre">titre du salon</label>
         <input type="text" name="titre">
-        <input type="submit" value="validation">   
+        <input type="submit" value="validation">
+        <!-- recherche par mot cle possible :) -->   
     </form>
 
     <div id="scroolList">
@@ -25,23 +34,22 @@
             <h1 >titre salon</h1>
             <img src="">
             <article >
-                <h2>description du salon</h2>
+                <h2>description du salon</h2> <!-- pithc du salon dans la bbd -->
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nulla hic voluptatem at. Nihil molestiae facilis tempora earum, ipsum delectus maxime ad cum ducimus odit accusantium, magnam architecto recusandae dolorem.
                 Dolor veniam vitae quisquam voluptatum minima dolore ducimus nobis corporis accusantium reprehenderit, mollitia quidem voluptas dolores quis tempora maiores error voluptatem autem nostrum. Nobis quis odit at, nostrum ad libero!
                 Mollitia aspernatur nobis perspiciatis accusamus perferendis consectetur assumenda numquam animi nesciunt tempora atque saepe, doloribus magni explicabo provident, reiciendis ex dicta nulla deserunt. Neque, fuga minima id repellat non vel.
                 Deserunt hic modi reprehenderit, corporis numquam at dignissimos non ad harum. Repudiandae sint perspiciatis soluta provident minima accusamus fuga officiis! Ipsum corrupti eligendi adipisci totam voluptate illum quasi similique nihil!
                 Molestias ab iusto adipisci provident illo, doloremque aliquam voluptates earum voluptatibus! Consequatur tenetur sit ut eius! Officiis quae illum dolore odit eum maiores, nam doloremque perspiciatis, reprehenderit consequuntur aperiam unde.</p>
             </article>
+            <p>localisation :</p>
             <p>Bruxelles/Strasbourg</p>
         </div>
     </div>
 
     <button id="formullaireB">formullaire de contacte</button>
-    <form action="#" method="post" id="formullaireContact">
+    <form action="#" method="post" id="formullaireContact"><!-- formulaire de contacte pour cree un salon -->
         <label for="titre">titre du salon</label>
         <input type="text" name="titre" >
-        <label for="description">description</label>
-        <input type="text" name="description" >
         <label for="dateDebut">date de Debut</label>
         <input type="date" name="dateDebut" >
         <label for="dateFin">date de Fin</label>
@@ -50,10 +58,15 @@
         <input type="datetime" name="horaire" >
         <label for="localisation">localisation</label>
         <input type="text" name="localisation">
-        <label for="information">information</label>
-        <input type="text" name="information">
+        <label for="description">description</label>
+        <textarea name="description" cols="30" rows="10"></textarea>
+        <label for="information">information supplementaire</label>
+        <textarea name="information" cols="30" rows="10"></textarea>
         <input type="submit" value="envoyer">    
     </form>
+
+    <button id="jeu">game</button>
+    <canvas id="runnerGame"></canvas>
 </body>
 <script>
 
@@ -61,8 +74,18 @@
     var liste = document.getElementById("scroolList");
     var formullaireContact = document.getElementById("formullaireContact");
     var buttonForm = document.getElementById("formullaireB");
+    var jeuB = document.getElementById("jeu");
+    var runnerGame = document.getElementById("runnerGame");
+    var ctx = runnerGame.getContext("2d");
 
+
+    ctx.fillStyle = 'rgb(0,0,0)';
+    ctx.fillRect(0,130,1400,20);
+
+
+    runnerGame.style.display = "none";
     formullaireContact.style.display = "none";
+    jeuB.addEventListener("click",StartGame);
     buttonForm.addEventListener("click",enterFormContact);
 
     function enterFormContact(e){
@@ -85,6 +108,25 @@
         buttonForm.addEventListener("click",enterFormContact);
         // on sort dans le form de contact
         console.log("sortie");
+    }
+
+    function StartGame() {
+        runnerGame.style.display = "block";
+        jeuB.innerHTML = "exit game"
+        jeuB.removeEventListener("click",StartGame);
+        jeuB.addEventListener("click",ExitGame);
+        setInterval(gameUpdate,1000/60);
+    }
+
+
+    function gameUpdate() {
+    }
+
+    function ExitGame() {
+        runnerGame.style.display = "none";
+        jeuB.innerHTML = "game"
+        jeuB.removeEventListener("click",ExitGame);
+        jeuB.addEventListener("click",StartGame);
     }
 
 
