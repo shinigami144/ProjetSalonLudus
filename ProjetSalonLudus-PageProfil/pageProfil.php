@@ -1,3 +1,26 @@
+
+<?php 
+/*
+    $bdd;
+    $userId;
+
+    function deleteAccount(){
+        $bdd->query("DELETE FROM user WHERE id =".$userId.";");
+    }
+
+    function updateUser(){
+        $bdd->query("UPDATE user
+                    SET column1 = value1, column2 = value2, ...
+                    WHERE id =".$userId.";");
+    }
+
+    function updateMdp($newMdp){
+        $bdd->query("UPDATE user
+                    SET password =".$newMdp."
+                    WHERE id =".$userId.";");
+    }
+*/
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -273,10 +296,10 @@
         </select>
         <label for="phoneNumber">Téléphone : </label>
         <input type="tel" name="phoneNumber">
-        <input type="button" value="changer de mont de passe" id="mdp">
+        <input type="button" value="Changer de mot-de-passe" id="mdp">
         <input type="submit" value="Enregistrer">
     </form>
-    <button id="modif">modification</button>
+    <button id="modif">Modifier</button>
 </body>
 <script>
 
@@ -286,22 +309,17 @@
     var Supprimer = document.getElementById("supp");
     var mdp_change = document.getElementById("mdp");
 
-
     modifFrom.style.display = "none";
-    modifFrom.addEventListener("submit", sendChange);
 
+    modifFrom.addEventListener("submit", sendChange);
     mdp_change.addEventListener("click",changerMdp);
     button.addEventListener("click",enterModifMode);
     Supprimer.addEventListener("click",deleteUser);
 
-  /*  for(var i = 0; i < infoContainer.children.length; i++){
-        infoContainer.children[i].addEventListener("dblclick", enterModifMode);
-    }  boucle for pour modifier les individuelement les enfants */
-
     function enterModifMode(e){
         infoContainer.style.display = "none";
         modifFrom.style.display = "block";
-        button.innerHTML = "cancel";
+        button.innerHTML = "Annuler";
         button.removeEventListener("click",enterModifMode);
         button.addEventListener("click",exitModifMode);
         //remplir le form des informations
@@ -310,7 +328,7 @@
     function exitModifMode(e){
         modifFrom.style.display = "none";
         infoContainer.style.display = "block";
-        button.innerHTML = "modification";
+        button.innerHTML = "Modifier";
         button.removeEventListener("click",exitModifMode);
         button.addEventListener("click",enterModifMode);
         //quitte le form des informations
@@ -318,45 +336,42 @@
 
     function sendChange(e){
         //envoie des changements vers le serveur
+        <?php //send info and updateUser() ?>
         console.log("change");
         return false;
     }
 
     function deleteUser(e){
         //supprime l'user de la table
+        <?php //deleteAccount() ?>
         console.log("mort");
     }
     function changerMdp(e){
-
-
         //changer de mot de passe
-        var ancienmdp = prompt("entre votre ancien mdp");
+        var ancienmdp = prompt("Entrez votre ancien mot-de-passe");
         if ((ancienmdp == null )||  (ancienmdp == ""))  {
-            
             return;
-
-
         }
         // verification du mot de passe  si bon suite sinon return (a faire)
-
         while (true) {
+            var newmdp =prompt("Entrez le nouveau mot-de-passe");
 
-        var newmdp =prompt("entre le nouveau mot de passe");
-        if ((newmdp == null )|| (newmdp == "") ) {
-            return;
-        }
-        if (newmdp == ancienmdp) {
-            alert("le nouveau mot de passe ne peux pas etre egale à l'ancien mot de passe");
-            
-        } else if (newmdp == prompt("comfirmer le mot de passe") ) {
-            //changement dans le serveur/bdd
-            return;   
-        }else{
-            alert("erreur comfirmation incorrect");
+            if ((newmdp == null )|| (newmdp == "") ) {
+                return;
+            }
+            if (newmdp == ancienmdp) {
+                alert("Le nouveau mot-de-passe ne peux pas être égal à l'ancien mot-de-passe");
+                
+            } 
+            else if (newmdp == prompt("Confirmez le nouveau mot-de-passe") ) {
+                //changement dans le serveur/bdd
+                <?php //send newmdp to php and do updateMdp()?>
+                return;   
+            }
+            else{
+                alert("Erreur : confirmation incorrecte");
             }
         }
-
     }
-
 </script>
 </html>
