@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html >
 <head>
-    <title>Liste des Salon</title>
+    <title>Liste des Salons</title>
     <style>
         #runnerGame {
             width: 1400px;
@@ -13,106 +13,138 @@
 <body>
 
     <form action="#" method="post" id="rechercheSalon"> <!-- recherche de salon -->
-        <label for="rechercher">recherche de votre salon :</label>
-        <label for="dateDebut">date de debut</label>
+        <input type="text" name="nomSalon">
+        <label for="dateDebut">Date de debut</label>
         <input type="date" name="dateDebut" >
-        <label for="dateFin">date de fin</label>
+        <label for="dateFin">Date de fin</label>
         <input type="date" name="dateFin">
-        <label for="localisation">localisation</label>
-        <select name="localisation" >
-            <option value="localisation1">Bruxelles </option><!-- juste les villes -->
-            <option value="localisation2">Strasbourg </option>
+        <label for="localisation">Localisation</label>
+        <select name="localisation" ><!-- Ce serait bien de remplir le select avec les villes possible des salons dans la bdd -->
+            <option value="Bruxelles">Bruxelles </option><!-- juste les villes pour exemple -->
+            <option value="Starsbourg">Strasbourg </option>
         </select>
-        <label for="titre">titre du salon</label>
+        <label for="type">Type</label>
+        <select name="type" ><!-- Ce serait bien de remplir le select avec les type de salon possible de la bdd -->
+            <option value="Technologie">Technologie</option><!-- juste les types pour exemple -->
+            <option value="Emplois">Emplois </option>
+        </select>
+        <label for="titre">Nom du salon</label>
         <input type="text" name="titre">
-        <input type="submit" value="validation">
-        <!-- recherche par mot cle possible :) -->   
+        <input type="submit" value="Filtrer">  
     </form>
 
-    <div id="scroolList">
-        <div>
-            <h1 >titre salon</h1>
-            <img src="">
-            <article >
-                <h2>description du salon</h2> <!-- pithc du salon dans la bbd -->
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nulla hic voluptatem at. Nihil molestiae facilis tempora earum, ipsum delectus maxime ad cum ducimus odit accusantium, magnam architecto recusandae dolorem.
-                Dolor veniam vitae quisquam voluptatum minima dolore ducimus nobis corporis accusantium reprehenderit, mollitia quidem voluptas dolores quis tempora maiores error voluptatem autem nostrum. Nobis quis odit at, nostrum ad libero!
-                Mollitia aspernatur nobis perspiciatis accusamus perferendis consectetur assumenda numquam animi nesciunt tempora atque saepe, doloribus magni explicabo provident, reiciendis ex dicta nulla deserunt. Neque, fuga minima id repellat non vel.
-                Deserunt hic modi reprehenderit, corporis numquam at dignissimos non ad harum. Repudiandae sint perspiciatis soluta provident minima accusamus fuga officiis! Ipsum corrupti eligendi adipisci totam voluptate illum quasi similique nihil!
-                Molestias ab iusto adipisci provident illo, doloremque aliquam voluptates earum voluptatibus! Consequatur tenetur sit ut eius! Officiis quae illum dolore odit eum maiores, nam doloremque perspiciatis, reprehenderit consequuntur aperiam unde.</p>
-            </article>
-            <p>localisation :</p>
-            <p>Bruxelles/Strasbourg</p>
-        </div>
+    <div id="scrollList">
+        <!-- vide au debut -->
     </div>
 
-    <button id="formullaireB">formullaire de contacte</button>
-    <form action="#" method="post" id="formullaireContact"><!-- formulaire de contacte pour cree un salon -->
-        <label for="titre">titre du salon</label>
+    <button id="formulaireB">Formulaire de contact</button>
+
+    <form action="#" method="post" id="formulaireContact"><!-- formulaire de contacte pour cree un salon -->
+        <label for="titre">Nom du salon</label>
         <input type="text" name="titre" >
-        <label for="dateDebut">date de Debut</label>
+        <label for="dateDebut">Date de debut</label>
         <input type="date" name="dateDebut" >
-        <label for="dateFin">date de Fin</label>
+        <label for="dateFin">Date de fin</label>
         <input type="date" name="dateFin" >
-        <label for="horaire">horaire</label>
+        <label for="horaire">Horaire</label>
         <input type="datetime" name="horaire" >
-        <label for="localisation">localisation</label>
+        <label for="localisation">Localisation</label>
         <input type="text" name="localisation">
-        <label for="description">description</label>
+        <label for="description">Description</label>
         <textarea name="description" cols="30" rows="10"></textarea>
-        <label for="information">information supplementaire</label>
+        <label for="information">Information supplémentaire</label>
         <textarea name="information" cols="30" rows="10"></textarea>
         <input type="submit" value="envoyer">    
     </form>
 
-    <button id="jeu">game</button>
+    <button id="jeu">Mini-jeu</button>
     <canvas id="runnerGame"></canvas>
 </body>
 <script>
 
-    var formullaire = document.getElementById("rechercheSalon");
-    var liste = document.getElementById("scroolList");
-    var formullaireContact = document.getElementById("formullaireContact");
-    var buttonForm = document.getElementById("formullaireB");
+    var formulaire = document.getElementById("rechercheSalon");
+    var liste = document.getElementById("scrollList");
+    var formulaireContact = document.getElementById("formulaireContact");
+    var buttonForm = document.getElementById("formulaireB");
+   
+    formulaireContact.style.display = "none";
+    buttonForm.addEventListener("click",enterFormContact);
+    formulaire.addEventListener("submit",filtrer);
+    formulaireContact.addEventListener("submit",envoyerSalon);
+
+    //au debut il faut remplir la liste avec tous les salon (ou trier)
+
+    //exemple :
+    creerSalon("ludus","c'est une ecole","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvEVnVjIin1HPVmd4KfEvcHbqqE-Kf4xpRQ&usqp=CAU","Bruxelle");
+    creerSalon("Siep","c'est un salon","https://www.fredzone.org/wp-content/uploads/2016/10/cursedimages-640x467.jpg","Paris");
+    creerSalon("Truc","c'est indéfinis","https://telegram.im/img/cursedimages","New-York");
+
+    function creerSalon(nom, pitch, img, ville){
+        var container = document.createElement("div");
+        var elem = document.createElement("p");
+        elem.innerHTML = nom;
+        container.appendChild(elem);
+        elem = document.createElement("img");
+        elem.src = img;
+        container.appendChild(elem);
+        elem = document.createElement("p");
+        elem.innerHTML = pitch;
+        container.appendChild(elem);
+        elem = document.createElement("p");
+        elem.innerHTML = "Localisation :";
+        container.appendChild(elem);
+        elem = document.createElement("p");
+        elem.innerHTML = ville;
+        container.appendChild(elem);
+        liste.appendChild(container);
+    }
+
+    function enterFormContact(e){
+        formulaireContact.style.display = "block";
+        formulaire.style.display = "none";
+        liste.style.display = "none";
+        buttonForm.innerHTML ="Annuler";
+        buttonForm.removeEventListener("click",enterFormContact);
+        buttonForm.addEventListener("click",exitFormContact);
+        // on entre dans le form de contact
+    }
+
+    function exitFormContact(e) {
+        formulaireContact.style.display = "none";
+        formulaire.style.display = "block";
+        liste.style.display = "block";
+        buttonForm.innerHTML ="Formulaire de contact";
+        buttonForm.removeEventListener("click",exitFormContact);
+        buttonForm.addEventListener("click",enterFormContact);
+        // on sort dans le form de contact
+    }
+
+    function filtrer(e){
+        //demander au serveur les salon correspondant au filtre
+    }
+
+    function envoyerSalon(e){
+        //envoyer au admin le formulaire ? (c'est pour créer un salon)
+    }
+    
+    
+    //game =========================================================================================================================================================
+    //game =========================================================================================================================================================
+    //game =========================================================================================================================================================
+
     var jeuB = document.getElementById("jeu");
     var runnerGame = document.getElementById("runnerGame");
     var ctx = runnerGame.getContext("2d");
 
-
     ctx.fillStyle = 'rgb(0,0,0)';
     ctx.fillRect(0,130,1400,20);
 
-
     runnerGame.style.display = "none";
-    formullaireContact.style.display = "none";
     jeuB.addEventListener("click",StartGame);
-    buttonForm.addEventListener("click",enterFormContact);
-
-    function enterFormContact(e){
-        formullaireContact.style.display = "block";
-        formullaire.style.display = "none";
-        liste.style.display = "none";
-        buttonForm.innerHTML ="cancel";
-        buttonForm.removeEventListener("click",enterFormContact);
-        buttonForm.addEventListener("click",exitFormContact);
-        // on entre dans le form de contact
-        console.log("enter");
-    }
-
-    function exitFormContact(e) {
-        formullaireContact.style.display = "none";
-        formullaire.style.display = "block";
-        liste.style.display = "block";
-        buttonForm.innerHTML ="formullaire de contacte";
-        buttonForm.removeEventListener("click",exitFormContact);
-        buttonForm.addEventListener("click",enterFormContact);
-        // on sort dans le form de contact
-        console.log("sortie");
-    }
 
     function StartGame() {
         runnerGame.style.display = "block";
-        jeuB.innerHTML = "exit game"
+        jeuB.innerHTML = "Quitter le jeu"
         jeuB.removeEventListener("click",StartGame);
         jeuB.addEventListener("click",ExitGame);
         setInterval(gameUpdate,1000/60);
