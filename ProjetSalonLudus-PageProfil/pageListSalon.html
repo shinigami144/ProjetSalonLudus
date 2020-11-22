@@ -1,63 +1,76 @@
 <!DOCTYPE html>
 <html >
 <head>
+    <link rel="stylesheet" href="./CSS/listeSalon.css">
     <title>Liste des Salons</title>
-    <style>
-        #runnerGame {
-            width: 1400px;
-            height: 200px;
-            border: black solid 2px;
-        }
-    </style>
 </head>
 <body>
 
     <form action="#" method="post" id="rechercheSalon"> <!-- recherche de salon -->
-        <input type="text" name="nomSalon">
-        <label for="dateDebut">Date de debut</label>
-        <input type="date" name="dateDebut" >
-        <label for="dateFin">Date de fin</label>
-        <input type="date" name="dateFin">
-        <label for="localisation">Localisation</label>
-        <select name="localisation" ><!-- Ce serait bien de remplir le select avec les villes possible des salons dans la bdd -->
-            <option value="Bruxelles">Bruxelles </option><!-- juste les villes pour exemple -->
-            <option value="Starsbourg">Strasbourg </option>
-        </select>
-        <label for="type">Type</label>
-        <select name="type" ><!-- Ce serait bien de remplir le select avec les type de salon possible de la bdd -->
-            <option value="Technologie">Technologie</option><!-- juste les types pour exemple -->
-            <option value="Emplois">Emplois </option>
-        </select>
-        <label for="titre">Nom du salon</label>
-        <input type="text" name="titre">
-        <input type="submit" value="Filtrer">  
+        <div>
+            <input type="text" name="nomSalon" placeholder="chercher un salon">
+            <input type="submit" value="Filtrer"> 
+        </div>
+        <div>
+            <div>
+                <label for="dateDebut">Commence le :</label>
+                <input type="date" name="dateDebut" >
+            </div>
+            <div>
+                <label for="dateFin">Termine le :</label>
+                <input type="date" name="dateFin">
+            </div>
+            <select name="localisation" ><!-- Ce serait bien de remplir le select avec les villes possible des salons dans la bdd -->
+                <option value="Bruxelles">Bruxelles </option><!-- juste les villes pour exemple -->
+                <option value="Starsbourg">Strasbourg </option>
+            </select>
+            <select name="type" ><!-- Ce serait bien de remplir le select avec les type de salon possible de la bdd -->
+                <option value="Technologie">Technologie</option><!-- juste les types pour exemple -->
+                <option value="Emplois">Emplois </option>
+            </select>
+        </div>
     </form>
 
     <div id="scrollList">
         <!-- vide au debut -->
     </div>
 
-    <button id="formulaireB">Formulaire de contact</button>
-
     <form action="#" method="post" id="formulaireContact"><!-- formulaire de contacte pour cree un salon -->
         <label for="titre">Nom du salon</label>
         <input type="text" name="titre" >
+        <br>
         <label for="dateDebut">Date de debut</label>
         <input type="date" name="dateDebut" >
+        <br>
         <label for="dateFin">Date de fin</label>
         <input type="date" name="dateFin" >
-        <label for="horaire">Horaire</label>
-        <input type="datetime" name="horaire" >
+        <br>
+        <label for="horaireOuverture">Horaire d'ouverture</label>
+        <input type="time" name="horaireOuverture">
+        <br>
+        <label for="horaireFermeture">Horaire de fermeture</label>
+        <input type="time" name="horaireFermeture">
+        <br>
         <label for="localisation">Localisation</label>
         <input type="text" name="localisation">
-        <label for="description">Description</label>
+           <!-- ce serait cool d'avoir un google maps ou quoi -->
+        <br>
+        <label for="description">Description :</label>
+        <br>
         <textarea name="description" cols="30" rows="10"></textarea>
-        <label for="information">Information supplémentaire</label>
+        <br>
+        <label for="information">Information supplémentaire :</label>
+        <br>
         <textarea name="information" cols="30" rows="10"></textarea>
+        <br>
         <input type="submit" value="envoyer">    
     </form>
 
-    <button id="jeu">Mini-jeu</button>
+    <div id="buttonCont">
+        <button id="jeu">Mini-jeu</button>
+        <button id="formulaireB">Formulaire de contact</button>
+    </div>
+
     <canvas id="runnerGame"></canvas>
 </body>
 <script>
@@ -78,23 +91,23 @@
     creerSalon("ludus","c'est une ecole","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvEVnVjIin1HPVmd4KfEvcHbqqE-Kf4xpRQ&usqp=CAU","Bruxelle");
     creerSalon("Siep","c'est un salon","https://www.fredzone.org/wp-content/uploads/2016/10/cursedimages-640x467.jpg","Paris");
     creerSalon("Truc","c'est indéfinis","https://telegram.im/img/cursedimages","New-York");
+    creerSalon("ludus","c'est une ecole","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvEVnVjIin1HPVmd4KfEvcHbqqE-Kf4xpRQ&usqp=CAU","Bruxelle");
+    creerSalon("Siep","c'est un salon","https://www.fredzone.org/wp-content/uploads/2016/10/cursedimages-640x467.jpg","Paris");
+    creerSalon("Truc","c'est indéfinis","https://telegram.im/img/cursedimages","New-York");
+    creerSalon("ludus","c'est une ecole","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvEVnVjIin1HPVmd4KfEvcHbqqE-Kf4xpRQ&usqp=CAU","Bruxelle");
+    creerSalon("Siep","c'est un salon","https://www.fredzone.org/wp-content/uploads/2016/10/cursedimages-640x467.jpg","Paris");
+    creerSalon("Truc","c'est indéfinis","https://telegram.im/img/cursedimages","New-York");
 
     function creerSalon(nom, pitch, img, ville){
         var container = document.createElement("div");
-        var elem = document.createElement("p");
-        elem.innerHTML = nom;
-        container.appendChild(elem);
-        elem = document.createElement("img");
+        var elem = document.createElement("img");
         elem.src = img;
         container.appendChild(elem);
         elem = document.createElement("p");
+        elem.innerHTML = nom + " - " + ville;
+        container.appendChild(elem);
+        elem = document.createElement("p");
         elem.innerHTML = pitch;
-        container.appendChild(elem);
-        elem = document.createElement("p");
-        elem.innerHTML = "Localisation :";
-        container.appendChild(elem);
-        elem = document.createElement("p");
-        elem.innerHTML = ville;
         container.appendChild(elem);
         liste.appendChild(container);
     }
@@ -156,7 +169,7 @@
 
     function ExitGame() {
         runnerGame.style.display = "none";
-        jeuB.innerHTML = "game"
+        jeuB.innerHTML = "Mini-jeu"
         jeuB.removeEventListener("click",ExitGame);
         jeuB.addEventListener("click",StartGame);
     }
