@@ -24,11 +24,11 @@ var submitBtnModifStand = document.getElementById('submitBtnChangeStand'); // Bu
 // initialisation des onchangeListener
 //logoEntreprise.addEventListener("change",VerifFileLogo);
 nomEntreprise.addEventListener("change",ChangeNomEntreprise);
-descriptionEntreprise.addEventListener("change",SaveChangeButtonDisplay);
-adresseEntreprise.addEventListener("change",SaveChangeButtonDisplay);
-emailEntreprise.addEventListener("change",SaveChangeButtonDisplay);
-siteEntreprise.addEventListener("change",SaveChangeButtonDisplay);
-telEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+descriptionEntreprise.addEventListener("change",ChangeDescriptionEntreprise);
+adresseEntreprise.addEventListener("change",ChangeAdresseEntreprise);
+emailEntreprise.addEventListener("change",ChangeEmailEntreprise);
+siteEntreprise.addEventListener("change",ChangeSiteEntreprise);
+telEntreprise.addEventListener("change",ChangeTelEntreprise);
 
 function ChangeNomEntreprise(){
     var visiteurChamp = document.getElementById("nomEntreprise");
