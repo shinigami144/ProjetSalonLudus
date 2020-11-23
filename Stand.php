@@ -89,7 +89,7 @@ try {
     </header>
 <!-- <img src="https://fakeimg.pl/300/" id="logoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand"> -->
 
-    <form id="divInformationEntreprise">
+    <form id="divInformationEntreprise" class="container">
         <div class="form-row">
           <div class="col-md-5">
             <div class="card card-inverse card-primary">
