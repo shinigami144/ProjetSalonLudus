@@ -13,15 +13,21 @@
 <?php
 	require("connect.php");	
     $conn = connectDB();
+    $sql = "SELECT * FROM stand WHERE idStand=?";
+    $req = $conn->prepare($sql);
+    $req->execute([$_GET['idStand']]);
+    $data = $req->fetchAll();
+    //var_dump($data);
+    
     $permission = 2;
     if(isset($conn)){
         echo '
             <div id="PageCommun">
                 <div id="divInformationEntreprise">
                     <image id="logoEntreprise" src="https://fakeimg.pl/300/"></image>
-                    <p id="nomEntreprise" contenteditable="false">Nom</p>
-                    <p id="descriptionEntreprise" contenteditable="false">description</p>
-                    <address id="adresseEntreprise" contenteditable="false"> Rue des Coquelico 87 </address>
+                    <p id="nomEntreprise" contenteditable="false">'.$data[0]['nomStand'].'</p>
+                    <p id="descriptionEntreprise" contenteditable="false">'.$data[0]['descriptionStand'].'</p>
+                    <address id="adresseEntreprise" contenteditable="false">'.$data[0]['adresseStand'].' </address>
                     <p type="email"  id="emailEntreprise" contenteditable="false">Email</p>
                     <a  id="siteEntreprise" contenteditable="false">SITE</a>
                     <p  id="telEntreprise" contenteditable="false"  >tel</p>
@@ -69,9 +75,9 @@
                         </label>
                         <input type="file" name="LogoEntreprise_Upload" value="" id="ALogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
                     </div>
-                    <input type="text" name="nomEntreprise" placeholder="NomEntreprise" id="AnomEntreprise" readonly>
-                    <input type="text" name="descriptionEntreprise" placeholder="description de l\'entreprise" id="AdescriptionEntreprise"  readonly>
-                    <input type="text" name="adresseEntreprise" placeholder="81 rue des moule" id="AadresseEntreprise" readonly>
+                    <input type="text" name="nomEntreprise" value="'.$data[0]['nomStand'].'"placeholder="NomEntreprise" id="AnomEntreprise" readonly>
+                    <input type="text" name="descriptionEntreprise" value="'.$data[0]['descriptionStand'].'" placeholder="description de l\'entreprise" id="AdescriptionEntreprise"  readonly>
+                    <input type="text" name="adresseEntreprise" value="'.$data[0]['adresseStand'].'"placeholder="81 rue des moule" id="AadresseEntreprise" readonly>
                     <input type="email" name="emailEntreprise" placeholder="truc@tucr.com" id="AemailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
                     <input type="text" name="siteEntreprise" placeholder="https://www.w3schools.com/" id="AsiteEntreprise" readonly>
                     <input type="tel" name="telephoneEntreprise" placeholder="+2486442727" id="AtelEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
