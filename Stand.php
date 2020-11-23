@@ -71,10 +71,10 @@
                     </div>
                     <input type="text" name="nomEntreprise" placeholder="NomEntreprise" id="AnomEntreprise" readonly>
                     <input type="text" name="descriptionEntreprise" placeholder="description de l\'entreprise" id="AdescriptionEntreprise"  readonly>
-                    <input type="text" placeholder="81 rue des moule" id="AadresseEntreprise" readonly>
-                    <input type="email" placeholder="truc@tucr.com" id="AemailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
-                    <input type="text"  placeholder="https://www.w3schools.com/" id="AsiteEntreprise" readonly>
-                    <input type="tel"  placeholder="+2486442727" id="AtelEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
+                    <input type="text" name="adresseEntreprise" placeholder="81 rue des moule" id="AadresseEntreprise" readonly>
+                    <input type="email" name="emailEntreprise" placeholder="truc@tucr.com" id="AemailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
+                    <input type="text" name="siteEntreprise" placeholder="https://www.w3schools.com/" id="AsiteEntreprise" readonly>
+                    <input type="tel" name="telephoneEntreprise" placeholder="+2486442727" id="AtelEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
                     <title for="fileToUpload"> Brochure </title>
                     <div id="Brochure">
                         <h4>Brochure</h4>

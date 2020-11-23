@@ -39,31 +39,31 @@ function ChangeNomEntreprise(){
 
 function ChangeDescriptionEntreprise(){
     var visiteurChamp = document.getElementById("descriptionEntreprise");
-    visiteurChamp.textContent = nomEntreprise.value;
+    visiteurChamp.textContent = descriptionEntreprise.value;
     SaveChangeButtonDisplay();
 }
 
 function ChangeAdresseEntreprise(){
     var visiteurChamp = document.getElementById("adresseEntreprise");
-    visiteurChamp.textContent = nomEntreprise.value;
+    visiteurChamp.textContent = adresseEntreprise.value;
     SaveChangeButtonDisplay();
 }
 
 function ChangeEmailEntreprise(){
     var visiteurChamp = document.getElementById("emailEntreprise");
-    visiteurChamp.textContent = nomEntreprise.value;
+    visiteurChamp.textContent = emailEntreprise.value;
     SaveChangeButtonDisplay();
 }
 
 function ChangeSiteEntreprise(){
     var visiteurChamp = document.getElementById("siteEntreprise");
-    visiteurChamp.textContent = nomEntreprise.value;
+    visiteurChamp.textContent = siteEntreprise.value;
     SaveChangeButtonDisplay();
 }
 
 function ChangeTelEntreprise(){
     var visiteurChamp = document.getElementById("telEntreprise");
-    visiteurChamp.textContent = nomEntreprise.value;
+    visiteurChamp.textContent = telEntreprise.value;
     SaveChangeButtonDisplay();
 }
 
