@@ -23,16 +23,53 @@ var submitBtnModifStand = document.getElementById('submitBtnChangeStand'); // Bu
 
 // initialisation des onchangeListener
 //logoEntreprise.addEventListener("change",VerifFileLogo);
-nomEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+nomEntreprise.addEventListener("change",ChangeNomEntreprise);
 descriptionEntreprise.addEventListener("change",SaveChangeButtonDisplay);
 adresseEntreprise.addEventListener("change",SaveChangeButtonDisplay);
 emailEntreprise.addEventListener("change",SaveChangeButtonDisplay);
 siteEntreprise.addEventListener("change",SaveChangeButtonDisplay);
 telEntreprise.addEventListener("change",SaveChangeButtonDisplay);
 
+function ChangeNomEntreprise(){
+    var visiteurChamp = document.getElementById("nomEntreprise");
+    visiteurChamp.textContent = nomEntreprise.value;
+    console.log(visiteurChamp);
+    SaveChangeButtonDisplay();
+}
+
+function ChangeDescriptionEntreprise(){
+    var visiteurChamp = document.getElementById("descriptionEntreprise");
+    visiteurChamp.textContent = nomEntreprise.value;
+    SaveChangeButtonDisplay();
+}
+
+function ChangeAdresseEntreprise(){
+    var visiteurChamp = document.getElementById("adresseEntreprise");
+    visiteurChamp.textContent = nomEntreprise.value;
+    SaveChangeButtonDisplay();
+}
+
+function ChangeEmailEntreprise(){
+    var visiteurChamp = document.getElementById("emailEntreprise");
+    visiteurChamp.textContent = nomEntreprise.value;
+    SaveChangeButtonDisplay();
+}
+
+function ChangeSiteEntreprise(){
+    var visiteurChamp = document.getElementById("siteEntreprise");
+    visiteurChamp.textContent = nomEntreprise.value;
+    SaveChangeButtonDisplay();
+}
+
+function ChangeTelEntreprise(){
+    var visiteurChamp = document.getElementById("telEntreprise");
+    visiteurChamp.textContent = nomEntreprise.value;
+    SaveChangeButtonDisplay();
+}
+
 
 function SaveChangeButtonDisplay(){
-    
+
     var button = document.getElementById("submitBtnChangeStand");
     button.style.display = "block";
 
