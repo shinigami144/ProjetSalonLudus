@@ -109,7 +109,7 @@ function VerifFileLogo(){
         const reader = new FileReader();
         reader.addEventListener('load', event => {
             document.getElementById("logoEntreprise").src = event.target.result;
-            logoEntreprise.src = event.target.result;
+            document.getElementById("AlogoEntreprise").src = event.target.result;
         });
         reader.readAsDataURL(file);
 

@@ -71,7 +71,7 @@
                     <input type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">
                     <div id="stand_image_container">
                         <label for="ALogoEntreprise_UploadBtn">
-                            <img src="https://fakeimg.pl/300/" id="logoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
+                            <img src="https://fakeimg.pl/300/" id="AlogoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
                         </label>
                         <input type="file" name="LogoEntreprise_Upload" value="" id="ALogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
                     </div>
