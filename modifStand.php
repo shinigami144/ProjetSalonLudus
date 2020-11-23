@@ -11,6 +11,8 @@ if(isset($conn) && ($_POST != NULL)){
     echo $_POST['emailEntreprise']; // manque email
     echo $_POST['siteEntreprise']; // manque site
     echo $_POST['telephoneEntreprise']; // manque tel 
+    echo $_POST["LogoEntreprise_Upload"];
+    echo $_POST["fileToUpload"];
     var_dump($req);
     try {
 		$req->execute([$_POST["nomEntreprise"],$_POST['descriptionEntreprise'],$_POST['adresseEntreprise'],$_POST['idStand']]);

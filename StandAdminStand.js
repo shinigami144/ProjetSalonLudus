@@ -1,11 +1,13 @@
 
 var logoEntreprise = document.getElementById("ALogoEntreprise_UploadBtn");
+//console.log( document.getElementById("ALogoEntreprise_UploadBtn"));
 var nomEntreprise = document.getElementById("AnomEntreprise");
 var descriptionEntreprise = document.getElementById("AdescriptionEntreprise");
 var adresseEntreprise  = document.getElementById("AadresseEntreprise");
 var emailEntreprise = document.getElementById("AemailEntreprise");
 var siteEntreprise = document.getElementById("AsiteEntreprise");
 var telEntreprise = document.getElementById("AtelEntreprise");
+
 
 nomEntreprise.addEventListener("dblclick",ChangeContentEditable);
 descriptionEntreprise.addEventListener("dblclick",ChangeContentEditable);
@@ -22,13 +24,18 @@ divAdminStand.style.display = "none"; // force au chargement pour que l'on ne le
 var submitBtnModifStand = document.getElementById('submitBtnChangeStand'); // Button Submit
 
 // initialisation des onchangeListener
-//logoEntreprise.addEventListener("change",VerifFileLogo);
+//console.log(logoEntreprise);
+logoEntreprise.addEventListener("change",VerifFileLogo);
 nomEntreprise.addEventListener("change",ChangeNomEntreprise);
 descriptionEntreprise.addEventListener("change",ChangeDescriptionEntreprise);
 adresseEntreprise.addEventListener("change",ChangeAdresseEntreprise);
 emailEntreprise.addEventListener("change",ChangeEmailEntreprise);
 siteEntreprise.addEventListener("change",ChangeSiteEntreprise);
 telEntreprise.addEventListener("change",ChangeTelEntreprise);
+
+function debug(){
+    console.log(event.target.id);
+}
 
 function ChangeNomEntreprise(){
     var visiteurChamp = document.getElementById("nomEntreprise");
@@ -102,6 +109,7 @@ function VerifFileLogo(){
         const reader = new FileReader();
         reader.addEventListener('load', event => {
             document.getElementById("logoEntreprise").src = event.target.result;
+            logoEntreprise.src = event.target.result;
         });
         reader.readAsDataURL(file);
 

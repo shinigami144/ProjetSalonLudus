@@ -68,9 +68,9 @@
             echo'
             <div id="PageAdminStand">
                 <form id="divInformationEntreprise" action="modifStand.php" method="POST">
-                    <input type="number" value="2" name="idStand" id="IDSTAND">
+                    <input type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">
                     <div id="stand_image_container">
-                        <label for="LogoEntreprise_UploadBtn"> <!-- Le FOR doit être égal à l\'id de l\'input type file ci-dessous -->
+                        <label for="ALogoEntreprise_UploadBtn">
                             <img src="https://fakeimg.pl/300/" id="logoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
                         </label>
                         <input type="file" name="LogoEntreprise_Upload" value="" id="ALogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
@@ -111,8 +111,6 @@
 
     }
     
-
-
 ?>
 
 
