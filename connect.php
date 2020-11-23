@@ -96,7 +96,7 @@ class stand
 }
 function connectDB()
 {
-	define("SERVERNAME", "localhost:3308");
+	define("SERVERNAME", "127.0.0.1");
 	define("username", "root");
 	define("password", "");
 	define("db", "salonvirtuel");
@@ -105,11 +105,11 @@ function connectDB()
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		echo "<script> console.log('Connected successfully') </script>";
-		}
+	}
 	catch(PDOException $e)
-		{
+	{
 		echo "<script> Connection failed: " . $e->getMessage() . "</script>";
-		}
+	}
 	
 	return $conn;
 }
