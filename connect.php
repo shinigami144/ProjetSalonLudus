@@ -96,10 +96,11 @@ class stand
 }
 function connectDB()
 {
-	define("SERVERNAME", "127.0.0.1");
+	define("SERVERNAME", "localhost:3308");
 	define("username", "root");
 	define("password", "");
 	define("db", "salonvirtuel");
+	$conn = null;
 	try {
 		$conn = new PDO("mysql:host=". SERVERNAME .";dbname=".db, username, password);
 		// set the PDO error mode to exception
@@ -108,12 +109,10 @@ function connectDB()
 	}
 	catch(PDOException $e)
 	{
-		echo "<script> Connection failed: " . $e->getMessage() . "</script>";
+		echo $e->getMessage();
 	}
 	
 	return $conn;
 }
-
-
 
 ?>

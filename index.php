@@ -38,7 +38,7 @@
 		<p>Vous êtes bien dans le main</p>
 			
 		<h4>Liste des stand</h4>';
-		echo '<form method="get" action="stand.php">
+		echo '<form method="get" action="addStand.php">
 			<select name = "idStand" id="idStand">';
 		$table->execute();	
 			foreach($table as $row)
@@ -48,9 +48,20 @@
 			echo '</select>
 			<br/><input type="submit" value="Regarder">
 			</form>';
-		echo '
+		echo "
+		
+		<h4>Ajouter un stand</h4>
+		<form method = 'post' action ='/addStand.php'>
+			nomStand <input name='nomStand' type= 'text' required>
+			 descriptionStand <input name='descriptionStand' type= 'text' required>
+			 adresseStand <input name='adresseStand' type= 'text'>
+			<br> imageStand <input name='imageStand' type= 'text'>
+			idPaysStand <input name='idPaysStand' type= 'text'>
+			codePostalStand <input name='codePostalStand' type= 'text'>
+		<br/><input type='submit' value='Ajouter'>
+		</form>
 		</body>
-		</html>';
+		</html>";
 	}
 
 ?>
