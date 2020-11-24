@@ -5,6 +5,19 @@
     <title>Liste des Salons</title>
 </head>
 <body>
+    <a href='./listeStand.php'>Salon1</a>
+
+
+
+
+
+
+
+
+
+
+
+
 
     <form action="#" method="post" id="rechercheSalon"> <!-- recherche de salon -->
         <div>

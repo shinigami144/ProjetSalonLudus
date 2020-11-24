@@ -17,7 +17,7 @@
     if ($cpt == 2) // Du coup, si les deux ne sont pas vide
     {
         try {
-            $sql = $conn->prepare('SELECT mailUtilisateur,	mdpUtilisateur FROM utilisateur WHERE mailUtilisateur = "'.$_POST['mail'].'"');
+            $sql = $conn->prepare('SELECT mailUtilisateur,	mdpUtilisateur, idUtilisateur FROM utilisateur WHERE mailUtilisateur = "'.$_POST['mail'].'"');
             $sql->execute();
 
             $result = $sql->fetchAll();
@@ -30,6 +30,8 @@
                     {
                         // On le connecte
                         $_SESSION['mail'] = $_POST['mail'];
+                        $_SESSION['idUtilisateur'] = $user['idUtilisateur'];
+
                         // La ligne de code ci dessous permet de rediriger vers un autre page, il suffit juste de metre le nom de la page après "location :" 
                         header('location: index.php');
                     }
