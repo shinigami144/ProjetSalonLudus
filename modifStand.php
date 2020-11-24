@@ -10,23 +10,22 @@ if(isset($conn) && ($_POST != NULL)){
     //echo $_POST['descriptionEntreprise'];
     //echo $_POST['adresseEntreprise'];
     //echo $_POST['siteEntreprise']; // manque site
-    echo $_POST["LogoEntreprise_Upload"];
-    echo $_POST["fileToUpload"];
     $pathLogo = "./File/Logo/Stand".$_POST['idStand'];
     $pathBrochure ="./File/Brochure/Stand".$_POST['idStand'];
-
+    var_dump($_FILES);
+    var_dump($_POST);
     try{
         if(file_exists($pathLogo)){
             echo "pathlogo existe donc pas save";
         }
         else{
-            $etat1 = move_uploaded_file($_FILES["LogoEntreprise_Upload"],$pathLogo);
+            $etat1 = move_uploaded_file($_FILES["LogoEntreprise_Upload"]["tmp_name"],$pathLogo);
         }   
         if(file_exists($pathBrochure)){
             echo "brochure existe";
         }
         else{
-            $etat2 = move_uploaded_file($_FILES["fileToUpload"],$pathBrochure);
+            $etat2 = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$pathBrochure);
         }
         //echo "Try : verif filetoUpload ; ".$_POST["fileToUpload"];
         echo $etat1;
@@ -39,7 +38,7 @@ if(isset($conn) && ($_POST != NULL)){
     try {
         $req->execute([$_POST["nomEntreprise"],$_POST['descriptionEntreprise'],$_POST['adresseEntreprise'],$pathLogo,$_POST['idStand']]);
         $req2 = $conn->prepare($sql2);
-        $req2->execute([$_POST['fileToUpload'],$pathBrochure,$_POST['idStand']]);
+        $req2->execute([$_FILES['fileToUpload']["name"],$pathBrochure,$_POST['idStand']]);
 	}
 	catch(PDOException $e)
 	{

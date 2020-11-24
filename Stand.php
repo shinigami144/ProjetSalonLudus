@@ -80,7 +80,7 @@
             '; // CSS via adminStand
             echo'
             <div id="PageAdminStand">
-                <form id="divInformationEntreprise" action="modifStand.php" method="POST">
+                <form id="divInformationEntreprise" enctype="multipart/form-data" action="modifStand.php" method="POST">
                     <input type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">
                     <div id="stand_image_container">
                         <label for="ALogoEntreprise_UploadBtn">
