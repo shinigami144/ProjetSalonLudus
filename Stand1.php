@@ -14,7 +14,7 @@
 <body>
     <form id="divInformationEntreprise">
         <div id="stand_image_container">
-          <label for="LogoEntreprise_UploadBtn"> <!-- Le FOR doit être égal à l'id de l'input type file ci-dessous -->
+          <label for="LogoEntreprise_UploadBtn">
             <img src="https://fakeimg.pl/300/" id="logoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
           </label>
           <input type="file" name="LogoEntreprise_Upload" value="" id="LogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
