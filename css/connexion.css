@@ -1,0 +1,34 @@
+        html {
+            display: grid;
+            justify-items: center;
+            align-items: center;
+        }
+
+        body {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            text-align: center;
+            margin: 0;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-group{
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding-right: 7%;
+        }
+
+        input[type="email"]{
+            width: 30%
+        }
+
+        input[type="password"]{
+            width: 30%
+        }
+
+        input[type="submit"]{
+            margin-bottom: 30px;
+        }
