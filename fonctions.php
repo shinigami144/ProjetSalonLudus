@@ -202,7 +202,7 @@
                 $sql = 'UPDATE `utilisateur` SET `mailUtilisateur` = "'.$nouveauMail.'", `verificationUtilisateur` = "0" WHERE `utilisateur`.`mailUtilisateur` = "'.$_SESSION['mail'].'";';
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
-      
+                $_SESSION['mail'] = $nouveauMail;
               } catch(PDOException $e) {
                 echo $sql . "<br>" . $e->getMessage();
               }
@@ -288,6 +288,37 @@
         $idPays = RecupIdPays($nouveauPays);
         try {
           $sql = 'UPDATE `utilisateur` SET `idPaysUtilsateur` = "'.$idPays.'" WHERE `utilisateur`.`mailUtilisateur` = "'.$_SESSION['mail'].'";';
+          $stmt = $conn->prepare($sql);
+          $stmt->execute();
+
+        } catch(PDOException $e) {
+          echo $sql . "<br>" . $e->getMessage();
+        }
+      }
+
+      // return le mdp crypte
+      function GetMdp()
+      {
+        include('db.php'); 
+        try {
+          $sql = $conn->prepare('SELECT mdpUtilisateur FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          foreach ($result as $user) {
+              return $user['prenomUtilisateur'];
+          }
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      // prend en parametre le nouveau mdp
+      function SetMdp($nouveauMdp)
+      {
+        include('db.php'); 
+        try {
+          $nouveauMdpCrypt = password_hash($nouveauMdp,PASSWORD_DEFAULT);
+          $sql = 'UPDATE `utilisateur` SET `mdpUtilisateur` = "'.$nouveauMdpCrypt.'" WHERE `utilisateur`.`mailUtilisateur` = "'.$_SESSION['mail'].'";';
           $stmt = $conn->prepare($sql);
           $stmt->execute();
 

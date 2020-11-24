@@ -11,7 +11,7 @@
     // !! Toutes les fonctions utilisé son dans le fichier fonctions.php !!
     // /!\ Pour votre la photo de profil il faut voir si on laisse l'utilisateur importer la sienne ou si on l'oblige a choisir parmis celle dispo 
     //(sachant qu'on avait parler en réunion de peut etre faire un systhème ou l'on peut recuperer des images de profil via les stand et/ou salon pour gamifier tout ca donc a vous de voir)
-    
+
     // Modifie l'adresse mail et remet a 0 la validation de l'email
     if (!empty($_POST['email'])) 
     {   
@@ -70,7 +70,7 @@
         <input type="submit" name="btnSupprimer" class="button" value="Supprimer le compte" /> 
     </form> 
 
-    <a href="PageListSalon.html">Vers la liste des salons</a>
+    <a href="listeSalon.php">Vers la liste des salons</a>
     
     <div id="informationContainer">
         <?php AfficheImageProfil(); ?>
@@ -83,8 +83,9 @@
         <p>Pays : <?php AffichePays(); ?></p>
         <p>Telephone : <?php AfficheTelephone(); ?></p>
     </div>
-
+    
     <form id="modificationForm" method="POST">
+    <h2>modification des infos du compte</h2>
         <input type="button" value="changer la photo de profil" name="profilePicture">
         <label for="email">E-mail : </label>
         <input type="email" name="email" placeholder="<?php echo $_SESSION['mail']; ?>">
@@ -104,8 +105,17 @@
         </select>
         <label for="phoneNumber">Téléphone : </label>
         <input type="tel" name="phoneNumber" placeholder="<?php AfficheTelephone(); ?>">
-        <input type="button" value="changer de mont de passe" id="mdp">
         <button type="submit">Enregistrer</button>
+    </form>
+    <form method="post" id="mdpchange" >
+    <h2>modification du mot de passe</h2>
+        <label for="ancienmdp">ancien mot de passe :</label>
+        <input type="text" name="ancienmdp" >
+        <label for="newmdp">nouveau mot de passe :</label>
+        <input type="text" name="newmdp" >
+        <label for="confimdp">confirmation mot de passe :</label>
+        <input type="text" name="confimdp" >
+        <input type="submit" value="valider">
     </form>
     <button type="submit" id="modif">modification</button>
 </body>
@@ -115,11 +125,15 @@
     var modifFrom = document.getElementById("modificationForm");
     var button = document.getElementById("modif");
     var mdp_change = document.getElementById("mdp");
+    var passewordchangeur = document.getElementById("mdpchange");
+    //var passeword = echo du passeword dans la bbd
+
+    passewordchangeur.style.display = "none";
+    passewordchangeur.addEventListener("submit",sendmdp);
 
     modifFrom.style.display = "none";
     modifFrom.addEventListener("submit", sendChange);
 
-    mdp_change.addEventListener("click",changerMdp);
     button.addEventListener("click",enterModifMode);
 
   /*  for(var i = 0; i < infoContainer.children.length; i++){
@@ -128,6 +142,7 @@
 
     function enterModifMode(e){
         infoContainer.style.display = "none";
+        passewordchangeur.style.display = "block";
         modifFrom.style.display = "block";
         button.innerHTML = "cancel";
         button.removeEventListener("click",enterModifMode);
@@ -137,6 +152,7 @@
 
     function exitModifMode(e){
         modifFrom.style.display = "none";
+        passewordchangeur.style.display = "none";
         infoContainer.style.display = "block";
         button.innerHTML = "modification";
         button.removeEventListener("click",exitModifMode);
@@ -149,33 +165,8 @@
         console.log("change");
         return false;
     }
-
-    function changerMdp(e){
-
-        //changer de mot de passe
-        var ancienmdp = prompt("entre votre ancien mdp");
-        if ((ancienmdp == null )||  (ancienmdp == ""))  {
-            return;
-        }
-        // verification du mot de passe  si bon suite sinon return (a faire)
-
-        while (true) {
-
-        var newmdp =prompt("entre le nouveau mot de passe");
-        if ((newmdp == null )|| (newmdp == "") ) {
-            return;
-        }
-        if (newmdp == ancienmdp) {
-            alert("le nouveau mot de passe ne peux pas etre egale à l'ancien mot de passe");
-            
-        } else if (newmdp == prompt("comfirmer le mot de passe") ) {
-            //changement dans le serveur/bdd
-            return;   
-        }else{
-            alert("erreur comfirmation incorrect");
-            }
-        }
-
+    function sendmdp(e){
+        //changement de mot de passe
     }
 
 </script>
