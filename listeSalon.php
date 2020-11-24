@@ -101,17 +101,17 @@
     //au debut il faut remplir la liste avec tous les salon (ou trier)
 
     //exemple :
-    creerSalon("ludus","c'est une ecole","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvEVnVjIin1HPVmd4KfEvcHbqqE-Kf4xpRQ&usqp=CAU","Bruxelle");
-    creerSalon("Siep","c'est un salon","https://www.fredzone.org/wp-content/uploads/2016/10/cursedimages-640x467.jpg","Paris");
+    creerSalon("ludus","c'est une ecole","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvEVnVjIin1HPVmd4KfEvcHbqqE-Kf4xpRQ&usqp=CAU","Bruxelle","1");
+    creerSalon("Siep","c'est un salon","https://www.fredzone.org/wp-content/uploads/2016/10/cursedimages-640x467.jpg","Paris","1");
     creerSalon("Truc","c'est indéfinis","https://telegram.im/img/cursedimages","New-York");
-    creerSalon("ludus","c'est une ecole","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvEVnVjIin1HPVmd4KfEvcHbqqE-Kf4xpRQ&usqp=CAU","Bruxelle");
-    creerSalon("Siep","c'est un salon","https://www.fredzone.org/wp-content/uploads/2016/10/cursedimages-640x467.jpg","Paris");
-    creerSalon("Truc","c'est indéfinis","https://telegram.im/img/cursedimages","New-York");
-    creerSalon("ludus","c'est une ecole","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvEVnVjIin1HPVmd4KfEvcHbqqE-Kf4xpRQ&usqp=CAU","Bruxelle");
-    creerSalon("Siep","c'est un salon","https://www.fredzone.org/wp-content/uploads/2016/10/cursedimages-640x467.jpg","Paris");
-    creerSalon("Truc","c'est indéfinis","https://telegram.im/img/cursedimages","New-York");
+    creerSalon("ludus","c'est une ecole","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvEVnVjIin1HPVmd4KfEvcHbqqE-Kf4xpRQ&usqp=CAU","Bruxelle","1");
+    creerSalon("Siep","c'est un salon","https://www.fredzone.org/wp-content/uploads/2016/10/cursedimages-640x467.jpg","Paris","1");
+    creerSalon("Truc","c'est indéfinis","https://telegram.im/img/cursedimages","New-York","1");
+    creerSalon("ludus","c'est une ecole","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyvEVnVjIin1HPVmd4KfEvcHbqqE-Kf4xpRQ&usqp=CAU","Bruxelle","1");
+    creerSalon("Siep","c'est un salon","https://www.fredzone.org/wp-content/uploads/2016/10/cursedimages-640x467.jpg","Paris","1");
+    creerSalon("Truc","c'est indéfinis","https://telegram.im/img/cursedimages","New-York","1");
 
-    function creerSalon(nom, pitch, img, ville){
+    function creerSalon(nom, pitch, img, ville, id){
         var container = document.createElement("div");
         var elem = document.createElement("img");
         elem.src = img;
@@ -122,8 +122,9 @@
         elem = document.createElement("p");
         elem.innerHTML = pitch;
         container.appendChild(elem);
+        container.setAttribute("name",id);
         liste.appendChild(container);
-        //container.addEventListener("click",allez sur la page sallon avec l'id du div);
+        //container.addEventListener("click",allez sur la page salon avec l'id stocké dans le name du div);
     }
 
     function enterFormContact(e){
