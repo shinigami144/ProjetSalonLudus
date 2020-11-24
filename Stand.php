@@ -25,13 +25,7 @@
     $data = $req->fetchAll();
     $data2 = $req2->fetchAll();
     $data3 = $req3->fetchAll();
-    var_dump($data3);
-    // var_dump($data2);
-    // var_dump($data);
-    // site = bdd nouvel version
-    // brochure dans la table fichier 
-    // idstandFA = position du stand 
-    // positionFA = position dasn la file 
+    //var_dump($data3);
     $permission = 2;
     if(isset($conn)){
         echo '
@@ -39,10 +33,11 @@
                 <div id="divInformationEntreprise">
                     <image id="logoEntreprise" src="'.$data[0]['imageStand'].'"></image>
                     <p id="nomEntreprise" contenteditable="false">'.$data[0]['nomStand'].'</p>
+                    <p id="pictchStand">'.$data[0]['pitchStand'].' </p>
                     <p id="descriptionEntreprise" contenteditable="false">'.$data[0]['descriptionStand'].'</p>
-                    <address id="adresseEntreprise" contenteditable="false">'.$data[0]['adresseStand'].' </address>
+                    <p id="adresseEntreprise" contenteditable="false">'.$data[0]['adresseStand'].' </p>
                     <p type="email"  id="emailEntreprise" contenteditable="false">'.$data2[0]['mailUtilisateur'].'</p>
-                    <a  id="siteEntreprise" contenteditable="false">SITE</a>
+                    <a  id="siteEntreprise" contenteditable="false">'.$data[0]['siteStand'].'</a>
                     <p  id="telEntreprise" contenteditable="false"  >'.$data2[0]['telUtilisateur'].'</p>
                     <div id="Brochure">
                         <h4>Brochure</h4>
@@ -89,10 +84,11 @@
                         <input type="file" name="LogoEntreprise_Upload" value="" id="ALogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
                     </div>
                     <input type="text" name="nomEntreprise" value="'.$data[0]['nomStand'].'"placeholder="NomEntreprise" id="AnomEntreprise" readonly>
+                    <input type="text" name="pitchStand" value="'.$data[0]['pitchStand'].'" placeholher="PicthEntreprise" id="ApitchStand" readonly>
                     <input type="text" name="descriptionEntreprise" value="'.$data[0]['descriptionStand'].'" placeholder="description de l\'entreprise" id="AdescriptionEntreprise"  readonly>
                     <input type="text" name="adresseEntreprise" value="'.$data[0]['adresseStand'].'"placeholder="81 rue des moule" id="AadresseEntreprise" readonly>
-                    <input type="email" name="emailEntreprise" value="'.$data2[0]['mailUtilisateur'].'" placeholder="truc@tucr.com" id="AemailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
-                    <input type="text" name="siteEntreprise" placeholder="https://www.w3schools.com/" id="AsiteEntreprise" readonly>
+                    <input type="email" name="emailEntreprise" value="'.$data2[0]['mailUtilisateur'].'" placeholder="truc@tucr.com" id="AemailEntreprise" readonly pattern="\^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
+                    <input type="text" name="siteEntreprise" value="'.$data[0]['siteStand'].'" placeholder="https://www.w3schools.com/" id="AsiteEntreprise" readonly>
                     <input type="tel" name="telephoneEntreprise"  value="'.$data2[0]['telUtilisateur'].'" placeholder="+2486442727" id="AtelEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
                     <title for="fileToUpload"> Brochure </title>
                     <div id="Brochure">
