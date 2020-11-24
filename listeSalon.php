@@ -1,24 +1,123 @@
 <!DOCTYPE html>
 <html >
 <head>
-    <link rel="stylesheet" href="./CSS/listeSalon.css">
     <title>Liste des Salons</title>
+    <style>
+                #runnerGame {
+            width: 1400px;
+            height: 200px;
+            border: black solid 2px;
+        }
+
+        html {
+            display: grid;
+            justify-items: center;
+            align-items: center;
+        }
+
+        body {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin: 0;
+            width: 60%;
+            height: calc(100vh - 60px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #rechercheSalon > div:first-child{
+            display: grid;
+            grid-template-columns: 85% 15%;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+
+        #rechercheSalon > div:nth-child(2){
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #rechercheSalon select {
+            width: 20%;
+            height: 24px;
+            text-align: center;
+        }
+
+        #scrollList {
+            padding : 12px;
+            width: calc(100% - 24px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            height: 576px;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+            align-items: stretch;
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+          }
+
+          /* Track */
+          ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+          }
+
+          /* Handle */
+          ::-webkit-scrollbar-thumb {
+            background: #888;
+          }
+
+          /* Handle on hover */
+          ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+          }
+
+        #scrollList div {
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.5);
+            padding : 5px;
+            transition: box-shadow 0.5s;
+        }
+
+        #scrollList div:hover {
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 0, 255, 0.3);
+        }
+
+        #scrollList div p:nth-child(2){
+            height: 30px;
+            font-size: 25px;
+            margin: 0;
+        }
+
+        #scrollList div p:nth-child(3){
+            height: 100px;
+            margin: 0;
+        }
+
+        #scrollList img {
+            float: left;
+            margin-right: 10px;
+            width: 130px;
+            height: 130px;
+            border-radius: 5px;
+        }
+
+        #buttonCont {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 <body>
     <a href='./listeStand.php'>Salon1</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
     <form action="#" method="post" id="rechercheSalon"> <!-- recherche de salon -->
         <div>
             <input type="text" name="nomSalon" placeholder="chercher un salon">
