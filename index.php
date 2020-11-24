@@ -41,15 +41,15 @@
 				
 				<h4>Liste des stand</h4>';
 			echo '<form method="get" action="stand.php">
-				<select name = "idStand" 	id="idStand">
-				foreach($table as $row)
-				{';
-
+				<select name = "idStand" 	id="idStand">';
+				$table = $conn->query($req);
+				foreach($table as $test)
+				{
 					if ($nbrSalonVisible>0) {
-						echo('<option value="'. $row["idStand"]. '">'. $row["nomStand"] . '</option>;');
+						echo('<option value="'. $test["idStand"]. '">'. $test["nomStand"] . '</option>;');
 					}
-			
-				echo'	}
+				}
+				echo'
 				</select>
 				<br/><input type="submit" value="Regarder">
 				</form>';

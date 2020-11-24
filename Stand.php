@@ -25,8 +25,14 @@
     $data = $req->fetchAll();
     $data2 = $req2->fetchAll();
     $data3 = $req3->fetchAll();
+    if(empty($data3)){
+        $brochurelink= null;
+    }
+    else{
+        $brochurelink = $data3[0]['lienFIchier'];
+    }
     //var_dump($data3);
-    $permission = 2;
+    $permission = 1;
     if(isset($conn)){
         echo '
             <div id="PageCommun">
@@ -41,7 +47,7 @@
                     <p  id="telEntreprise" contenteditable="false"  >'.$data2[0]['telUtilisateur'].'</p>
                     <div id="Brochure">
                         <h4>Brochure</h4>
-                        <a href="'.$data3[0]['lienFIchier'].'" download="brochurePDF">
+                        <a href="'.$brochurelink.'" download="brochurePDF">
                             <image src="./File/Graphics/DownloadIcon.png"/>
                         </a>
                     </div>
@@ -96,7 +102,7 @@
                     <title for="fileToUpload"> Brochure </title>
                     <div id="Brochure">
                         <h4>Brochure</h4>
-                        <a href="'.$data3[0]['lienFIchier'].'" download="brochurePDF">
+                        <a href="'.$brochurelink.'" download="brochurePDF">
                             <image src="./File/Graphics/DownloadIcon.png"/>
                         </a>
                         <input type="file" name="fileToUpload" id="fileToUpload">
