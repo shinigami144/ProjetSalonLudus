@@ -12,9 +12,9 @@ var telEntreprise = document.getElementById("AtelEntreprise");
 nomEntreprise.addEventListener("dblclick",ChangeContentEditable);
 descriptionEntreprise.addEventListener("dblclick",ChangeContentEditable);
 adresseEntreprise.addEventListener("dblclick",ChangeContentEditable);
-emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
-siteEntreprise.addEventListener("dblclick",ChangeContentEditable);
-telEntreprise.addEventListener("dblclick",ChangeContentEditable);
+//emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
+//siteEntreprise.addEventListener("dblclick",ChangeContentEditable);
+//telEntreprise.addEventListener("dblclick",ChangeContentEditable);
 
 var divAdminStand = document.getElementById("PageAdminStand");
 divAdminStand.style.display = "none"; // force au chargement pour que l'on ne le vois pas ( si je le met dans le CSS il ne se modifie jamais DAVID)
@@ -29,9 +29,9 @@ logoEntreprise.addEventListener("change",VerifFileLogo);
 nomEntreprise.addEventListener("change",ChangeNomEntreprise);
 descriptionEntreprise.addEventListener("change",ChangeDescriptionEntreprise);
 adresseEntreprise.addEventListener("change",ChangeAdresseEntreprise);
-emailEntreprise.addEventListener("change",ChangeEmailEntreprise);
-siteEntreprise.addEventListener("change",ChangeSiteEntreprise);
-telEntreprise.addEventListener("change",ChangeTelEntreprise);
+//emailEntreprise.addEventListener("change",ChangeEmailEntreprise);
+//siteEntreprise.addEventListener("change",ChangeSiteEntreprise);
+//telEntreprise.addEventListener("change",ChangeTelEntreprise);
 
 function debug(){
     console.log(event.target.id);
