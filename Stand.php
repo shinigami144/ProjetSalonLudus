@@ -53,8 +53,11 @@
         echo'<script src="./StandCommun.js"></script>' ;// script commun 
         if($permission == 1){ // admin de salon
             echo'
-                <button id="BoutonAccepterStand"  onclick="accepterStand()">Stand Accepter</button>
-                <button id="ButtonRefuserStand" onclick="refuserStand()">Stand Refuser</button>
+            <form action="./acceptationStand.php" method="POST">
+                <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">
+                <button type="submit" name="acceptationStand" value="1">Accepter le stand</button>
+                <button type="submit" name="acceptationStand" value="0">Refuser le stand</button>
+            </form>
             ';
             echo'<script src="./StandAdminSalon.js"></script>' ; // script propre au admin salon
         }
@@ -99,7 +102,11 @@
                         S\'ajouter a la file d\'attente de rendez-vous
                     </button>
                     <button id="AButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>
-                </div> 
+                </div>
+                <form onsubmit="return confirm("Voulez-vous supprimer le stand actuel ?")" action="./deleteStand.php" method="POST">
+                    <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">    
+                    <input type="submit" value="Supprimer le stand">
+                </form> 
             </div   
             ';
             echo'<div>

@@ -1,5 +1,4 @@
 <?php
-
 	/*
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$user = new user(0, $_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["pays"], $_POST["ville"], $_POST["code_postal"], $_POST["date_naissance"]);
@@ -7,8 +6,9 @@
 		
 	require("connect.php");	
 	$conn = connectDB(); 
+	$nbrSalonVisible = 0;
 
-	$req = "select * from stand";
+	$req = "select * from stand WHERE acceptationStand=1";
 	if(isset($conn))
 	{
 		$table = $conn->query($req);
@@ -22,7 +22,9 @@
 		{
 			$stand = new stand($row["idStand"], $row["nomStand"]);
 			$stand->show();
+			$nbrSalonVisible++;
 		}
+
 		echo "</table>";
 		
 		echo'
@@ -41,9 +43,13 @@
 			echo '<form method="get" action="stand.php">
 				<select name = "idStand" 	id="idStand">
 				foreach($table as $row)
-				{
-					<option value="'. $row["idStand"]. '">'. $row["nomStand"] . '</option>
-				}
+				{';
+
+					if ($nbrSalonVisible>0) {
+						echo('<option value="'. $row["idStand"]. '">'. $row["nomStand"] . '</option>;');
+					}
+			
+				echo'	}
 				</select>
 				<br/><input type="submit" value="Regarder">
 				</form>';
