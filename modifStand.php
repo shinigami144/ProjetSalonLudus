@@ -10,26 +10,18 @@ if(isset($conn) && ($_POST != NULL)){
     //echo $_POST['descriptionEntreprise'];
     //echo $_POST['adresseEntreprise'];
     //echo $_POST['siteEntreprise']; // manque site
-    $pathLogo = "./File/Logo/Stand".$_POST['idStand'];
-    $pathBrochure ="./File/Brochure/Stand".$_POST['idStand'];
+    $pathnameLogo = pathinfo($_FILES["LogoEntreprise_Upload"]["name"]);
+    $pathnameBrochure = pathinfo($_FILES['fileToUpload']["name"]);
+    var_dump($pathnameBrochure);
+    $pathLogo = "./File/Logo/Stand".$_POST['idStand'].".".$pathnameLogo['extension'];
+    $pathBrochure ="./File/Brochure/Stand".$_POST['idStand'].".".$pathnameBrochure['extension'];
+
     var_dump($_FILES);
     var_dump($_POST);
     try{
-        if(file_exists($pathLogo)){
-            echo "pathlogo existe donc pas save";
-        }
-        else{
-            $etat1 = move_uploaded_file($_FILES["LogoEntreprise_Upload"]["tmp_name"],$pathLogo);
-        }   
-        if(file_exists($pathBrochure)){
-            echo "brochure existe";
-        }
-        else{
-            $etat2 = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$pathBrochure);
-        }
-        //echo "Try : verif filetoUpload ; ".$_POST["fileToUpload"];
-        echo $etat1;
-        echo $etat2;
+        move_uploaded_file($_FILES["LogoEntreprise_Upload"]["tmp_name"],$pathLogo);
+        move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$pathBrochure);
+        
     }
     catch(PDOException $e){
         echo "<script> Connection failed: " . $e->getMessage() . "</script>";
@@ -45,6 +37,6 @@ if(isset($conn) && ($_POST != NULL)){
 		echo "<script> Connection failed: " . $e->getMessage() . "</script>";
 	}
     //$req->execute([$_POST['nomEntreprise'],$_POST['descriptionEntreprise'],$_POST['idStand']]);
-    //header("Location: http://localhost/projetGD/ProjetSalonLudus/stand.php?idStand=".$_POST['idStand']);
+    header("Location: http://localhost/projetGD/ProjetSalonLudus/stand.php?idStand=".$_POST['idStand']);
 }
 ?>
