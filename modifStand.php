@@ -1,6 +1,5 @@
 <?php
-require("connect.php");	
-$conn = connectDB(); 
+require("db.php");	
 if(isset($conn) && ($_POST != NULL)){
     $sql = "UPDATE stand SET nomStand=?,descriptionStand=?,adresseStand=?,imageStand=?,pitchStand=?,siteStand=? WHERE idStand=?"; // ajouter site stand 
     $sql2 = "UPDATE fichier SET nomFichier=?,lienFIchier=? WHERE idStand=?";

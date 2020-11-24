@@ -4,8 +4,7 @@
 			$user = new user(0, $_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["pays"], $_POST["ville"], $_POST["code_postal"], $_POST["date_naissance"]);
 		}*/
 		
-	require("connect.php");	
-	$conn = connectDB(); 
+	require("db.php");	
 	$nbrSalonVisible = 0;
 
 	$req = "select * from stand WHERE acceptationStand=1";

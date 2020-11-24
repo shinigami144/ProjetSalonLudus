@@ -11,8 +11,18 @@
     </style>
 </head>
 <?php
-	require("connect.php");	
-    $conn = connectDB();
+	require("db.php");	
+    session_start();
+    //var_dump($_SESSION);
+    //$sql4 = "SELECT * FROM adminstand WHERE " 
+    // 1 id salon -> qui sont les id user qui apparaise -> session id user in 
+    // -> oui -> afficher admin 
+    // -> non afficher visiteur 
+    // session admin salon = 1 -> apparaitre 
+    $sql4 = "SELECT * FROM adminstand WHERE idUtilisateur=? AND idStand=?";
+    $req4 = $conn->prepare($sql4);
+    $req4->execute([$_SESSION['idUtilisateur'],$_GET['idStand']]);
+    $data4 = $req4->fetchAll();
     $sql = "SELECT * FROM stand WHERE idStand=?";
     $sql2 = "SELECT * FROM utilisateur,adminstand WHERE adminstand.idStand=? AND utilisateur.idUtilisateur = adminstand.idUtilisateur";
     $sql3 = "SELECT * FROM fichier WHERE idStand=?";
@@ -25,6 +35,13 @@
     $data = $req->fetchAll();
     $data2 = $req2->fetchAll();
     $data3 = $req3->fetchAll();
+    if(empty($data4)){
+        $permission = 0;
+    }
+    else{
+        $permission = 2;
+    }
+    //if() //  admin de salon a voir avec page salons
     if(empty($data3)){
         $brochurelink= null;
     }
@@ -32,7 +49,6 @@
         $brochurelink = $data3[0]['lienFIchier'];
     }
     //var_dump($data3);
-    $permission = 1;
     if(isset($conn)){
         echo '
             <div id="PageCommun">
