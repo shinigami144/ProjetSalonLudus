@@ -1,6 +1,7 @@
 
 var logoEntreprise = document.getElementById("ALogoEntreprise_UploadBtn");
 //console.log( document.getElementById("ALogoEntreprise_UploadBtn"));
+var picthEntreprise = document.getElementById("ApitchStand");
 var nomEntreprise = document.getElementById("AnomEntreprise");
 var descriptionEntreprise = document.getElementById("AdescriptionEntreprise");
 var adresseEntreprise  = document.getElementById("AadresseEntreprise");
@@ -12,13 +13,15 @@ var telEntreprise = document.getElementById("AtelEntreprise");
 nomEntreprise.addEventListener("dblclick",ChangeContentEditable);
 descriptionEntreprise.addEventListener("dblclick",ChangeContentEditable);
 adresseEntreprise.addEventListener("dblclick",ChangeContentEditable);
-emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
+//emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
 siteEntreprise.addEventListener("dblclick",ChangeContentEditable);
-telEntreprise.addEventListener("dblclick",ChangeContentEditable);
+//telEntreprise.addEventListener("dblclick",ChangeContentEditable);
+picthEntreprise.addEventListener("dblclick",ChangeContentEditable);
 
 var divAdminStand = document.getElementById("PageAdminStand");
 divAdminStand.style.display = "none"; // force au chargement pour que l'on ne le vois pas ( si je le met dans le CSS il ne se modifie jamais DAVID)
-
+var buttonSubmitChange = document.getElementById("submitBtnChangeStand");
+buttonSubmitChange.style.display = "none";
 
 // Appuie sur le bouton submit du form
 var submitBtnModifStand = document.getElementById('submitBtnChangeStand'); // Button Submit
@@ -29,12 +32,20 @@ logoEntreprise.addEventListener("change",VerifFileLogo);
 nomEntreprise.addEventListener("change",ChangeNomEntreprise);
 descriptionEntreprise.addEventListener("change",ChangeDescriptionEntreprise);
 adresseEntreprise.addEventListener("change",ChangeAdresseEntreprise);
-emailEntreprise.addEventListener("change",ChangeEmailEntreprise);
+//emailEntreprise.addEventListener("change",ChangeEmailEntreprise);
 siteEntreprise.addEventListener("change",ChangeSiteEntreprise);
-telEntreprise.addEventListener("change",ChangeTelEntreprise);
+//telEntreprise.addEventListener("change",ChangeTelEntreprise);
+picthEntreprise.addEventListener("change",ChangePitchStand);
 
 function debug(){
     console.log(event.target.id);
+}
+
+function ChangePitchStand(){
+    var visiteurChamp = document.getElementById("pictchStand");
+    visiteurChamp.textContent = picthEntreprise.value;
+    console.log(visiteurChamp);
+    SaveChangeButtonDisplay();
 }
 
 function ChangeNomEntreprise(){
@@ -76,9 +87,8 @@ function ChangeTelEntreprise(){
 
 
 function SaveChangeButtonDisplay(){
-
-    var button = document.getElementById("submitBtnChangeStand");
-    button.style.display = "block";
+    
+    buttonSubmitChange.style.display = "block";
 
 }
   //RECUPERER LES VALUES DE LA BDD
@@ -109,7 +119,7 @@ function VerifFileLogo(){
         const reader = new FileReader();
         reader.addEventListener('load', event => {
             document.getElementById("logoEntreprise").src = event.target.result;
-            logoEntreprise.src = event.target.result;
+            document.getElementById("AlogoEntreprise").src = event.target.result;
         });
         reader.readAsDataURL(file);
 
