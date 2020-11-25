@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
+    
     <style>
         a{
             display: block;
@@ -11,145 +12,180 @@
     </style>
 </head>
 <?php
-	require("db.php");	
-    session_start();
-    //var_dump($_SESSION);
-    //$sql4 = "SELECT * FROM adminstand WHERE " 
-    // 1 id salon -> qui sont les id user qui apparaise -> session id user in 
-    // -> oui -> afficher admin 
-    // -> non afficher visiteur 
-    // session admin salon = 1 -> apparaitre 
-    $sql4 = "SELECT * FROM adminstand WHERE idUtilisateur=? AND idStand=?";
-    $req4 = $conn->prepare($sql4);
-    $req4->execute([$_SESSION['idUtilisateur'],$_GET['idStand']]);
-    $data4 = $req4->fetchAll();
-    $sql = "SELECT * FROM stand WHERE idStand=?";
-    $sql2 = "SELECT * FROM utilisateur,adminstand WHERE adminstand.idStand=? AND utilisateur.idUtilisateur = adminstand.idUtilisateur";
-    $sql3 = "SELECT * FROM fichier WHERE idStand=?";
-    $req2 = $conn->prepare($sql2);
-    $req3 = $conn->prepare($sql3);
-    $req = $conn->prepare($sql);
-    $req->execute([$_GET['idStand']]);
-    $req2->execute([$_GET['idStand']]);
-    $req3->execute([$_GET['idStand']]);
-    $data = $req->fetchAll();
-    $data2 = $req2->fetchAll();
-    $data3 = $req3->fetchAll();
-    if(empty($data4)){
-        $permission = 0;
+	require("connect.php");	
+	$conn = connectDB(); 
+?>
+<body>
+    <form id="divInformationEntreprise">
+        <div id="stand_image_container">
+          <label for="LogoEntreprise_UploadBtn"> <!-- Le FOR doit être égal à l'id de l'input type file ci-dessous -->
+            <img src="https://fakeimg.pl/300/" id="logoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
+          </label>
+          <input type="file" name="LogoEntreprise_Upload" value="" id="LogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
+        </div>
+        <input type="text" placeholder="NomEntreprise" id="nomEntreprise" readonly>
+        <input type="text" placeholder="description de l'entreprise" id="descriptionEntreprise"  readonly>
+        <input type="text" placeholder="81 rue des moule" id="adresseEntreprise" readonly>
+        <input type="email" placeholder="truc@tucr.com" id="emailEntreprise" readonly pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" >
+        <input type="text"  placeholder="https://www.w3schools.com/" id="siteEntreprise" readonly>
+        <input type="tel"  placeholder="+2486442727" id="telEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
+        <title for="fileToUpload"> Brochure </title>
+        <div id="Brochure">
+            <h4>Brochure</h4>
+            <a href="./DataFile/Exemple_MainActivity.pdf" download="brochurePDF">
+                <image src="./Graphics/DownloadIcon.png"/>
+            </a>
+        </div>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" name="btnModifStand" id="submitBtnChangeStand" value="Mettre à jour les informations du Stand">
+    </form>
+    <div id="divFileAttente">
+        <input id="descriptionFileAttente" readonly>
+        <div id="listeFileAttente">
+            <p><span id="textWaiting"></span>
+            <span id="nbrWaiting">0</span></p>
+        </div>
+        <button id="boutonAjoutFileAttente" onclick="addMeToWaitList()">
+            S'ajouter a la file d'attente de rendez-vous
+        </button>
+        <button id="ButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>
+    </div>
+    <button id="BoutonAccepterStand">Stand Accepter</button>
+    <button id="ButtonRefuserStand" onclick="refuserStand()">Stand Refuser</button>
+</body>
+<?php
+	$idStand = 
+	$req = "select * from stand";
+	if ($_SERVER["REQUEST_METHOD"] == "GET") {
+		$req = "select * from stand where idStand = " . $_GET["idStand"];
+	}
+	var_dump($req);
+	if(isset($conn))
+	{
+		$table = $conn->query($req);
+		foreach($table as $row)
+		{
+			var_dump($row);
+		}
+	}
+?>
+<script>
+    // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
+    // variable user
+    var userPermission;
+
+    // partie divInformationEntreprise
+
+    var logoEntreprise = document.getElementById("LogoEntreprise_UploadBtn");
+    var nomEntreprise = document.getElementById("nomEntreprise");
+    var descriptionEntreprise = document.getElementById("descriptionEntreprise");
+    var adresseEntreprise  = document.getElementById("adresseEntreprise");
+    var emailEntreprise = document.getElementById("emailEntreprise");
+    var siteEntreprise = document.getElementById("siteEntreprise");
+    var telEntreprise = document.getElementById("telEntreprise");
+    var submitBtnModifStand = document.querySelector('#submitBtnChangeStand'); // Button Submit
+
+
+    // ------------------------------------------------------------------------------- recuperation des different element du document -----------------------------------------------------------------------
+
+    //initialisation des different onclickListener
+
+    nomEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    descriptionEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    adresseEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    emailEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    siteEntreprise.addEventListener("dblclick",ChangeContentEditable);
+    telEntreprise.addEventListener("dblclick",ChangeContentEditable);
+
+    // Appuie sur le bouton submit du form
+    submitBtnModifStand.addEventListener('click', ModifStand);
+
+    // initialisation des onchangeListener
+    logoEntreprise.addEventListener("change",VerifFileLogo);
+    nomEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    descriptionEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    adresseEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    emailEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    siteEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+    telEntreprise.addEventListener("change",SaveChangeButtonDisplay);
+
+    function SaveChangeButtonDisplay(){
+        var button = document.getElementById("submitBtnChangeStand");
+        button.style.display = "block";
     }
-    else{
-        $permission = 2;
+
+
+
+  	//RECUPERER LES VALUES DE LA BDD
+
+    // initialisation des onchangeListener
+
+    function ChangeContentEditable(){
+        var element = document.getElementById(event.currentTarget.id);
+        console.log(element.readOnly);
+        element.readOnly = false;
+        element.focus();
+        console.log(element.readOnly);
     }
-    //if() //  admin de salon a voir avec page salons
-    if(empty($data3)){
-        $brochurelink= null;
+
+    function ModifStand(){
+      console.log("Votre stand a été modifié !");
     }
-    else{
-        $brochurelink = $data3[0]['lienFIchier'];
-    }
-    //var_dump($data3);
-    if(isset($conn)){
-        echo '
-            <div id="PageCommun">
-                <div id="divInformationEntreprise">
-                    <image id="logoEntreprise" src="'.$data[0]['imageStand'].'"></image>
-                    <p id="nomEntreprise" contenteditable="false">'.$data[0]['nomStand'].'</p>
-                    <p id="pictchStand">'.$data[0]['pitchStand'].' </p>
-                    <p id="descriptionEntreprise" contenteditable="false">'.$data[0]['descriptionStand'].'</p>
-                    <p id="adresseEntreprise" contenteditable="false">'.$data[0]['adresseStand'].' </p>
-                    <p type="email"  id="emailEntreprise" contenteditable="false">'.$data2[0]['mailUtilisateur'].'</p>
-                    <a  id="siteEntreprise" contenteditable="false">'.$data[0]['siteStand'].'</a>
-                    <p  id="telEntreprise" contenteditable="false"  >'.$data2[0]['telUtilisateur'].'</p>
-                    <div id="Brochure">
-                        <h4>Brochure</h4>
-                        <a href="'.$brochurelink.'" download="brochurePDF">
-                            <image src="./File/Graphics/DownloadIcon.png"/>
-                        </a>
-                    </div>
-                </div>
-                <div id="divFileAttente">
-                    <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d\'attente</p>
-                    <div id="listeFileAttente">
-                    <p><span id="textWaiting"></span>
-			        <span id="nbrWaiting">0</span> </p>
-                </div>
-                <button id="boutonAjoutFileAttente" onclick="addMeToWaitList()">
-                    S\'ajouter a la file d\'attente de rendez-vous
-                </button>
-                </div>
-            </div>
-        ';
-        echo'<script src="./StandCommun.js"></script>' ;// script commun 
-        if($permission == 1){ // admin de salon
-            echo'
-            <form action="./acceptationStand.php" method="POST">
-                <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">
-                <button type="submit" name="acceptationStand" value="1">Accepter le stand</button>
-                <button type="submit" name="acceptationStand" value="0">Refuser le stand</button>
-            </form>
-            ';
-            echo'<script src="./StandAdminSalon.js"></script>' ; // script propre au admin salon
+    
+    function VerifFileLogo(){
+        file = event.target.files[0];
+        if (!file) {
+            console.log("no file");
         }
-        else if ($permission == 2){ // admin stand 
-            echo'<style>
-                #IDSTAND{
-                    display:none;
-                }
-                </style>
-            '; // CSS via adminStand
-            echo'
-            <div id="PageAdminStand">
-                <form id="divInformationEntreprise" enctype="multipart/form-data" action="modifStand.php" method="POST">
-                    <input type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">
-                    <div id="stand_image_container">
-                        <label for="ALogoEntreprise_UploadBtn">
-                            <img src="'.$data[0]['imageStand'].'" id="AlogoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
-                        </label>
-                        <input type="file" name="LogoEntreprise_Upload" value="" id="ALogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
-                    </div>
-                    <input type="text" name="nomEntreprise" value="'.$data[0]['nomStand'].'"placeholder="NomEntreprise" id="AnomEntreprise" readonly>
-                    <input type="text" name="pitchStand" value="'.$data[0]['pitchStand'].'" placeholher="PicthEntreprise" id="ApitchStand" readonly>
-                    <input type="text" name="descriptionEntreprise" value="'.$data[0]['descriptionStand'].'" placeholder="description de l\'entreprise" id="AdescriptionEntreprise"  readonly>
-                    <input type="text" name="adresseEntreprise" value="'.$data[0]['adresseStand'].'"placeholder="81 rue des moule" id="AadresseEntreprise" readonly>
-                    <input type="email" name="emailEntreprise" value="'.$data2[0]['mailUtilisateur'].'" placeholder="truc@tucr.com" id="AemailEntreprise" readonly pattern="\^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
-                    <input type="text" name="siteEntreprise" value="'.$data[0]['siteStand'].'" placeholder="https://www.w3schools.com/" id="AsiteEntreprise" readonly>
-                    <input type="tel" name="telephoneEntreprise"  value="'.$data2[0]['telUtilisateur'].'" placeholder="+2486442727" id="AtelEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
-                    <title for="fileToUpload"> Brochure </title>
-                    <div id="Brochure">
-                        <h4>Brochure</h4>
-                        <a href="'.$brochurelink.'" download="brochurePDF">
-                            <image src="./File/Graphics/DownloadIcon.png"/>
-                        </a>
-                        <input type="file" name="fileToUpload" id="fileToUpload">
-                    </div>
-                <input type="submit" name="btnModifStand" id="submitBtnChangeStand" value="Mettre à jour les informations du Stand">
-                </form>
-                <div id="AdivFileAttente">
-                    <input id="AdescriptionFileAttente" readonly>
-                    <div id="AlisteFileAttente">
-                    </div>
-                    <button id="AboutonAjoutFileAttente" onclick="addMeToWaitList()">
-                        S\'ajouter a la file d\'attente de rendez-vous
-                    </button>
-                    <button id="AButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>
-                </div>
-                <form onsubmit="return confirm("Voulez-vous supprimer le stand actuel ?")" action="./deleteStand.php" method="POST">
-                    <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">    
-                    <input type="submit" value="Supprimer le stand">
-                </form> 
-            </div   
-            ';
-            echo'<div>
-                    <button id="ButtonChangeModeMOdification" onclick="ChangeMode()">Passer en mode edition</button>
-                </div>';
-            //echo'<button id="ButtonChangeModeMOdification" onclick="removeUserFromWaitingList()">Next</button>'; // button pour visualiser la page modifiable et devisualiser la page modifiable
-            echo'<script src="./StandAdminStand.js"></script>'; // script propre au AdminStand via link
+        else if (!file.type.match('image.*')) {
+            console.log("not a image");
+        }
+        else {
+            const reader = new FileReader();
+            reader.addEventListener('load', event => {
+                document.getElementById("logoEntreprise").src = event.target.result;
+            });
+            reader.readAsDataURL(file);
+
+        }
+        SaveChangeButtonDisplay();
+    }
+
+    var tempPositionfortest = 1;
+
+    function addMeToWaitList()
+    {
+        var lsiteAttente = document.getElementById("listeFileAttente");
+        var userText = document.createElement("p");
+        userText.id = "userID"; //  modifier quand lier a bdd
+        userText.appendChild(document.createTextNode("userNom" + tempPositionfortest)); // modifier pour changer userNom avec user name from bdd
+        lsiteAttente.appendChild(userText);
+        tempPositionfortest++;
+  		
+  	}
+    
+    function accepterStand(){
+        console.log("envoi du mail pour prevenir que le stand est visible")
+    }
+
+    function refuserStand(){
+        var person  = prompt("Please enter reasons of the reject:", "reject for");
+        if (person != null && person != "") {
+            console.log("sendmail")
         }
 
     }
-    
-?>
+
+    function removeUserFromWaitingList(){
+        var lsiteAttente = document.getElementById("listeFileAttente");
+        console.log(lsiteAttente.children[0]);
+        if(lsiteAttente.children[0]){
+            lsiteAttente.children[0].remove(lsiteAttente.children[0]);
+        }
+    }
+
+
+</script>
 
 
 </html>
