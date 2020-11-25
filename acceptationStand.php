@@ -1,6 +1,5 @@
 <?php
-require("connect.php");	
-$conn = connectDB(); 
+require("db.php");	
 if(isset($conn) && ($_POST != NULL)){
     $sql = "UPDATE stand SET acceptationStand=? WHERE idStand=?";
     $req = $conn->prepare($sql);

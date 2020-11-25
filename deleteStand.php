@@ -1,6 +1,5 @@
 <?php
-require("connect.php");	
-$conn = connectDB(); 
+require("db.php");	
 if(isset($conn) && ($_POST != NULL)){
     $sql = "DELETE FROM stand WHERE idStand=?";
     $sql2 = "DELETE FROM adminstand Where idStand=?";
