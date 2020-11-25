@@ -17,7 +17,7 @@
     if ($cpt == 2) // Du coup, si les deux ne sont pas vide
     {
         try {
-            $sql = $conn->prepare('SELECT mailUtilisateur,	mdpUtilisateur FROM utilisateur WHERE mailUtilisateur = "'.$_POST['mail'].'"');
+            $sql = $conn->prepare('SELECT mailUtilisateur,	mdpUtilisateur, idUtilisateur FROM utilisateur WHERE mailUtilisateur = "'.$_POST['mail'].'"');
             $sql->execute();
 
             $result = $sql->fetchAll();
@@ -30,8 +30,10 @@
                     {
                         // On le connecte
                         $_SESSION['mail'] = $_POST['mail'];
+                        $_SESSION['idUtilisateur'] = $user['idUtilisateur'];
+
                         // La ligne de code ci dessous permet de rediriger vers un autre page, il suffit juste de metre le nom de la page après "location :" 
-                        header('location: index.php');
+                        header('location: central.php');
                     }
                     else 
                     {
@@ -56,28 +58,24 @@
 <html lang="en">
 <head>
     <title>Connection</title>
+    <link href="./css/connexion.css" rel="stylesheet">
 </head>
 <body>
-    <h1><p align="center">Connexion</p></h1>
+    <h1><p>Connexion</p></h1>
 
-    <form align="center" method="POST"> 
+    <form method="POST"> 
         <div class="form-group">
-            <label for="mail">Adresse mail</label>
+            <label for="mail">Adresse mail : </label>
             <input type="email" class="form-control" name="mail" required>
         </div>
         <div class="form-group">
-            <label for="password">Mot de passe</label>
+            <label for="password">Mot de passe : </label>
             <input type="password" class="form-control" name="password" required>
         </div>
-            <button type="submit" class="btn btn-primary">Connexion</button>
+            <input type="submit" value="Connexion">
     </form>  
 
     <!-- Redirige vers la page d'inscription -->
-    <form action="inscription.php">
-        <input type="submit" name="select" value="Inscription" />
-    </form>
-
-
-
+    <a href="./inscription.php">Si vous n'avez pas de compte, inscrivez-vous ici.</a>
 </body>
 </html>

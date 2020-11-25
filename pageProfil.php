@@ -70,7 +70,7 @@
         <input type="submit" name="btnSupprimer" class="button" value="Supprimer le compte" /> 
     </form> 
 
-    <a href="PageListSalon.html">Vers la liste des salons</a>
+    <a href="listeSalon.php">Vers la liste des salons</a>
     
     <div id="informationContainer">
         <?php AfficheImageProfil(); ?>

@@ -41,7 +41,7 @@
             echo $sql . "<br>" . $e->getMessage();
         }
         
-        header('location: index.php');
+        header('location: central.php');
     }
     else 
     {

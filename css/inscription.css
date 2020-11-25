@@ -1,0 +1,80 @@
+        html {
+            display: grid;
+            justify-items: center;
+            align-items: center;
+        }
+
+        body {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            height: 100%;
+            text-align: center;
+            margin: 0;
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        label {
+            text-align: right;
+            width: 50%;
+        }
+
+        input {
+            width: calc(50% - 8px);
+        }
+
+        select {
+            width: calc(50% - 2px);
+        }
+
+        .form-group {
+            display: flex;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        [type=checkbox] { 
+            width: 50%;
+        }
+
+        [type=radio] { 
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* IMAGE STYLES */
+        [type=radio] + img {
+            cursor: pointer;
+        }
+
+        /* CHECKED STYLES */
+        [type=radio]:checked + img {
+            outline: 2px solid #f00;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+        #radioContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        #radioContainer label {
+            width: auto;
+        }
+
+        .btn {
+            margin-top: 30px;
+            width: 150px;
+            float: none;
+        }
