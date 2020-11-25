@@ -5,12 +5,17 @@
 		}*/
 		
 	require("db.php");	
+	require("classStand.php");
 	$nbrSalonVisible = 0;
+	session_start();
 
-	$req = "select * from stand WHERE acceptationStand=1";
+	$sql = "SELECT * FROM stand,adminstand WHERE acceptationStand=1 OR (adminstand.idUtilisateur =? AND adminstand.idStand=stand.idStand )";
+	$req = $conn->prepare($sql);
+
 	if(isset($conn))
 	{
-		$table = $conn->query($req);
+		$req->execute([$_SESSION['idUtilisateur']]);
+		$table = $req->fetchAll();
 		
 		echo "<table><tr><th>idStand<th>nomStand<th>imageStand<th>pitchStand
 			<th>codePostalStand<th>villeStand<th>idPaysStand<th>descriptionStand
@@ -41,7 +46,9 @@
 				<h4>Liste des stand</h4>';
 			echo '<form method="get" action="stand.php">
 				<select name = "idStand" 	id="idStand">';
-				$table = $conn->query($req);
+				$req = $conn->prepare($sql);
+				$req->execute([$_SESSION['idUtilisateur']]);
+				$table = $req->fetchAll();
 				foreach($table as $test)
 				{
 					if ($nbrSalonVisible>0) {
