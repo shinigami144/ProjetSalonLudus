@@ -52,8 +52,13 @@
 				</select>
 				<br/><input type="submit" value="Regarder">
 				</form>';
+				echo' 
+				<form method="get" action="addStand.php">
+					<input type="submit" value="CreerStand">
+				</form>
+				';
 		echo '
-			</p>
+		</p>
 		</body>
 		</html>';
 	}
