@@ -105,7 +105,7 @@
                 <input type="email" class="form-control" name="email" required>
             </div>
             <div class="form-group">
-                <label for="passsword">Mot de passe :&nbsp;</label>
+                <label for="passsword">Mot de passe : (10 caract mini, 1 maj, 1 nbr et un caract spécial)&nbsp;</label> 
                 <input type="password" class="form-control" name="passsword" required>
             </div>
             <div class="form-group">

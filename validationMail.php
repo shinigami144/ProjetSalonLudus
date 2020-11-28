@@ -8,7 +8,7 @@
     } 
 
     if(array_key_exists('btnPasser', $_POST)) { 
-        header('location: index.php');
+        header('location: central.php');
     } 
 
     function sendMail()

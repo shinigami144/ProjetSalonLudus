@@ -327,4 +327,282 @@
         }
       }
 
+      function AfficheVillesDesSalons ()
+      {
+        include('db.php'); 
+        try {
+            $sql = $conn->prepare('SELECT DISTINCT `villeSalon` FROM `salon`');
+            $sql->execute();
+            $result = $sql->fetchAll();
+            foreach ($result as $user) {
+                echo '<option value="'.$user['villeSalon'].'">'.$user['villeSalon'].'</option>';
+            }
+          } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+          }
+      }
+
+      // Affichage de la liste des salons
+      function AfficheSalon()
+      {
+        include('db.php'); 
+        try {
+            $sql = $conn->prepare('SELECT * FROM `salon`');
+            $sql->execute();
+            $result = $sql->fetchAll();
+            return json_encode($result);
+          } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+          }
+      }
+      // ---------------------- Filtre de la liste des salons -----------------------------
+      function FiltreSalonVille($ville)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      function FiltreSalonDateDebut($dateDebut)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      function FiltreSalonDateFin($dateFin)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateFinSalon` = "'.$dateFin.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      function FiltreSalonNom($nom)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `nomSalon` = "'.$nom.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      function FiltreSalonVilleEtDateDebut($ville,$dateDebut)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'" AND `dateDebutSalon` = "'.$dateDebut.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      function FiltreSalonVilleEtDateFin($ville,$dateFin)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'" AND `dateFinSalon` = "'.$dateFin.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      function FiltreSalonVilleEtNom($ville,$nom)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'" AND `nomSalon` = "'.$nom.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+      
+      function FiltreSalonDateDebutDateFin($dateDebut,$dateFin)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `dateFinSalon` = "'.$dateFin.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      function FiltreSalonDateDebutNom($dateDebut,$nom)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `nomSalon` = "'.$nom.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      function FiltreSalonDateFinNom($dateFin,$nom)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateFinSalon` = "'.$dateFin.'" AND `nomSalon` = "'.$nom.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+      
+      function FiltreSalonVilleDateDebutDateFin($ville,$dateDebut,$dateFin)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateFinSalon` = "'.$dateFin.'" AND `dateDebutSalon` = "'.$dateDebut.'" AND `villeSalon` = "'.$ville.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+      
+      function FiltreSalonVilleDateDebutNom($ville,$dateDebut,$nom)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `nomSalon` = "'.$nom.'" AND `dateDebutSalon` = "'.$dateDebut.'" AND `villeSalon` = "'.$ville.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+      
+      function FiltreSalonVilleDateFinNom($ville,$dateFin,$nom)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `nomSalon` = "'.$nom.'" AND `dateFinSalon` = "'.$dateFin.'" AND `villeSalon` = "'.$ville.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      function FiltreSalonDateDebutDateFinNom($dateDebut,$dateFin,$nom)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `dateFinSalon` = "'.$dateFin.'" AND `villeSalon` = "'.$ville.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+      
+      function FiltreSalonVilleDateDebutDateFinNom($ville,$dateDebut,$dateFin,$nom)
+      {
+        include('db.php');
+        try {
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `dateFinSalon` = "'.$dateFin.'" AND `villeSalon` = "'.$ville.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          return json_encode($result);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+      // ------------------- FIN Filtre de la liste des salons -----------------------------
+
+      // Creation de salon pas encore accepter par les admin
+      function creeSalon($titre,$dateDebutContact,$dateFinContact,$horaireOuverture,$horaireFermeture,$localisationContact,$description)
+      {
+        include('db.php');
+        try {
+          $sql = "INSERT INTO `salon` (`idSalon`, `nomSalon`, `imageSalon`, `pitchSalon`, `descriptionSalon`, `dateDebutSalon`, `dateFinSalon`, `ouvertureSalon`, `fermetureSalon`, `villeSalon`, `regionSalon`, `idPaysSalon`, `stockInfoSalon`, `idSuperAdmin`) 
+          VALUES (NULL, '".$titre."', NULL, NULL, '".$description."', '".$dateDebutContact."', '".$dateFinContact."', '".$horaireOuverture."', '".$horaireFermeture."', '".$localisationContact."', NULL, NULL, '1', NULL)";
+            $conn->exec($sql);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+        // Recupère l'id du salon qu'on vient de crée
+        try {
+          $sql = $conn->prepare('SELECT idSalon FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebutContact.'" AND `dateFinSalon` = "'.$dateFinContact.'" AND `descriptionSalon` = "'.$description.'" AND `nomSalon` = "'.$titre.'" AND `villeSalon` = "'.$localisationContact.'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          foreach ($result as $user) {
+            $idSalon = $user['idSalon'];
+          }
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+
+        // Recupère l'id de l'utilisateur 
+        try {
+          $sql = $conn->prepare('SELECT idUtilisateur FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          foreach ($result as $user) {
+            $idUtilisateur = $user['idUtilisateur'];
+          }
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+
+        // Defini le createur/admin du salon
+        try {
+          $sql = "INSERT INTO `stockageinfosalon` (`idUtilisateur`, `idSalon`) VALUES ('".$idUtilisateur."', '".$idSalon."');";
+          $conn->exec($sql);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+
+        // Defini les droits du createur/admin 
+        try {
+          $sql = "INSERT INTO `adminsalon` (`idUtilisateur`, `idSalon`, `droitASalon`) VALUES ('".$idUtilisateur."', '".$idSalon."', '1');";
+          $conn->exec($sql);
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+
+      }
+
 ?>
