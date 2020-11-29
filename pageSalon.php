@@ -1,11 +1,14 @@
 <?php 
-    echo $_GET['id'];
+    session_start();
+    include('fonctions.php');
+    $idSalon = $_GET['id'];
+    echo EstAdmin($idSalon);
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Mettre nom du salon en php</title>
+    <title><?php AfficheNomSalon($idSalon); ?></title>
     <style>
 
         /* width */
@@ -209,21 +212,17 @@
     <div id="information"><!-- information (à completer en php)-->
         <div>
             <div>
-                <h1>nom du salon</h1>
-                <p>Organisé par : Sacha Touille</p>
+                <h1><?php AfficheNomSalon($idSalon); ?></h1>
+                <p>Organisé par : <?php AfficheNomPrenomCreateurSalon($idSalon); ?></p>
             </div>     
-            <img src="https://i.pinimg.com/originals/04/4f/e6/044fe6678073bca353c8185dbc3e8c0a.jpg">       
+            <img src="<?php AfficheImageSalon($idSalon); ?>">       
         </div>
         <article>
             <h2>Information :</h2>
-            <p>du 15 novembre au 20 décembre</p>
-            <p>de 10h à 18h</p>
-            <p>adresse (facultatif)</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut rerum, quibusdam dolor dolores numquam, 
-            doloribus aliquid cupiditate quis odit error incidunt nam, voluptatem magnam maiores corporis rem eaque. Totam, 
-            amet! Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quibusdam architecto animi quod harum eveniet error incidunt adipisci fugiat veritatis provident tempora, 
-            cum nesciunt expedita tenetur neque quis, temporibus modi.
-            </p>
+            <p>du <?php AfficheDateDebutSalon($idSalon); ?> au <?php AfficheDateFinSalon($idSalon); ?></p>
+            <p>de <?php AfficheOuvertureSalon($idSalon); ?> à <?php AfficheFermetureSalon($idSalon); ?></p>
+            <p><?php AfficheLocalisationSalon($idSalon); ?></p>
+            <p><?php AfficheDescriptionSalon($idSalon); ?></p>
         </article>
     </div>
     <!--partie stand-->

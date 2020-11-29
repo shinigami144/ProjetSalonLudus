@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     require_once('db.php'); 
 
     if(array_key_exists('btnCode', $_POST)) { 

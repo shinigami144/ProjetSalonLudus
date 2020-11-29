@@ -96,7 +96,7 @@
 
     if (!empty($_POST['titre']) and !empty($_POST['dateDebutContact']) and !empty($_POST['dateFinContact']) and !empty($_POST['horaireOuverture']) and !empty($_POST['horaireFermeture']) and !empty($_POST['localisationContact']) and !empty($_POST['description']))
     {
-        $idSalon = creeSalon($_POST['titre'],$_POST['dateDebutContact'],$_POST['dateFinContact'],$_POST['horaireOuverture'],$_POST['horaireFermeture'],$_POST['localisationContact'],$_POST['description']);
+        $idSalon = creeSalon($_POST['titre'],$_POST['dateDebutContact'],$_POST['dateFinContact'],$_POST['horaireOuverture'],$_POST['horaireFermeture'],$_POST['localisationContact'],$_POST['description'],$_POST['image']);
     }
     // Pas oublier info est pas obligatoire mais bien l'ajouter dans le mail si le gars ecrit des trucs 
     // ------------------------------------------ Gestion de l'envoie de mail  -----------------------------------------
