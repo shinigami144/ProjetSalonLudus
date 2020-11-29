@@ -96,7 +96,7 @@
 
     if (!empty($_POST['titre']) and !empty($_POST['dateDebutContact']) and !empty($_POST['dateFinContact']) and !empty($_POST['horaireOuverture']) and !empty($_POST['horaireFermeture']) and !empty($_POST['localisationContact']) and !empty($_POST['description']))
     {
-        creeSalon($_POST['titre'],$_POST['dateDebutContact'],$_POST['dateFinContact'],$_POST['horaireOuverture'],$_POST['horaireFermeture'],$_POST['localisationContact'],$_POST['description']);
+        $idSalon = creeSalon($_POST['titre'],$_POST['dateDebutContact'],$_POST['dateFinContact'],$_POST['horaireOuverture'],$_POST['horaireFermeture'],$_POST['localisationContact'],$_POST['description']);
     }
     // Pas oublier info est pas obligatoire mais bien l'ajouter dans le mail si le gars ecrit des trucs 
     // ------------------------------------------ Gestion de l'envoie de mail  -----------------------------------------
@@ -105,11 +105,11 @@
     {
         if (!empty($_POST['information']))
         {
-            sendMailDemandeCreationSalon($_POST['titre'],$_POST['dateDebutContact'],$_POST['dateFinContact'],$_POST['horaireOuverture'],$_POST['horaireFermeture'],$_POST['localisationContact'],$_POST['description'],$_POST['information']);
+            sendMailDemandeCreationSalon($_POST['titre'],$_POST['dateDebutContact'],$_POST['dateFinContact'],$_POST['horaireOuverture'],$_POST['horaireFermeture'],$_POST['localisationContact'],$_POST['description'],$_POST['information'],$_POST['image'],$idSalon);
         }
         else 
         {
-            sendMailDemandeCreationSalon($_POST['titre'],$_POST['dateDebutContact'],$_POST['dateFinContact'],$_POST['horaireOuverture'],$_POST['horaireFermeture'],$_POST['localisationContact'],$_POST['description'],'');
+            sendMailDemandeCreationSalon($_POST['titre'],$_POST['dateDebutContact'],$_POST['dateFinContact'],$_POST['horaireOuverture'],$_POST['horaireFermeture'],$_POST['localisationContact'],$_POST['description'],'',$_POST['image'],$idSalon);
         }
         
     }
@@ -174,6 +174,9 @@
         <input type="text" name="localisationContact">
            <!-- ce serait cool d'avoir un google maps ou quoi -->
         <br>
+        <label for="image">Image (lien internet)</label>
+        <input type="text" name="image"/>
+        <br>
         <label for="description">Description :</label>
         <br>
         <textarea name="description" cols="30" rows="10"></textarea>
@@ -225,9 +228,16 @@
         elem = document.createElement("p");
         elem.innerHTML = pitch;
         container.appendChild(elem);
-        container.setAttribute("name",id);
+        elem = document.createElement("button");
+        elem.innerHTML = 'Aller vers salon';
+        elem.setAttribute("name",id);
+        elem.addEventListener("click",function(){allerVersPageSalon(id)});
+        container.appendChild(elem);
         liste.appendChild(container);
-        //container.addEventListener("click",allez sur la page salon avec l'id stocké dans le name du div);
+    }
+
+    function allerVersPageSalon(id){
+        window.location.href = 'pageSalon.php?id='+id;
     }
 
     function enterFormContact(e){

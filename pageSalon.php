@@ -1,7 +1,11 @@
+<?php 
+    echo $_GET['id'];
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Document</title>
+    <title>Mettre nom du salon en php</title>
     <style>
 
         /* width */
@@ -164,8 +168,11 @@
 </head>
 <body>
     <div id="adminDiv"><!-- uniquement pour admin salon -->
-        <button id="suppSalon">supprimer salon</button>
-        <button id="modSalon">modifier salon</button>
+    <form method="GET" id="suppSalon" onsubmit='return confirm("Etes-vous sûr ?")'>
+        <input type="submit" value="Supprimer le Salon">
+    </form>
+
+        <button id="modSalon">Modifier le salon</button>
         <form id="modifierSalon"><!-- formulaire pour modifier un salon -->
             <h2>modification du Salon</h2>
             <label for="titre">Nom du salon</label>
@@ -238,3 +245,87 @@
     </div>
     <a href="#">Je crée mon stand</a> <!--lien vers la page de creation de stand-->
 </body>
+<script>
+
+    var adminDiv = document.getElementById("adminDiv");
+    var modifierSalon = document.getElementById("modifierSalon");
+    var stand = document.getElementById("stand");
+    var information = document.getElementById("information");
+    var filtreStand = document.getElementById("filtreStand");
+    var suppSalon = document.getElementById("suppSalon");
+    var modSalon = document.getElementById("modSalon");
+
+    modifierSalon.style.display = "none";
+    modifierSalon.addEventListener("submit", sendModif);
+    filtreStand.addEventListener("submit", filtrer);
+    suppSalon.addEventListener("submit", supprimerSalon);
+    modSalon.addEventListener("click", afficherAdmin);
+
+    var isAdmin = true;//iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii pour enlever la div admin ou pas
+    if(isAdmin){
+
+    }
+    else {
+        adminDiv.parentElement.removeChild(adminDiv);
+    }
+
+    function sendModif(){
+
+    }
+
+    function filtrer(){
+        
+    }
+
+    function supprimerSalon(){
+        
+    }
+
+    function afficherAdmin(){
+        modifierSalon.style.display = "block";
+        modSalon.innerHTML = "Annuler modification";
+        modSalon.removeEventListener("click", afficherAdmin);
+        modSalon.addEventListener("click", desafficherAdmin);
+    }
+
+    function desafficherAdmin(){
+        modifierSalon.style.display = "none";
+        modSalon.innerHTML = "Modifier le salon";
+        modSalon.removeEventListener("click", desafficherAdmin);
+        modSalon.addEventListener("click", afficherAdmin);
+    }
+
+    function creerStand(nom, pitch, img ,heureOuverture, heureFermeture, ouvert, id){
+            var container = document.createElement("div");
+            var elem = document.createElement("img");
+            var div1 = document.createElement("div");
+            var div2 = document.createElement("div");
+            elem.src = img;
+            container.appendChild(elem);
+            elem = document.createElement("p");
+            elem.innerHTML = nom;
+            div1.appendChild(elem);
+            elem = document.createElement("p");
+            elem.innerHTML = pitch;
+            div1.appendChild(elem);
+            elem = document.createElement("h4");
+            elem.innerHTML = "Horaire";
+            div2.appendChild(elem);
+            elem = document.createElement("p");
+            elem.innerHTML = heureOuverture;
+            div2.appendChild(elem);
+            elem = document.createElement("p");
+            elem.innerHTML = heureFermeture ;
+            div2.appendChild(elem);
+            container.appendChild(div1);
+            container.appendChild(div2);
+            container.setAttribute("name",id);
+            if(ouvert == "0"){
+                container.setAttribute("class","grey");
+            }
+            liste.appendChild(container);
+            //container.addEventListener("click",allez sur la page stand avec l'id stocké dans le name du div);
+    }
+
+</script>
+</html>

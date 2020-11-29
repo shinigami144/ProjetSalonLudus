@@ -69,6 +69,7 @@
         } catch(PDOException $e) {
           echo $sql . "<br>" . $e->getMessage();
         }
+        session_destroy();
       }
     
       function AfficheNom ()
@@ -570,6 +571,7 @@
           $result = $sql->fetchAll();
           foreach ($result as $user) {
             $idSalon = $user['idSalon'];
+            echo $idSalon;
           }
         } catch(PDOException $e) {
           echo "Error: " . $e->getMessage();
@@ -603,6 +605,144 @@
           echo "Error: " . $e->getMessage();
         }
 
+        return $idSalon;
+
+      }
+
+      function sendMailDemandeCreationSalon($titre,$dateDebutContact,$dateFinContact,$horaireOuverture,$horaireFermeture,$localisationContact,$description,$information,$image,$idSalon)
+      {
+        include('db.php');
+        $entetes = 'Content-Type: text/html; charset="UTF-8"'."n";
+        try {
+          $sql = $conn->prepare('SELECT mailSuperAdmin FROM `superadmin`');
+          $sql->execute();
+          $result = $sql->fetchAll();
+          foreach ($result as $user) {
+            if (mail($user['mailSuperAdmin'], "Demande de creation de salon", '<html lang="fr">
+            <head>
+                <meta charset="UTF-8">
+                <title>Confirmation Salon</title>
+                <style>
+                    #information {
+                        margin-top: 30px;
+                        padding : 12px;
+                        width: calc(100% - 24px);
+                        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+                        border-radius: 10px;
+                        margin-bottom: 50px;
+                    }
+            
+                    #information > div {
+                        width: 100%;
+                        height: 200px;
+                        text-align: center;
+                        display: flex;
+                        align-items: center;
+                    }
+            
+                    #information > div > div {
+                        width: calc(100% - 200px);
+                    }
+            
+                    #information > div img {
+                        float: left;
+                        width: 200px;
+                        height: 200px;
+                        margin-right: 20px;
+                    }
+            
+                    #information > div h1 {
+                        text-decoration: underline;
+                    }
+            
+                    #information > article {
+                        width: calc(100% - 60px);
+                        padding-left: 30px;
+                        padding-right: 30px;
+                    }
+            
+                    #formContainer button {
+                        height: 40px;
+                        font-size: 20px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div id="information"><!-- information (à completer en php)-->
+                    <div>
+                        <img src="'.$image.'">
+                        <div>
+                            <h1>'.$titre.'</h1>
+                            <p>Organisé par : '.$_SESSION['mail'].'</p>
+                        </div>     
+                    </div>
+                    <article>
+                        <h2>Information :</h2>
+                        <p>du '.$dateDebutContact.' au '.$dateFinContact.'</p>
+                        <p>de '.$horaireOuverture.' à '.$horaireFermeture.'</p>
+                        <p> A '.$localisationContact.'</p>
+                        <p>Description : '.$description.'</p>
+                        <p>Informations supplémentaire : '.$information.'</p>
+                    </article>
+                </div>
+                <div id="formContainer">
+                    <a href="http://localhost/projetsalon/MesTest/accepterSalon.php?id='.$idSalon.'"><button>Accepter le salon</button></a>
+                    <a href="http://localhost/projetsalon/MesTest/refuserSalon.php?id='.$idSalon.'"><button>Refuser le salon</button></a>
+                </div>
+            </body>
+            </html>',$entetes)) // Envoi du message
+            {
+                echo "Demande bien envoyé.";
+                echo $idSalon;
+            }
+            else // Non envoyé
+            {
+                echo "Problème.";
+            }
+          }
+        } catch(PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+
+      function accepterSalon($idSalon)
+      {
+        include('db.php'); 
+        try {
+          $sql = 'UPDATE `salon` SET `idSuperAdmin` = "1" WHERE `salon`.`idSalon` = '.$idSalon;
+          $stmt = $conn->prepare($sql);
+          $stmt->execute();
+        } catch(PDOException $e) {
+          echo $sql . "<br>" . $e->getMessage();
+        }
+      }
+
+      function refuserSalon($idSalon)
+      {
+        include('db.php'); 
+        try {
+          $sql = 'DELETE FROM `adminsalon` WHERE `adminsalon`.`idSalon` = '.$idSalon;
+          $stmt = $conn->prepare($sql);
+          $stmt->execute();
+        } catch(PDOException $e) {
+          echo $sql . "<br>" . $e->getMessage();
+        }
+
+        try {
+          $sql = 'DELETE FROM `stockageinfosalon` WHERE `stockageinfosalon`.`idSalon` = '.$idSalon;
+          $stmt = $conn->prepare($sql);
+          $stmt->execute();
+        } catch(PDOException $e) {
+          echo $sql . "<br>" . $e->getMessage();
+        }
+
+        try {
+          $sql = 'DELETE FROM `salon` WHERE `salon`.`idSalon` = '.$idSalon;
+          $stmt = $conn->prepare($sql);
+          $stmt->execute();
+        } catch(PDOException $e) {
+          echo $sql . "<br>" . $e->getMessage();
+        }
       }
 
 ?>
