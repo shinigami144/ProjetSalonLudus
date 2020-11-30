@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once('db.php'); 
+    include('fonctions.php');
 
     $cpt = 0;
 
@@ -10,10 +11,6 @@
     if (!empty($_POST['condition'])) 
     {   
         $cpt++;
-    }
-    else 
-    {
-        echo "Vous devez accepter les conditions d'utilisation à fin de pouvoir crée votre compte.";
     }
 
     // ----------------------------- Adresse mail --------------------------------
@@ -39,14 +36,6 @@
                 echo "Error: " . $e->getMessage();
               }
         }
-        else 
-        {
-            echo "Adresse mail invalide.";
-        }    
-    }
-    else
-    {
-        echo "Adresse mail non renseigné.";
     }
 
     // ---------------------------- Mot de passe ----------------------------------
@@ -58,19 +47,7 @@
             {
                 $cpt++;
             }
-            else
-            {
-                echo "Mot de passe non valide veillez en entrer un nouveau. (Le mot de passe doit contenir au minimum une majuscule, une minuscule, un chiffre, un caractère spécial et doit etre composé de minimum 10 caractères).";
-            }
         }
-        else 
-        {
-            echo "Les deux mots de passe ne correspondent pas.";
-        }
-    }
-    else
-    {
-        echo "Mot de passe non renseigné.";
     }
 
    // ---------------------------------- Nom --------------------------------------
@@ -78,40 +55,35 @@
    {
         $cpt++;
    }
-   else
-   {
-       echo "Nom non renseigné.";
-   }
 
    // -------------------------------- Prenom -------------------------------------
    if (!empty($_POST['prenom'])) 
    {
         $cpt++;
    }
-   else
-   {
-       echo "Prenom non renseigné.";
-   }
 
    // ------------------------------- REQUETES ------------------------------------
    if ($cpt == 5)
    {
         $mdpCrypte = password_hash($_POST['passsword'],PASSWORD_DEFAULT);
-
+        $idPays = RecupIdPays($_POST['pays']);
         try {
-            $sql = "INSERT INTO `Utilisateur`(`mailUtilisateur`, `mdpUtilisateur`, `nomUtilisateur`, `prenomUtilisateur`, `adresseUtilisateur`, `codePostalUtilsateur`, `villeUtilisateur`, `paysUtilsateur`, `telUtilisateur`, `verificationUtilisateur`) 
-            VALUES ('".$_POST['email']."','".$mdpCrypte."','".$_POST['nom']."','".$_POST['prenom']."','".$_POST['adresse']."','".$_POST['code_postal']."','".$_POST['ville']."','".$_POST['pays']."','".$_POST['tel']."',0)";
+            $sql = "INSERT INTO `Utilisateur`(`mailUtilisateur`, `mdpUtilisateur`, `nomUtilisateur`, `prenomUtilisateur`, `adresseUtilisateur`, `codePostalUtilsateur`, `villeUtilisateur`, `idPaysUtilsateur`, `telUtilisateur`, `verificationUtilisateur`,`photoUtilisateur`) 
+            VALUES ('".$_POST['email']."','".$mdpCrypte."','".$_POST['nom']."','".$_POST['prenom']."','".$_POST['adresse']."','".$_POST['code_postal']."','".$_POST['ville']."','".$idPays."','".$_POST['tel']."',0,".$_POST['image'].")";
 
             $conn->exec($sql);
-          } catch(PDOException $e) {
+        } catch(PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
-          }
-
+        }
 
         // Variable de session
         $_SESSION['mail'] = $_POST['email'];
+        $sql2 = $conn->prepare('SELECT idUtilisateur FROM utilisateur WHERE mailUtilisateur = "'.$_POST['mail'].'"');
+        $sql2->execute();
+        $result = $sql2->fetchAll();
+        $_SESSION['idUtilisateur'] = $result[0]['idUtilisateur'];
         // La ligne de code ci dessous permet de rediriger vers un autre page, il suffit juste de metre le nom de la page après "location :" 
-        header('location: index.php');
+        header('location: validationMail.php');
    }
 
 ?>
@@ -123,63 +95,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
+    <link href="./css/inscription.css" rel="stylesheet">
 </head>
 <body>
-<p><h1 align="center"><strong>Inscription</strong><h1></p>
-
-<p>
-    <div class="contrainer" align="center">
+        <h1>Incription</h1>
         <form method="POST">
             <div class="form-group">
-                <label for="email">Adresse mail</label>
-                <input type="email" class="form-control" name="email">
+                <label for="email">Adresse mail :&nbsp;</label>
+                <input type="email" class="form-control" name="email" required>
             </div>
             <div class="form-group">
-                <label for="passsword">Mot de passe</label>
-                <input type="password" class="form-control" name="passsword">
+                <label for="passsword">Mot de passe : (10 caract mini, 1 maj, 1 nbr et un caract spécial)&nbsp;</label> 
+                <input type="password" class="form-control" name="passsword" required>
             </div>
             <div class="form-group">
-                <label for="conf_password">Confirmation du mot de passe</label>
-                <input type="password" class="form-control" name="conf_password">
+                <label for="conf_password">Confirmation du mot de passe :&nbsp;</label>
+                <input type="password" class="form-control" name="conf_password" required>
             </div>
             <div class="form-group">
-                <label for="nom">Nom</label>
-                <input type="text" class="form-control" name="nom">
+                <label for="nom">Nom :&nbsp;</label>
+                <input type="text" class="form-control" name="nom" required>
             </div>
             <div class="form-group">
-                <label for="prenom">Prenom</label>
-                <input type="text" class="form-control" name="prenom">
+                <label for="prenom">Prénom :&nbsp;</label>
+                <input type="text" class="form-control" name="prenom" required>
             </div>
             <div class="form-group">
-                <label for="adresse">Adresse</label>
+                <label for="adresse">Adresse :&nbsp;</label>
                 <input type="text" class="form-control" name="adresse">
             </div>
             <div class="form-group">
-                <label for="code_postal">Code postal</label>
+                <label for="code_postal">Code postal :&nbsp;</label>
                 <input type="text" class="form-control" name="code_postal" size="5">
             </div>
             <div class="form-group">
-                <label for="ville">Ville</label>
+                <label for="ville">Ville :&nbsp;</label>
                 <input type="text" class="form-control" name="ville">
             </div>
             <div class="form-group">
-                <label for="pays">Pays</label>
-                <input type="text" class="form-control" name="pays">
+                <label for="pays">Pays :&nbsp;</label>
+                <select name="pays" required>
+                    <option value="">Sélectionner votre pays</option>
+                    <?php AfficheOptionSelectPays(); ?>
+                </select>
             </div>
             <div class="form-group">
-                <label for="tel">Numero telephone</label>
+                <label for="tel">Numero telephone :&nbsp;</label>
                 <input type="tel" class="form-control" name="tel"  size="13">
             </div>
+            <p>Choisi ton image de profil :&nbsp;</p>
+            <div id="radioContainer">
+                <label>
+                    <input type="radio" id="img1" name="image" value="1" checked>
+                    <img src="./css/1.png">
+                </label>
+                <label>
+                    <input type="radio" id="img2" name="image" value="2">
+                    <img src="./css/2.png">
+                </label>
+                <label>
+                    <input type="radio" id="img3" name="image" value="3">
+                    <img src="./css/3.png">
+                </label>
+                <label>
+                    <input type="radio" id="img4" name="image" value="4">
+                    <img src="./css/4.png">
+                </label>
+            </div> 
             <div class="form-group">
-                <label for="condition">J'accepte les conditions d'utilisation et de confidencialité</label>
-                <input type="checkbox" class="form-control" name="condition">
+                <label for="condition">J'accepte les conditions d'utilisation et de confidencialité :</label>
+                <input type="checkbox" class="form-control" name="condition" required>
             </div>
-            <button type="submit" class="btn btn-primary">S'inscrire</button>
+            <input type="submit" class="btn btn-primary" value="S'inscrire">
         </form>
-    </div>
-</p>
-
-</body>
+    </body>
 </html>
 
     

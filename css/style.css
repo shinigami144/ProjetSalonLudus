@@ -1,31 +1,53 @@
 *{
+    margin :0;
+    padding: 0;
     font-family: : Century Gathic;
 }
 
-
-#profilePic {
-    margin-top:11%;
-    position:fixed;
+#Image-cropper{
+    max-width: 1000px;
+    height: auto;
+    position: relative;
+    overflow: hidden;
 }
 
 
-/* Page content */
-.content {
-  padding: 16px;
-}
-
-/* The sticky class is added to the navbar with JS when it reaches its scroll position */
-.sticky {
-  position: fixed;
-  top: 0;
+#profilePic button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
   width: 100%;
+  font-size: 18px;
 }
 
-/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-.sticky + .content {
-  padding-top: 60px;
+#profilePic button:hover {
+  opacity: 0.7;
 }
+      
+#profilePic{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: auto;
+    background-color: #fff;
+    text-align: center;
+    font-family: arial;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+        
+    }
 
+
+
+ifram{
+    border: 1px solid black;
+    width: auto;
+    height: auto;
+}
 
 #Header{
     width: 15%;
@@ -87,68 +109,6 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-.nav{
-    width: 100%;
-    height: 8%;
-    background-color: black;
-    text-align: center;
-    color: white;
-    font-size: 16pt;
-}
-#nav1{
-    color: white;
-    background-color: black;
-    width: 30%;
-    display: inline-block;
-    height: 5%;
-    text-align: center;
-}
-#nav1:hover{
-    color: white;
-    background-color: grey;
-    width: 30%;
-    display: inline-block;
-    height: 5%;
-    text-align: center;
-}
-#nav2{
-    color: white;
-    background-color: black;
-    width: 30%;
-    display: inline-block;
-    height: 5%;
-    text-align: center;
-}
-#nav2:hover{
-    color: white;
-    background-color: grey;
-    width: 30%;
-    display: inline-block;
-    height: 5%;
-    text-align: center;
-}
-#nav3{
-    color: white;
-    background-color: black;
-    width: 30%;
-    display: inline-block;
-    height: 5%;
-    text-align: center;
-}
-#nav3:hover{
-    color: white;
-    background-color: grey;
-    width: 30%;
-    display: inline-block;
-    height: 5%;
-    text-align: center;
-}
-nav div a{
-    margin-top: 10%;
-    color: white;
-    text-align: center;
 }
 
 
