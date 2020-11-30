@@ -97,6 +97,23 @@ function SaveChangeButtonDisplay(){
 
 // initialisation des onchangeListener
 
+function CallUser(){
+    var href="skype:Mail@Mail.fr?call"
+    var text = "skype:";
+    var extend ="?call";
+    var aleph = document.getElementById("ListeFileAttente");
+    var beth = aleph.children;
+    // premier mail de la liste
+    var mail = beth[0].children[2].textContent;
+    if()
+    text+= mail;
+    text+= extend;
+    console.log(text);
+    window.open(text);
+}
+
+
+
 function ChangeContentEditable(){
     var element = document.getElementById(event.currentTarget.id);
     console.log(element.readOnly);
