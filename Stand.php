@@ -53,53 +53,59 @@
     </script>'; // mise en place de l'id dans la session en JS
     if(isset($conn)){
         echo '
+            <!-- BG A ENLEVER AVANT DE PUSH -->
             <div id="PageCommun" class="container">
             <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="ID">
-                <div id="divInformationEntreprise" class="container">
-                    <div class="row">
+                <div id="divInformationEntreprise" class="container bg-info">
+                    <div class="row bg-success">
                       <div class="col-md-12">
-                        <p class="lead"> La Ludus Académie </p>
-                        <button class="btn btn-primary btn-lg">STAND</button>
+                        <p class="text-center font-weight-bold text-uppercase"> La Ludus Académie </p>
                       </div>
                     </div>
-                    <image id="logoEntreprise" src="'.$data[0]['imageStand'].'"></image>
-                    <p id="nomEntreprise" contenteditable="false">'.$data[0]['nomStand'].'</p>
-                    <p id="pictchStand">'.$data[0]['pitchStand'].' </p>
-                    <p id="descriptionEntreprise" contenteditable="false">'.$data[0]['descriptionStand'].'</p>
-                    <p id="adresseEntreprise" contenteditable="false">'.$data[0]['adresseStand'].' </p>
-                    <p type="email"  id="emailEntreprise" contenteditable="false">'.$data2[0]['mailUtilisateur'].'</p>
-                    <a id="siteEntreprise" contenteditable="false">'.$data[0]['siteStand'].'</a>
-                    <p id="telEntreprise" contenteditable="false">'.$data2[0]['telUtilisateur'].'</p>
-                    <div id="Brochure">
-                        <h4>Brochure</h4>
-                        <a href="'.$brochurelink.'" download="brochurePDF">
-                            <image src="./File/Graphics/DownloadIcon.png"/>
-                        </a>
+                    <div class="row bg-success">
+                      <div class="col-md-6 bg-danger">
+                        <image class="img-fluid rounded" id="logoEntreprise" src="'.$data[0]['imageStand'].'"></image>
+                        <p id="nomEntreprise" contenteditable="false">'.$data[0]['nomStand'].'</p>
+                        <p id="pictchStand">'.$data[0]['pitchStand'].' </p>
+                        <p id="adresseEntreprise" contenteditable="false">'.$data[0]['adresseStand'].' </p>
+                        <p type="email"  id="emailEntreprise" contenteditable="false">'.$data2[0]['mailUtilisateur'].'</p>
+                        <a id="siteEntreprise" contenteditable="false">'.$data[0]['siteStand'].'</a>
+                        <p id="telEntreprise" contenteditable="false">'.$data2[0]['telUtilisateur'].'</p>
+                        <div id="divFileAttente">
+                            <table>
+                                <thead>
+                                    <tr id="BaseTable">
+                                        <th scope="col">Nom</th>
+                                        <th scope="col">Prenom</th>';
+                                        if($permission == 2){
+                                            echo '<th scope="col">AdresseMail</th>';
+                                        }
+                                        echo'
+                                    </tr>
+                                </thead>
+                                <tbody class="ListeFileAttente" id="ListeFileAttente">
+                                </tbody>
+                            </table>
+                            <button class="btn btn-info btn-lg" id="boutonAjoutFileAttente" onclick="addMeToWaitList()">
+                                <span>S\'ajouter a la file d\'attente de rendez-vous</span>
+                            </button>';
+                            if($permission == 2){
+                                echo '<br/><button class="btn btn-primary btn-lg" id="ButtonCallUser" onclick="CallUser()">Call</button><br/>';
+                                echo '<button class="btn btn-warning btn-lg" id="ButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button><br/>';
+                            }
+                            echo'
+                        </div>
+                      </div>
+                      <div class="col-md-6 bg-warning">
+                        <p id="descriptionEntreprise" contenteditable="false">'.$data[0]['descriptionStand'].'</p>
+                        <div id="Brochure">
+                          <a href="./DataFile/Exemple_MainActivity.pdf" download="brochure_stand" id="download_brochure_stand" class="badge badge-light">
+                            <label for="download_brochure_stand" class="font_general lead">Télécharger la Brochure</label>
+                            <img src="./Graphics/DownloadIcon.png" width=24 height=24 /> <!-- POUR TELECHARGER LA BROCHURE (client) -->
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                </div>
-                <div id="divFileAttente">
-                    <table>
-                        <thead>
-                            <tr id="BaseTable">
-                                <th scope="col">Nom</th>
-                                <th scope="col">Prenom</th>';
-                                if($permission == 2){
-                                    echo '<th scope="col">AdresseMail</th>';
-                                }
-                                echo'
-                            </tr>
-                        </thead>
-                        <tbody class="ListeFileAttente" id="ListeFileAttente">
-                        </tbody>
-                    </table>
-                    <button id="boutonAjoutFileAttente" onclick="addMeToWaitList()">
-                        S\'ajouter a la file d\'attente de rendez-vous
-                    </button>';
-                    if($permission == 2){
-                        echo '<button id="ButtonCallUser" onclick="CallUser()">Call</button>';
-                        echo '<button id="ButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>';
-                    }
-                    echo'
                 </div>
             </div>
         ';
@@ -108,8 +114,8 @@
             echo'
             <form action="./acceptationStand.php" method="POST">
                 <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTANDACCEPTATION">
-                <button type="submit" name="acceptationStand" value="1">Accepter le stand</button>
-                <button type="submit" name="acceptationStand" value="0">Refuser le stand</button>
+                <button class="btn btn-lg btn-success" type="submit" name="acceptationStand" value="1">Accepter le stand</button>
+                <button class="btn btn-lg btn-danger" type="submit" name="acceptationStand" value="0">Refuser le stand</button>
             </form>
             ';
             echo'<script src="./StandAdminSalon.js"></script>' ; // script propre au admin salon
