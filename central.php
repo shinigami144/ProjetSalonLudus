@@ -33,11 +33,12 @@ echo '<script>
             <a id="buttonProfil" href="#" class="w3-bar-item w3-button w3-col l3">Profil</a>
             <a id="buttonDeconnexion" href="deco.php" class="w3-bar-item w3-button w3-col l3">Deconnexion</a>
         </div>
-        <div>
-        <div id="profilePic" class="card" >
-        <?php AfficheImageProfil(); ?>
-        <?php AfficheNomPrenom(); ?>     
-        <p><button onclick=MoveToStand()>Retour a la file d'attente</button></p> 
+        <div>        
+            <div id="profilePic" class="card" >
+                <?php AfficheImageProfil(); ?>
+                <?php AfficheNomPrenom(); ?>     
+                <p><button onclick=MoveToStand()>Retour a la file d'attente</button></p> 
+            </div>
         </div>
         <div class="w3-center w3-animate-opacity w3-blue-grey w3-jumbo">
             Salon
@@ -96,7 +97,7 @@ echo '<script>
         <div class="w3-margin">
             <iframe
                     id="bodyPage"
-                    src="listeSalon.php"
+                    src="./listeSalon.php"
                     style="width:82%;height:100%;">
             </iframe>    
         </div>
