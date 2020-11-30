@@ -46,7 +46,8 @@ $("#buttonSalon").click(function(){
                         
 $("#buttonStands").click(function(){
     
-    iframe.src = "./stand.php?idStand="
+    //if()
+    iframe.src = "pageSalon.php?id=";
     console.log(iframe);
     
 });

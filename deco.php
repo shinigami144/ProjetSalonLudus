@@ -1,4 +1,4 @@
 <?php
 session_destroy();
-header("Location:connection.php")
+header("Location:index.php")
 ?>

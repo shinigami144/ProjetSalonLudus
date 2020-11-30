@@ -1,13 +1,13 @@
 <?php
 require_once('db.php');
 session_start();
-
 include('fonctions.php'); 
 $sql = "SELECT idStandFdA FROM utilisateur WHERE mailUtilisateur=?";
 $req = $conn->prepare($sql);
-$value = $req->execute([$_SESSION['mail']]);
+$req->execute([$_SESSION['mail']]);
+$data = $req->fetchAll();
 echo '<script>
-    var idFile = '.$value.'
+    var idFile='.$data[0]["idStandFdA"].';
 </script>';
 ?>
 
@@ -29,7 +29,7 @@ echo '<script>
     <div id="stickySection" class="container sticky">
         <div class="w3-navbar w3-dark-grey w3-row">
             <a id="buttonSalon" href="#" class="w3-bar-item w3-button w3-col l3">Acceuil</a>
-            <a id="buttonStands" href="#" class="w3-bar-item w3-button w3-col l3">Stands</a>
+            <!--<a id="buttonStands" href="#" class="w3-bar-item w3-button w3-col l3">Stands</a>-->
             <a id="buttonProfil" href="#" class="w3-bar-item w3-button w3-col l3">Profil</a>
             <a id="buttonDeconnexion" href="deco.php" class="w3-bar-item w3-button w3-col l3">Deconnexion</a>
         </div>
@@ -108,6 +108,8 @@ echo '<script>
     <script>
         function MoveToStand(){
             document.getElementById('bodyPage').src = "./stand.php?idStand="+idFile;
+            console.log(document.getElementById('bodyPage').src);
+
         }
     </script>
 
