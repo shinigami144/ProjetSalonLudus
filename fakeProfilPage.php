@@ -1,9 +1,5 @@
-<div class="w3-blue"><p>Hello World depuis le backpage
-    <br>
-    <?php 
-    $_SESSION["testvariable"]="test";
-    echo $_SESSION["testvariable"];?>
-    <br>
+<div class="w3-blue"><p>Hello World depuis la fake profil page
+    
     
     
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur ut orci nec mollis. Vivamus in dui ac ipsum pulvinar consectetur ac in ante. Etiam volutpat at justo eu venenatis. Donec semper felis sit amet lectus pharetra sollicitudin. Nulla condimentum purus quis nisl pretium bibendum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed nec finibus ligula, et viverra ligula. Nulla laoreet lobortis urna ac pulvinar. Proin id lorem placerat, aliquam dui ut, laoreet erat. Vestibulum pulvinar sollicitudin elementum. Pellentesque semper volutpat lacinia. Donec eget lectus metus. Vestibulum ut tortor justo.
@@ -17,4 +13,4 @@ Sed posuere ante nec magna tristique viverra. Phasellus vel quam dolor. Sed turp
 Nunc a sapien aliquet, laoreet orci non, convallis urna. Aenean faucibus vel est vitae elementum. Donec convallis turpis sit amet nisi interdum facilisis. Aliquam convallis est risus, vitae viverra nisl faucibus ac. Sed non risus nunc. Morbi quis efficitur metus. Etiam pulvinar ut turpis id consectetur. Phasellus lorem urna, rutrum vel mattis sit amet, tristique suscipit sapien. Ut mollis lectus aliquam euismod tincidunt. Ut posuere, diam vitae bibendum consectetur, felis orci venenatis erat, id auctor sem sem dignissim nisi. Cras nunc tellus, varius nec velit non, dignissim gravida neque. Curabitur vitae mattis purus, vitae iaculis nisi.</p></div>
 
 
-<?php $_SESSION['testVariable']="backpagevariable"; ?>
+<?php $_SESSION['testVariable']="fakeProfilPage"; ?>

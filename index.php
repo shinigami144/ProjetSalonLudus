@@ -1,81 +1,98 @@
 <?php
-    session_start();
-    require_once('db.php'); 
-
-    $cpt = 0;
-
-    if (isset($_POST['mail']) and !empty($_POST['mail'])) // Si l'email n'est pas vide 
-    {
-        $cpt++;
-    }
-    
-    if (isset($_POST['password']) and !empty($_POST['password'])) // Si le mdp n'est pas vide 
-    {
-        $cpt++;
-    }
-
-    if ($cpt == 2) // Du coup, si les deux ne sont pas vide
-    {
-        try {
-            $sql = $conn->prepare('SELECT mailUtilisateur,	mdpUtilisateur, idUtilisateur FROM utilisateur WHERE mailUtilisateur = "'.$_POST['mail'].'"');
-            $sql->execute();
-
-            $result = $sql->fetchAll();
-
-
-            if ($result) // On check qu'il y a bien un utilisateur avec cette adresse mail 
-            {
-                foreach ($result as $user) {
-                    if (password_verify($_POST['password'], $user['mdpUtilisateur'])) // On check que le mdp renseigner et bien le meme que celui dans la base
-                    {
-                        // On le connecte
-                        $_SESSION['mail'] = $_POST['mail'];
-                        $_SESSION['idUtilisateur'] = $user['idUtilisateur'];
-
-                        // La ligne de code ci dessous permet de rediriger vers un autre page, il suffit juste de metre le nom de la page après "location :" 
-                        header('location: central.php');
-                    }
-                    else 
-                    {
-                        echo "Le mot de passe ne conrrespond pas.";
-                    }
-                }
-            }
-            else
-            {
-                echo "Vous n'avez pas encore de comtpe avec cette adresse mail.";
-            }
-
-
-          } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
-          }
-    }
+require_once('db.php');
+session_start();
 
 ?>
+<html>
+    <head>
+    <title>Siep Project</title>  
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Connection</title>
-    <link href="./css/connexion.css" rel="stylesheet">
+<!--        import CSS W3-->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        
+<!--        import jquery-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+         
 </head>
+    
+    
 <body>
-    <h1><p>Connexion</p></h1>
-
-    <form method="POST"> 
-        <div class="form-group">
-            <label for="mail">Adresse mail : </label>
-            <input type="email" class="form-control" name="mail" required>
+    <div id="stickySection" class="container sticky">
+        <div class="w3-navbar w3-dark-grey w3-row">
+            <a id="buttonSalon" href="#" class="w3-bar-item w3-button w3-col l3">Salon</a>
+            <a id="buttonStands" href="#" class="w3-bar-item w3-button w3-col l3">Stands</a>
+            <a id="buttonProfil" href="#" class="w3-bar-item w3-button w3-col l3">Profil</a>
+            <a id="buttonDeconnexion" href="deco.php" class="w3-bar-item w3-button w3-col l3">Deconnexion</a>
         </div>
-        <div class="form-group">
-            <label for="password">Mot de passe : </label>
-            <input type="password" class="form-control" name="password" required>
+        <div>
+        <?php include 'header.php';?>    
         </div>
-            <input type="submit" value="Connexion">
-    </form>  
+        <div class="w3-center w3-animate-opacity w3-blue-grey w3-jumbo">
+            Salon
+        </div>
+    </div>
+    
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
 
-    <!-- Redirige vers la page d'inscription -->
-    <a href="./inscription.php">Si vous n'avez pas de compte, inscrivez-vous ici.</a>
+      <!-- Modal content -->
+      <div class="modal-content">
+          <div class="w3-display-container w3-row">
+              <div class="w3-col l1">
+                   <span class="close w3-display-topright">&times;</span>
+              </div>
+              <div class="w3-col l11">
+                <span>C'est votre tour.</span> 
+                  <br>
+      
+              <?php
+              try {
+                  $sql = $conn->prepare('SELECT idStandRDV FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
+                  $sql->execute();
+                  $result = $sql->fetchAll();
+                  foreach ($result as $idstand) {
+                      $idstandrdv = $idstand['idStandRDV'];
+                  }
+              }catch(PDOException $e) {
+                  echo "Error: " . $e->getMessage();
+              }if(isset($idstandrdv)){
+                  $sql = $conn->prepare('SELECT lienAStand FROM adminstand WHERE idStand = "'.$idstandrdv.'"');
+              $sql->execute();
+              $result = $sql->fetchAll();
+              foreach ($result as $lienstand) {
+                  $lienrdv = $lienstand['lienAStand'];
+              }
+              echo'
+              <a href="'.$lienrdv.'"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLCY8jUzmtJbvlLiQ9dASd2XsdK-_NwSDmtw&usqp=CAU" />clickez ici pour rejoindre le meeting</a>
+              ';
+              }
+              ?>
+              </div>
+              
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+<!--    IFRAME-->
+    <div id="loadPage" class="container" style="margin:auto; margin-top:150px">
+        <div class="w3-margin">
+            <iframe
+                    id="bodyPage"
+                    src="backPage.php"
+                    style="width:82%;height:100%;">
+            </iframe>    
+        </div>
+    </div>
+     
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="./main.js"> </script>         
+    
+
 </body>
 </html>
