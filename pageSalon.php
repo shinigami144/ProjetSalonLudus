@@ -1,14 +1,63 @@
 <?php 
     session_start();
     include('fonctions.php');
-    $idSalon = $_GET['id'];
-    echo EstAdmin($idSalon);
+
+    if (!empty($_GET['id']) && isset($_GET['id']))
+    {
+        $_SESSION['idSalon'] = $_GET['id'];
+    }
+    echo $_SESSION['idSalon'];
+    // Active la fonction supprimer un salon
+    if(array_key_exists('btnSupprimer', $_POST)) { 
+        SupprimerUnSalon($_SESSION['idSalon']);
+        header('location: listeSalon.php');
+    } 
+
+    if (!empty($_POST['titre'])) 
+    {   
+        UpdateTitreSalon($_POST['titre']);
+    }
+
+    if (!empty($_POST['image'])) 
+    {   
+        UpdateImageSalon($_POST['image']);
+    }
+
+    if (!empty($_POST['dateDebut'])) 
+    {   
+        UpdateDateDebutSalon($_POST['dateDebut']);
+    }
+
+    if (!empty($_POST['dateFin'])) 
+    {   
+        UpdateDateFinSalon($_POST['dateFin']);
+    }
+
+    if (!empty($_POST['horaireOuverture'])) 
+    {   
+        UpdateHoraireDebutSalon($_POST['horaireOuverture']);
+    }
+
+    if (!empty($_POST['horaireFermeture'])) 
+    {   
+        UpdateHoraireFinSalon($_POST['horaireFermeture']);
+    }
+
+    if (!empty($_POST['localisation'])) 
+    {   
+        UpdateLocalisationSalon($_POST['localisation']);
+    }
+
+    if (!empty($_POST['description'])) 
+    {   
+        UpdateDescriptionSalon($_POST['description']);
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title><?php AfficheNomSalon($idSalon); ?></title>
+    <title><?php AfficheNomSalon($_SESSION['idSalon']); ?></title>
     <style>
 
         /* width */
@@ -171,21 +220,24 @@
 </head>
 <body>
     <div id="adminDiv"><!-- uniquement pour admin salon -->
-    <form method="GET" id="suppSalon" onsubmit='return confirm("Etes-vous sûr ?")'>
-        <input type="submit" value="Supprimer le Salon">
+    <form method="POST" id="suppSalon" onsubmit='return confirm("Etes-vous sûr ?")'>
+        <input type="submit" value="Supprimer le Salon" name="btnSupprimer">
     </form>
 
         <button id="modSalon">Modifier le salon</button>
-        <form id="modifierSalon"><!-- formulaire pour modifier un salon -->
+        <form method="POST" id="modifierSalon"><!-- formulaire pour modifier un salon -->
             <h2>modification du Salon</h2>
             <label for="titre">Nom du salon</label>
-            <input type="text" name="titre" >
+            <input type="text" name="titre" placeholder="<?php AfficheNomSalon($_SESSION['idSalon']); ?>">
+            <br>
+            <label>Image (lien) :</label>
+            <input type="text" name="image" placeholder="<?php AfficheImageSalon($_SESSION['idSalon']); ?>">
             <br>
             <label for="dateDebut">Date de debut</label>
-            <input type="date" name="dateDebut" >
+            <input type="date" name="dateDebut">
             <br>
             <label for="dateFin">Date de fin</label>
-            <input type="date" name="dateFin" >
+            <input type="date" name="dateFin">
             <br>
             <label for="horaireOuverture">Horaire d'ouverture</label>
             <input type="time" name="horaireOuverture">
@@ -194,16 +246,12 @@
             <input type="time" name="horaireFermeture">
             <br>
             <label for="localisation">Localisation</label>
-            <input type="text" name="localisation">
+            <input type="text" name="localisation" placeholder="<?php AfficheLocalisationSalon($_SESSION['idSalon']); ?>">
                <!-- ce serait cool d'avoir un google maps ou quoi -->
             <br>
             <label for="description">Description :</label>
             <br>
-            <textarea name="description" cols="30" rows="10"></textarea>
-            <br>
-            <label for="information">Information supplémentaire :</label>
-            <br>
-            <textarea name="information" cols="30" rows="10"></textarea>
+            <textarea name="description" cols="30" rows="10" placeholder="<?php AfficheDescriptionSalon($_SESSION['idSalon']); ?>"></textarea>
             <br>
             <input type="submit" value="envoyer">  
         </form>
@@ -212,17 +260,17 @@
     <div id="information"><!-- information (à completer en php)-->
         <div>
             <div>
-                <h1><?php AfficheNomSalon($idSalon); ?></h1>
-                <p>Organisé par : <?php AfficheNomPrenomCreateurSalon($idSalon); ?></p>
+                <h1><?php AfficheNomSalon($_SESSION['idSalon']); ?></h1>
+                <p>Organisé par : <?php AfficheNomPrenomCreateurSalon($_SESSION['idSalon']); ?></p>
             </div>     
-            <img src="<?php AfficheImageSalon($idSalon); ?>">       
+            <img src="<?php AfficheImageSalon($_SESSION['idSalon']); ?>">       
         </div>
         <article>
             <h2>Information :</h2>
-            <p>du <?php AfficheDateDebutSalon($idSalon); ?> au <?php AfficheDateFinSalon($idSalon); ?></p>
-            <p>de <?php AfficheOuvertureSalon($idSalon); ?> à <?php AfficheFermetureSalon($idSalon); ?></p>
-            <p><?php AfficheLocalisationSalon($idSalon); ?></p>
-            <p><?php AfficheDescriptionSalon($idSalon); ?></p>
+            <p>du <?php AfficheDateDebutSalon($_SESSION['idSalon']); ?> au <?php AfficheDateFinSalon($_SESSION['idSalon']); ?></p>
+            <p>de <?php AfficheOuvertureSalon($_SESSION['idSalon']); ?> à <?php AfficheFermetureSalon($_SESSION['idSalon']); ?></p>
+            <p><?php AfficheLocalisationSalon($_SESSION['idSalon']); ?></p>
+            <p><?php AfficheDescriptionSalon($_SESSION['idSalon']); ?></p>
         </article>
     </div>
     <!--partie stand-->
@@ -260,7 +308,7 @@
     suppSalon.addEventListener("submit", supprimerSalon);
     modSalon.addEventListener("click", afficherAdmin);
 
-    var isAdmin = true;//iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii pour enlever la div admin ou pas
+    var isAdmin = <?php EstAdmin($_SESSION['idSalon']); ?>;//iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii pour enlever la div admin ou pas
     if(isAdmin){
 
     }

@@ -957,5 +957,161 @@
         }      
         return false;
     }
+    // ----------------------------- Fonction faite par Aymeric ----------------------------
+    function SupprimerUnSalon($idSalon)
+    {
+      include('db.php'); 
+
+      try {
+        $sql = $conn->prepare('SELECT `idUtilisateur` FROM `adminsalon` WHERE `idSalon` = '.$idSalon);
+        $sql->execute();
+        $result = $sql->fetchAll();
+        foreach ($result as $user) {
+          $sql = $conn->prepare('SELECT `mailUtilisateur` FROM `utilisateur` WHERE `idUtilisateur` = '.$user['idUtilisateur']);
+          $sql->execute();
+          $result2 = $sql->fetchAll();
+          foreach ($result2 as $mail) {
+            if (mail($mail['mailUtilisateur'], "Votre salon à été supprimer", "Votre salon à été supprimer.")) // Envoi du message
+            {
+              echo "Email de suppression de salon envoyé.";
+            }
+            else // Non envoyé
+            {
+              echo "Problème lors de l'envoie de l'email de suppression de salon";
+            }
+          }
+        }
+      } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+      }
+
+      try {
+        $sql = 'DELETE FROM `adminsalon` WHERE `adminsalon`.`idSalon` = '.$idSalon;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+      } catch(PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+      }
+
+      try {
+        $sql = 'DELETE FROM `stockageinfosalon` WHERE `stockageinfosalon`.`idSalon` = '.$idSalon;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+      } catch(PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+      }
+
+      try {
+        $sql = 'DELETE FROM `salon` WHERE `salon`.`idSalon` = '.$idSalon;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+      } catch(PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+      }
+  }
+      
+  function UpdateTitreSalon($nouveau)
+  {
+    include('db.php'); 
+    try {
+      $sql = 'UPDATE `salon` SET `nomSalon` = "'.$nouveau.'" WHERE `salon`.`idSalon` = "'.$_SESSION['idSalon'].'";';
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+    } catch(PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+
+  function UpdateImageSalon($nouveau)
+  {
+    include('db.php'); 
+    try {
+      $sql = 'UPDATE `salon` SET `imageSalon` = "'.$nouveau.'" WHERE `salon`.`idSalon` = "'.$_SESSION['idSalon'].'";';
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+
+    } catch(PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+
+  function UpdateDateDebutSalon($nouveau)
+  {
+    include('db.php'); 
+    try {
+      $sql = 'UPDATE `salon` SET `dateDebutSalon` = "'.$nouveau.'" WHERE `salon`.`idSalon` = "'.$_SESSION['idSalon'].'";';
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+
+    } catch(PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+
+  function UpdateDateFinSalon($nouveau)
+  {
+    include('db.php'); 
+    try {
+      $sql = 'UPDATE `salon` SET `dateFinSalon` = "'.$nouveau.'" WHERE `salon`.`idSalon` = "'.$_SESSION['idSalon'].'";';
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+
+    } catch(PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+
+  function UpdateHoraireDebutSalon($nouveau)
+  {
+    include('db.php'); 
+    try {
+      $sql = 'UPDATE `salon` SET `ouvertureSalon` = "'.$nouveau.'" WHERE `salon`.`idSalon` = "'.$_SESSION['idSalon'].'";';
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+
+    } catch(PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+
+  function UpdateHoraireFinSalon($nouveau)
+  {
+    include('db.php'); 
+    try {
+      $sql = 'UPDATE `salon` SET `fermetureSalon` = "'.$nouveau.'" WHERE `salon`.`idSalon` = "'.$_SESSION['idSalon'].'";';
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+
+    } catch(PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+  
+  function UpdateLocalisationSalon($nouveau)
+  {
+    include('db.php'); 
+    try {
+      $sql = 'UPDATE `salon` SET `villeSalon` = "'.$nouveau.'" WHERE `salon`.`idSalon` = "'.$_SESSION['idSalon'].'";';
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+
+    } catch(PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+
+  function UpdateDescriptionSalon($nouveau)
+  {
+    include('db.php'); 
+    try {
+      $sql = 'UPDATE `salon` SET `descriptionSalon` = "'.$nouveau.'" WHERE `salon`.`idSalon` = "'.$_SESSION['idSalon'].'";';
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+
+    } catch(PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
+  // ------------------------- Fonction faite par Aymeric FIN ----------------------------
 
 ?>
