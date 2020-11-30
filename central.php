@@ -2,7 +2,15 @@
 require_once('db.php');
 session_start();
 
+include('fonctions.php'); 
+$sql = "SELECT idStandFdA FROM utilisateur WHERE mailUtilisateur=?";
+$req = $conn->prepare($sql);
+$value = $req->execute([$_SESSION['mail']]);
+echo '<script>
+    var idFile = '.$value.'
+</script>';
 ?>
+
 <html>
     <head>
     <title>Siep Project</title>  
@@ -26,7 +34,10 @@ session_start();
             <a id="buttonDeconnexion" href="deco.php" class="w3-bar-item w3-button w3-col l3">Deconnexion</a>
         </div>
         <div>
-        <?php include 'header.php';?>    
+        <div id="profilePic" class="card" >
+        <?php AfficheImageProfil(); ?>
+        <?php AfficheNomPrenom(); ?>     
+        <p><button onclick=MoveToStand()>Retour a la file d'attente</button></p> 
         </div>
         <div class="w3-center w3-animate-opacity w3-blue-grey w3-jumbo">
             Salon
@@ -93,7 +104,11 @@ session_start();
      
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="./main.js"> </script>         
-    
+    <script>
+        function MoveToStand(){
+            document.getElementById('bodyPage').src = "./stand.php?idStand="+idFile;
+        }
+    </script>
 
 </body>
 </html>

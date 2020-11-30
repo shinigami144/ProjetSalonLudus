@@ -12,7 +12,7 @@
                 console.log(xhttp.responseText);
             }
         };
-        xhttp.open("GET", "./addFileAttente.php?idStand="+document.getElementById("IDSTANDSUPRESS").value+"&idUser="+idUser, true);
+        xhttp.open("GET", "./addFileAttente.php?idStand="+document.getElementById("ID").value+"&idUser="+idUser, true);
         xhttp.send();
        
     }
@@ -38,6 +38,6 @@
                  // et si tu mettai directement ça ( tu peux ordonner via la requete SQL);
             }
         };
-        xhttp.open("GET", "./fileAttenteData.php?perm="+permission+"&idStand="+document.getElementById("IDSTANDSUPRESS").value, true);
+        xhttp.open("GET", "./fileAttenteData.php?perm="+permission+"&idStand="+document.getElementById("ID").value, true);
         xhttp.send();
     }

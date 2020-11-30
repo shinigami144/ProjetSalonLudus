@@ -18,7 +18,7 @@
 
   function MoveToStand(){
     var idFile = <?php echo $value; ?>;
-    window.location.replace("#stand.php?id="+idFile);
+    //window.location.replace("stand.php?id="+idFile);
   }
 
 

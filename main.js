@@ -40,19 +40,20 @@ let iframe = document.getElementById("bodyPage");
 
 //Handler for different page in iframe
 $("#buttonSalon").click(function(){
-    iframe.src ="backpage.php";
+    iframe.src ="./listeSalon.php";
     
 });
                         
 $("#buttonStands").click(function(){
     
-    iframe.src = "fakeProfilPage.php";
+    iframe.src = "./stand.php?idStand="
     console.log(iframe);
     
 });
                            
 $("#buttonProfil").click(function(){
-    console.log("Profil");
+    iframe.src = "./pageProfil.php";
+    console.log(iframe);
     
 });
                            

@@ -105,11 +105,12 @@ function CallUser(){
     var beth = aleph.children;
     // premier mail de la liste
     var mail = beth[0].children[2].textContent;
-    if()
-    text+= mail;
-    text+= extend;
-    console.log(text);
-    window.open(text);
+    if(mail == ""){
+        text+= mail;
+        text+= extend;
+        console.log(text);
+        window.open(text);
+    }
 }
 
 

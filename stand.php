@@ -49,6 +49,7 @@
     if(isset($conn)){
         echo '
             <div id="PageCommun">
+            <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="ID">
                 <div id="divInformationEntreprise">
                     <image id="logoEntreprise" src="'.$data[0]['imageStand'].'"></image>
                     <p id="nomEntreprise" contenteditable="false">'.$data[0]['nomStand'].'</p>
