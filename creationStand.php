@@ -1,5 +1,6 @@
 <?php
-include('fonctions.php');
+    session_start();
+    include('fonctions.php');
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +58,7 @@ include('fonctions.php');
         <br/>
 
         <label for="imageStand"> Image : </label>
-        <input type="file" name="imageStand" accept="image/png, image/jpeg, image/jpg">
+        <input type="text" name="imageStand">
         <br/>
 
 

@@ -292,7 +292,7 @@
         <!-- vide au debut -->
         </div>
     </div>
-    <a href="#">Je crée mon stand</a> <!--lien vers la page de creation de stand-->
+    <a href="creationStand.php">Je crée mon stand</a> <!--lien vers la page de creation de stand-->
 </body>
 <script>
     var liste = document.getElementById("scrollList");
@@ -377,12 +377,22 @@
             div2.appendChild(elem);
             container.appendChild(div1);
             container.appendChild(div2);
-            container.setAttribute("name",id);
             if(ouvert == "0"){
                 container.setAttribute("class","grey");
             }
+            else {
+                elem = document.createElement("button");
+                elem.innerHTML = 'Aller vers stand';
+                elem.setAttribute("name",id);
+                elem.addEventListener("click",function(){allerVersPageStand(id)});
+                container.appendChild(elem);
+            }
             liste.appendChild(container);
             //container.addEventListener("click",allez sur la page stand avec l'id stocké dans le name du div);
+    }
+
+    function allerVersPageStand(id){
+        window.location.href = 'stand.php?idStand='+id;
     }
 
 </script>

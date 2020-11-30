@@ -1,6 +1,6 @@
 <?php
-require("connect.php");	
-$conn = connectDB(); 
+include("db.php");	
+
 	echo "non visible";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

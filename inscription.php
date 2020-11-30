@@ -88,7 +88,6 @@
 
 ?>
 
-<!--  !!!!!!!!!  IL MANQUE LE CHOIX DES IMAGES DE PROFIL  !!!!!!!!!  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,6 +159,18 @@
                 <label>
                     <input type="radio" id="img4" name="image" value="4">
                     <img src="./css/4.png">
+                </label>
+                <label>
+                    <input type="radio" id="img5" name="image" value="5">
+                    <img src="./css/5.png">
+                </label>
+                <label>
+                    <input type="radio" id="img6" name="image" value="6">
+                    <img src="./css/6.png">
+                </label>
+                <label>
+                    <input type="radio" id="img7" name="image" value="7">
+                    <img src="./css/7.png">
                 </label>
             </div> 
             <div class="form-group">
