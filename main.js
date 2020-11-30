@@ -1,15 +1,6 @@
-var nbFile = 650;
+var nbFile = 9;
 var timer = setInterval(myTimer, 1000);
 
-
-//Allow the header to be correctly placed at the laoding of the page
-$(document).ready(function(){
-    $(this).scrollTop(0);
-});
-
-
-
-//Handling of the modal for connexions
 let modal = $("#myModal");
 let span = $(".close");
 
@@ -35,30 +26,3 @@ window.addEventListener("click", function(event) {
     modal.css("display","none");
   }
 });
-
-let iframe = document.getElementById("bodyPage");
-
-//Handler for different page in iframe
-$("#buttonSalon").click(function(){
-    iframe.src ="backpage.php";
-    
-});
-                        
-$("#buttonStands").click(function(){
-    
-    iframe.src = "fakeProfilPage.php";
-    console.log(iframe);
-    
-});
-                           
-$("#buttonProfil").click(function(){
-    console.log("Profil");
-    
-});
-                           
-$("#buttonDeconnexion").click(function(){
-    console.log("deco");
-//    
-    
-});
-                        

@@ -1,10 +1,13 @@
 <?php
     session_start();
-
     require_once('db.php'); 
 
     if(array_key_exists('btnCode', $_POST)) { 
         sendMail(); 
+    } 
+
+    if(array_key_exists('btnPasser', $_POST)) { 
+        header('location: central.php');
     } 
 
     function sendMail()
@@ -37,13 +40,12 @@
             echo $sql . "<br>" . $e->getMessage();
         }
         
-        header('location: index.php');
+        header('location: central.php');
     }
     else 
     {
         echo "Le code ne correspond pas.";
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +69,10 @@
             <input type="submit" value="Valider">
         </div>
     </form>
+
+    <form method="post"> 
+        <input type="submit" name="btnPasser" class="button" value="Passer la validation" /> 
+    </form> 
 
 </body>
 </html> 
