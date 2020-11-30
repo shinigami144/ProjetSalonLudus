@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="lib/bootstrap.js" charset="utf-8"></script>
+    <script src="lib/bootstrap.bundle.js" charset="utf-8"></script>
     <style>
         a{
             display: block;
@@ -11,7 +14,7 @@
     </style>
 </head>
 <?php
-	require("db.php");	
+	require("db.php");
     session_start();
     $sql4 = "SELECT * FROM adminstand WHERE idUtilisateur=? AND idStand=?";
     $req4 = $conn->prepare($sql4);
@@ -90,7 +93,7 @@
                 </div>
             </div>
         ';
-        echo'<script src="./StandCommun.js"></script>' ;// script commun 
+        echo'<script src="./StandCommun.js"></script>' ;// script commun
         if($permission == 1){ // admin de salon
             echo'
             <form action="./acceptationStand.php" method="POST">
@@ -101,7 +104,7 @@
             ';
             echo'<script src="./StandAdminSalon.js"></script>' ; // script propre au admin salon
         }
-        else if ($permission == 2){ // admin stand 
+        else if ($permission == 2){ // admin stand
             echo '<p id="debug"></p>';
             echo'
             <div id="PageAdminStand">
@@ -147,10 +150,10 @@
                     <button id="AButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>
                 </div>
                 <form onsubmit="return confirm("Voulez-vous supprimer le stand actuel ?")" action="./deleteStand.php" method="POST">
-                    <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTANDSUPRESS">    
+                    <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTANDSUPRESS">
                     <input type="submit" value="Supprimer le stand">
-                </form> 
-            </div   
+                </form>
+            </div
             ';
             echo'<div>
                     <button id="ButtonChangeModeMOdification" onclick="ChangeMode()">Passer en mode edition</button>
@@ -160,7 +163,7 @@
         }
 
     }
-    
+
 ?>
 
 
