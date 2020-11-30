@@ -8,7 +8,7 @@
     {
         $cpt++;
     }
-
+    
     if (isset($_POST['password']) and !empty($_POST['password'])) // Si le mdp n'est pas vide 
     {
         $cpt++;

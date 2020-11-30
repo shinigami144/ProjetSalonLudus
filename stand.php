@@ -13,12 +13,6 @@
 <?php
 	require("db.php");	
     session_start();
-    //var_dump($_SESSION);
-    //$sql4 = "SELECT * FROM adminstand WHERE " 
-    // 1 id salon -> qui sont les id user qui apparaise -> session id user in 
-    // -> oui -> afficher admin 
-    // -> non afficher visiteur 
-    // session admin salon = 1 -> apparaitre 
     $sql4 = "SELECT * FROM adminstand WHERE idUtilisateur=? AND idStand=?";
     $req4 = $conn->prepare($sql4);
     $req4->execute([$_SESSION['idUtilisateur'],$_GET['idStand']]);
@@ -48,7 +42,10 @@
     else{
         $brochurelink = $data3[0]['lienFIchier'];
     }
-    //var_dump($data3);
+    echo '<script>
+    sessionStorage.setItem("permission","'.$permission.'");
+    sessionStorage.setItem("idUtilisateur","'.$_SESSION['idUtilisateur'].'");
+    </script>'; // mise en place de l'id dans la session en JS
     if(isset($conn)){
         echo '
             <div id="PageCommun">
@@ -69,14 +66,23 @@
                     </div>
                 </div>
                 <div id="divFileAttente">
-                    <p id="descriptionFileAttente" contenteditable="false">Annotation pour la file d\'attente</p>
-                    <div id="listeFileAttente">
-                    <p><span id="textWaiting"></span>
-			        <span id="nbrWaiting">0</span> </p>
-                </div>
-                <button id="boutonAjoutFileAttente" onclick="addMeToWaitList()">
-                    S\'ajouter a la file d\'attente de rendez-vous
-                </button>
+                    <table>
+                        <thead>
+                            <tr id="BaseTable">
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prenom</th>';
+                                if($permission == 2){
+                                    echo '<th scope="col">AdresseMail</th>';
+                                }
+                                echo'
+                            </tr>
+                        </thead>
+                        <tbody class="ListeFileAttente" id="ListeFileAttente">
+                        </tbody>
+                    </table>
+                    <button id="boutonAjoutFileAttente" onclick="addMeToWaitList()">
+                        S\'ajouter a la file d\'attente de rendez-vous
+                    </button>
                 </div>
             </div>
         ';
@@ -84,7 +90,7 @@
         if($permission == 1){ // admin de salon
             echo'
             <form action="./acceptationStand.php" method="POST">
-                <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">
+                <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTANDACCEPTATION">
                 <button type="submit" name="acceptationStand" value="1">Accepter le stand</button>
                 <button type="submit" name="acceptationStand" value="0">Refuser le stand</button>
             </form>
@@ -92,16 +98,10 @@
             echo'<script src="./StandAdminSalon.js"></script>' ; // script propre au admin salon
         }
         else if ($permission == 2){ // admin stand 
-            echo'<style>
-                #IDSTAND{
-                    display:none;
-                }
-                </style>
-            '; // CSS via adminStand
+            echo '<p id="debug"></p>';
             echo'
             <div id="PageAdminStand">
                 <form id="divInformationEntreprise" enctype="multipart/form-data" action="modifStand.php" method="POST">
-                    <input type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">
                     <div id="stand_image_container">
                         <label for="ALogoEntreprise_UploadBtn">
                             <img src="'.$data[0]['imageStand'].'" id="AlogoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
@@ -126,16 +126,24 @@
                 <input type="submit" name="btnModifStand" id="submitBtnChangeStand" value="Mettre à jour les informations du Stand">
                 </form>
                 <div id="AdivFileAttente">
-                    <input id="AdescriptionFileAttente" readonly>
-                    <div id="AlisteFileAttente">
-                    </div>
+                    <table>
+                        <thead>
+                            <tr id="BaseTable">
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prenom</th>
+                                <th scope="col">AdresseMail</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ListeFileAttente" id="AListeFileAttente">
+                        </tbody>
+                    </table>
                     <button id="AboutonAjoutFileAttente" onclick="addMeToWaitList()">
                         S\'ajouter a la file d\'attente de rendez-vous
                     </button>
                     <button id="AButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>
                 </div>
                 <form onsubmit="return confirm("Voulez-vous supprimer le stand actuel ?")" action="./deleteStand.php" method="POST">
-                    <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTAND">    
+                    <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTANDSUPRESS">    
                     <input type="submit" value="Supprimer le stand">
                 </form> 
             </div   
