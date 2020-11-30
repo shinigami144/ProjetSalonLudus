@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand n°1</title>
+    <link rel="stylesheet" href="css/customizedstandstyle.css">
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="lib/bootstrap.js" charset="utf-8"></script>
     <script src="lib/bootstrap.bundle.js" charset="utf-8"></script>
@@ -51,17 +53,23 @@
     </script>'; // mise en place de l'id dans la session en JS
     if(isset($conn)){
         echo '
-            <div id="PageCommun">
+            <div id="PageCommun" class="container">
             <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="ID">
-                <div id="divInformationEntreprise">
+                <div id="divInformationEntreprise" class="container">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <p class="lead"> La Ludus Académie </p>
+                        <button class="btn btn-primary btn-lg">STAND</button>
+                      </div>
+                    </div>
                     <image id="logoEntreprise" src="'.$data[0]['imageStand'].'"></image>
                     <p id="nomEntreprise" contenteditable="false">'.$data[0]['nomStand'].'</p>
                     <p id="pictchStand">'.$data[0]['pitchStand'].' </p>
                     <p id="descriptionEntreprise" contenteditable="false">'.$data[0]['descriptionStand'].'</p>
                     <p id="adresseEntreprise" contenteditable="false">'.$data[0]['adresseStand'].' </p>
                     <p type="email"  id="emailEntreprise" contenteditable="false">'.$data2[0]['mailUtilisateur'].'</p>
-                    <a  id="siteEntreprise" contenteditable="false">'.$data[0]['siteStand'].'</a>
-                    <p  id="telEntreprise" contenteditable="false"  >'.$data2[0]['telUtilisateur'].'</p>
+                    <a id="siteEntreprise" contenteditable="false">'.$data[0]['siteStand'].'</a>
+                    <p id="telEntreprise" contenteditable="false">'.$data2[0]['telUtilisateur'].'</p>
                     <div id="Brochure">
                         <h4>Brochure</h4>
                         <a href="'.$brochurelink.'" download="brochurePDF">
