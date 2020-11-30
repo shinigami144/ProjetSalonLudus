@@ -1,0 +1,110 @@
+/*
+  CSS : DRUCKES Lucas & ...............
+*/
+
+/*---------------------------- FONTS ----------------------------*/
+/* NAV LOGO IMAGE */
+@font-face {
+  font-family: "apollo";
+  src: url("fonts/APOLLO.otf") format('opentype');
+}
+/* FONT UI */
+@font-face {
+  font-family: "comfortaaregular";
+  src: url("fonts/Comfortaa-Regular.ttf") format('truetype');
+}
+/* FONT GENERAL 1 => par défaut */
+@font-face {
+  font-family: "gravitybook";
+  src: url("fonts/Gravity-Book.otf") format('opentype');
+}
+/* FONT GENERAL 2 */
+@font-face {
+  font-family: "gravitylight";
+  src: url("fonts/Gravity-Light.otf") format('opentype');
+}
+
+/*---------------------- BOOTSTRAP CONTENT ----------------------*/
+
+.carousel-item {
+  height: 40vh;
+  min-height: 350px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/*---------------------------- CLASS ----------------------------*/
+/* == BACKGROUND == */
+.bg-palette-orange{
+  background-color: rgb(254,151,65);
+}
+.bg-palette-orange-gradient{
+  background: linear-gradient(rgb(255,205,164), rgb(255, 180, 118), rgb(254,151,65), rgb(252, 128, 24));
+}
+.bg-palette-green{
+  background-color: rgb(102, 204, 51);
+}
+.bg-palette-green-gradient{
+  background: linear-gradient(rgb(139,201,107), rgb(119,201,77), rgb(102,204,51), rgb(85,201,27));
+}
+.bg-palette-magenta{
+  background-color: rgb(208,144,180);
+}
+.bg-palette-blue{
+  background-color: rgb(52,42,169);
+}
+.bg-palette-blue-gradient{
+  background: linear-gradient(rgb(99,92,173),rgb(52,42,169),rgb(72,63,178),rgb(30,18,173));
+}
+.bg-palette-gray{
+  background-color: rgb(105,105,105);
+}
+.bg-palette-white{
+  background-color: white;
+}
+/* == FONTS == */
+.font_navlogoimage{
+  font-family: apollo, Arial;
+  font-size: 20px;
+}
+.font_ui{
+  font-family: comfortaaregular, Arial;
+  font-size: 20px;
+}
+.font_general{
+  font-family: gravitybook, Arial;
+  font-size: 20px;
+}
+.font_general2{
+  font-family: gravitylight, Arial;
+  font-size: 20px;
+}
+/* == FONT SIZE == */
+.small{
+  font-size: 10px;
+}
+.medium{
+  font-size: 20px;
+}
+.big{
+  font-size: 30px;
+}
+.huge{
+  font-size: 40px;
+}
+.font70{
+  font-size: 70px;
+}
+
+
+/*---------------------------- ID ----------------------------*/
+/* FORM */
+#divInformationEntreprise{
+  padding: 10px;
+}
+#submitBtnChangeStand{
+    display: none;
+}
