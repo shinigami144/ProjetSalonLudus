@@ -37,6 +37,8 @@ siteEntreprise.addEventListener("change",ChangeSiteEntreprise);
 //telEntreprise.addEventListener("change",ChangeTelEntreprise);
 picthEntreprise.addEventListener("change",ChangePitchStand);
 
+
+
 function debug(){
     console.log(event.target.id);
 }
@@ -129,11 +131,19 @@ function VerifFileLogo(){
 
 
 function removeUserFromWaitingList(){
-    var lsiteAttente = document.getElementById("listeFileAttente");
-    console.log(lsiteAttente.children[0]);
-    if(lsiteAttente.children[0]){
-        lsiteAttente.children[0].remove(lsiteAttente.children[0]);
-    }
+    var aleph = document.getElementById("ListeFileAttente");
+    var beth = aleph.children;
+    // premier mail de la liste
+    var mail = beth[0].children[2].textContent;
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("debug").innerHTML = xhttp.responseText;
+        }
+    };
+    xhttp.open("GET", "./deleteFileAttente.php?mail="+mail, true);
+    xhttp.send();
 }
 
 function ChangeMode(){
