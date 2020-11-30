@@ -82,7 +82,11 @@
                     </table>
                     <button id="boutonAjoutFileAttente" onclick="addMeToWaitList()">
                         S\'ajouter a la file d\'attente de rendez-vous
-                    </button>
+                    </button>';
+                    if($permission == 2){
+                        echo '<button id="ButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>';
+                    }
+                    echo'
                 </div>
             </div>
         ';
