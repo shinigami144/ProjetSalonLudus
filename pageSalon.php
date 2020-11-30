@@ -1,12 +1,14 @@
 <?php 
     session_start();
     include('fonctions.php');
-
+    
     if (!empty($_GET['id']) && isset($_GET['id']))
     {
         $_SESSION['idSalon'] = $_GET['id'];
     }
-    echo $_SESSION['idSalon'];
+
+    $dataStand = AfficheStand($_SESSION['idSalon']);
+
     // Active la fonction supprimer un salon
     if(array_key_exists('btnSupprimer', $_POST)) { 
         SupprimerUnSalon($_SESSION['idSalon']);
@@ -290,10 +292,10 @@
         <!-- vide au debut -->
         </div>
     </div>
-    <a href="#">Je crée mon stand</a> <!--lien vers la page de creation de stand-->
+    <a href="creationStand.php">Je crée mon stand</a> <!--lien vers la page de creation de stand-->
 </body>
 <script>
-
+    var liste = document.getElementById("scrollList");
     var adminDiv = document.getElementById("adminDiv");
     var modifierSalon = document.getElementById("modifierSalon");
     var stand = document.getElementById("stand");
@@ -309,7 +311,8 @@
     modSalon.addEventListener("click", afficherAdmin);
 
     var isAdmin = <?php EstAdmin($_SESSION['idSalon']); ?>;//iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii pour enlever la div admin ou pas
-    if(isAdmin){
+    console.log(isAdmin);
+    if(isAdmin == 1){
 
     }
     else {
@@ -342,6 +345,14 @@
         modSalon.addEventListener("click", afficherAdmin);
     }
 
+    var tabStand = <?php echo $dataStand; ?>;
+
+    for(var i = 0; i < tabStand.length; i++)
+    {
+        //en gros on peux pas mettre de num on doit utiliser les nomw dans la table 
+        creerStand(tabStand[i].nomStand,tabStand[i].pitchStand,tabStand[i].imageStand,tabStand[i].ouvertureStand,tabStand[i].fermetureStand,tabStand[i].ouvertStand,tabStand[i].idStand);
+    }
+
     function creerStand(nom, pitch, img ,heureOuverture, heureFermeture, ouvert, id){
             var container = document.createElement("div");
             var elem = document.createElement("img");
@@ -366,12 +377,22 @@
             div2.appendChild(elem);
             container.appendChild(div1);
             container.appendChild(div2);
-            container.setAttribute("name",id);
             if(ouvert == "0"){
                 container.setAttribute("class","grey");
             }
+            else {
+                elem = document.createElement("button");
+                elem.innerHTML = 'Aller vers stand';
+                elem.setAttribute("name",id);
+                elem.addEventListener("click",function(){allerVersPageStand(id)});
+                container.appendChild(elem);
+            }
             liste.appendChild(container);
             //container.addEventListener("click",allez sur la page stand avec l'id stocké dans le name du div);
+    }
+
+    function allerVersPageStand(id){
+        window.location.href = 'stand.php?idStand='+id;
     }
 
 </script>

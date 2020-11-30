@@ -1,30 +1,73 @@
 <?php
-require("connect.php");	
-$conn = connectDB(); 
-	echo "non visible";
+require("db.php");
+include('fonctions.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$ouvertStand = 1;
-	$stockInfoStand = 2;
-	$idSalon = 1;
-	$acceptationStand = 1;
-	$ouvertureStand = 1;
-	$fermetureStand = 2;
+	$idSalon = $_POST["idSalon"];
 	$nomStand = $_POST["nomStand"];
+	$pitchStand = $_POST["pitchStand"];
 	$descriptionStand = $_POST["descriptionStand"];
+	$siteStand = $_POST["siteStand"];
 	$adresseStand = $_POST["adresseStand"];
-	$imageStand = $_POST["imageStand"];
 	$codePostalStand = $_POST["codePostalStand"];
+	$villeStand = $_POST["villeStand"];
+	$imageStand = $_POST["imageStand"];
+	$ouvertureStand = $_POST["ouvertureStand"];
+	$fermetureStand = $_POST["fermetureStand"];
+
+	$pays = $_POST['pays'];
+	$idPaysStand = RecupIdPays($pays);
+
+	$acceptationStand = 0;
+	$ouvertStand = 0;
+	$stockInfoStand = 0;
+
+	// echo( "
+	// ID SALON".$idSalon. 
+	// "<br/>"."NOM STAND -> ".$nomStand. 
+	// "<br/>"."PITCH -> ".$pitchStand. 
+	// "<br/>"."DESC -> ".$descriptionStand. 
+	// "<br/>"."SITE -> ".$siteStand. 
+	// "<br/>"."ADRESSE -> ".$adresseStand. 
+	// "<br/>"."CP -> ".$codePostalStand. 
+	// "<br/>"."VILLE -> ".$villeStand. 
+	// "<br/>"."ID -> ".$idPaysStand
+	// );
 	
 	//CREATION DU STAND
-	$req = "INSERT INTO stand(ouvertStand, stockInfoStand, idSalon, acceptationStand, 
-	nomStand, descriptionStand, adresseStand, ouvertureStand, fermetureStand, 
-	imageStand, codePostalStand)
-	VALUES(".$ouvertStand.",".$stockInfoStand.",".$idSalon.", ".$acceptationStand.",
-	'".$nomStand."','".$descriptionStand."','".$adresseStand."','".$ouvertureStand."','".$fermetureStand."','".$imageStand."',
-	'".$codePostalStand."')";
+	$req = "INSERT INTO stand(
+		ouvertStand, 
+		stockInfoStand, 
+		idSalon, 
+		acceptationStand,
+		nomStand, 
+		descriptionStand, 
+		adresseStand, 
+		ouvertureStand, 
+		fermetureStand,
+		imageStand, 
+		codePostalStand, 
+		pitchStand, 
+		siteStand,
+		villeStand, 
+		idPaysStand)
+	VALUES(
+		".$ouvertStand.",
+		".$stockInfoStand.",
+		".$idSalon.",
+		".$acceptationStand.",
+		'".$nomStand."',
+		'".$descriptionStand."',
+		'".$adresseStand."',
+		'".$ouvertureStand."',
+		'".$fermetureStand."',
+		'".$imageStand."',
+		'".$codePostalStand."',
+		'".$pitchStand."',
+		'".$siteStand."',
+		'".$villeStand."',
+		'".$idPaysStand."')";
 	
-	echo $req;
 	try
 	{
 		$stmt = $conn->prepare($req);
@@ -33,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	{
 		echo $e->getMessage();
 	}
-	
+
 	if(isset($conn))
 	{
 		if ($stmt->execute() === TRUE) 
@@ -49,15 +92,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	{
 		echo "Can't connect to DB";
 	}
-	
+
 	//RECUPERATION DU l'ID DU NV STAND
-	
 	$req = "select * from stand";
 	if(isset($conn))
 	{
 		$table = $conn->prepare($req);
 		$table->execute();
-		
+	
 		$id = 0;
 		foreach($table as $row)
 		{
@@ -66,8 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 		echo $id;
 	}
-	
-    //$req->execute([$_POST['nomEntreprise'],$_POST['descriptionEntreprise'],$_POST['idStand']]);
-    header("Location: http://salonvirtuel/stand.php?idStand=".$id);
+
+    header("Location: ./stand.php?idStand=".$id);
 }
 ?>

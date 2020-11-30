@@ -1,5 +1,6 @@
 <?php
-include('fonctions.php');
+    session_start();
+    include('fonctions.php');
 ?>
 
 <!DOCTYPE html>
@@ -29,27 +30,35 @@ include('fonctions.php');
         <input name='descriptionStand' placeholder="Description des activités de l'entreprise" type= 'text' required>
         <br/>
 
-        <label for="emailStand"> Email :</label>
-        <input type="email" name="emailStand" placeholder="Email de l'entreprise" pattern="\^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
-        <br/>
-
-        <label for="telStand"> Pitch :</label>
-        <input type="tel" name="telStand"  placeholder="Téléphone de l'entreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$">
-        <br/>
-
-        <label for="siteStand"> Pitch :</label>
+        <label for="siteStand"> Site :</label>
         <input type="text" name="siteStand" placeholder="Site de l'entreprise">
         <br/>
 
-        <label for="adresseStand"> Adresse : </label>
-        <input name='adresseStand' placeholder="Adresse de l'entreprise" type= 'text'>
+        <label for="ouvertureStand"> Heure d'ouverture :</label>
+        <input name='ouvertureStand' placeholder="Heure d'ouverture du stand" type= 'time'>
+        <br/>
+
+        <label for="fermetureStand"> Heure de fermeture :</label>
+        <input name='fermetureStand' placeholder="Heure de fermeture du stand" type= 'time'>
         <br/>
 
         <label for="codePostalStand"> Code postal :</label>
         <input name='codePostalStand' placeholder="Code postal de l'entreprise" type= 'text'>
         <br/>
 
-        <label for="idPaysStand">Pays :&nbsp;</label>
+        <label for="adresseStand"> Adresse : </label>
+        <input name='adresseStand' placeholder="Adresse de l'entreprise" type= 'text'>
+        <br/>
+
+        <label for="villeStand"> Ville : </label>
+        <input name='villeStand' placeholder="Ville de l'entreprise" type= 'text'>
+        <br/>
+
+        <label for="codePostalStand"> Code postal :</label>
+        <input name='codePostalStand' placeholder="Code postal de l'entreprise" type= 'text'>
+        <br/>
+
+        <label for="pays"> Pays :&nbsp;</label>
         <select name="pays" required>
             <option value="">Sélectionner votre pays</option>
             <?php AfficheOptionSelectPays(); ?>
@@ -57,7 +66,7 @@ include('fonctions.php');
         <br/>
 
         <label for="imageStand"> Image : </label>
-        <input type="file" name="imageStand" accept="image/png, image/jpeg, image/jpg">
+        <input type="text" placeholder="Lien image stand" name="imageStand">
         <br/>
 
 

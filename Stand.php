@@ -52,6 +52,7 @@
     if(isset($conn)){
         echo '
             <div id="PageCommun">
+            <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="ID">
                 <div id="divInformationEntreprise">
                     <image id="logoEntreprise" src="'.$data[0]['imageStand'].'"></image>
                     <p id="nomEntreprise" contenteditable="false">'.$data[0]['nomStand'].'</p>
@@ -87,6 +88,7 @@
                         S\'ajouter a la file d\'attente de rendez-vous
                     </button>';
                     if($permission == 2){
+                        echo '<button id="ButtonCallUser" onclick="CallUser()">Call</button>';
                         echo '<button id="ButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>';
                     }
                     echo'
@@ -147,6 +149,7 @@
                     <button id="AboutonAjoutFileAttente" onclick="addMeToWaitList()">
                         S\'ajouter a la file d\'attente de rendez-vous
                     </button>
+                    <button id="AButtonCallUser" onclick="CallUser()">Call</button>
                     <button id="AButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>
                 </div>
                 <form onsubmit="return confirm("Voulez-vous supprimer le stand actuel ?")" action="./deleteStand.php" method="POST">

@@ -4,17 +4,9 @@
 
 
 #profilePic {
-    margin-top:5%;
+    margin-top:11%;
     position:fixed;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background-color: #fff;
-    text-align: center;
-    font-family: arial;
-    position: fixed;
-    top: 10%;
-    right: 0;
 }
-
 
 
 /* Page content */

@@ -2,15 +2,7 @@
 require_once('db.php');
 session_start();
 
-include('fonctions.php'); 
-$sql = "SELECT idStandFdA FROM utilisateur WHERE mailUtilisateur=?";
-$req = $conn->prepare($sql);
-$value = $req->execute([$_SESSION['mail']]);
-echo '<script>
-    var idFile = '.$value.'
-</script>';
 ?>
-
 <html>
     <head>
     <title>Siep Project</title>  
@@ -28,17 +20,13 @@ echo '<script>
 <body>
     <div id="stickySection" class="container sticky">
         <div class="w3-navbar w3-dark-grey w3-row">
-            <a id="buttonSalon" href="#" class="w3-bar-item w3-button w3-col l3">Acceuil</a>
+            <a id="buttonSalon" href="#" class="w3-bar-item w3-button w3-col l3">Salon</a>
             <a id="buttonStands" href="#" class="w3-bar-item w3-button w3-col l3">Stands</a>
             <a id="buttonProfil" href="#" class="w3-bar-item w3-button w3-col l3">Profil</a>
             <a id="buttonDeconnexion" href="deco.php" class="w3-bar-item w3-button w3-col l3">Deconnexion</a>
         </div>
-        <div>        
-            <div id="profilePic" class="card" >
-                <?php AfficheImageProfil(); ?>
-                <?php AfficheNomPrenom(); ?>     
-                <p><button onclick=MoveToStand()>Retour a la file d'attente</button></p> 
-            </div>
+        <div>
+        <?php include 'header.php';?>    
         </div>
         <div class="w3-center w3-animate-opacity w3-blue-grey w3-jumbo">
             Salon
@@ -60,11 +48,11 @@ echo '<script>
       
               <?php
               try {
-                  $sql = $conn->prepare('SELECT idStandFdA FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
+                  $sql = $conn->prepare('SELECT idStandRDV FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
                   $sql->execute();
                   $result = $sql->fetchAll();
                   foreach ($result as $idstand) {
-                      $idstandrdv = $idstand['idStandFdA'];
+                      $idstandrdv = $idstand['idStandRDV'];
                   }
               }catch(PDOException $e) {
                   echo "Error: " . $e->getMessage();
@@ -76,8 +64,7 @@ echo '<script>
                   $lienrdv = $lienstand['lienAStand'];
               }
               echo'
-              <a><img src="https://cdn.vox-cdn.com/thumbor/xGx425irVzHq-r8-_vTZrWo-79A=/0x0:1320x880/920x613/filters:focal(555x335:765x545):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/55270365/newskypelogo.1497525155.jpg" style="width:25%;"/>
-            Vous allez etre appelé</a>
+              <a href="'.$lienrdv.'"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLCY8jUzmtJbvlLiQ9dASd2XsdK-_NwSDmtw&usqp=CAU" />clickez ici pour rejoindre le meeting</a>
               ';
               }
               ?>
@@ -97,7 +84,7 @@ echo '<script>
         <div class="w3-margin">
             <iframe
                     id="bodyPage"
-                    src="./listeSalon.php"
+                    src="backPage.php"
                     style="width:82%;height:100%;">
             </iframe>    
         </div>
@@ -105,11 +92,7 @@ echo '<script>
      
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="./main.js"> </script>         
-    <script>
-        function MoveToStand(){
-            document.getElementById('bodyPage').src = "./stand.php?idStand="+idFile;
-        }
-    </script>
+    
 
 </body>
 </html>

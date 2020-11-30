@@ -128,7 +128,6 @@
     <link href="./css/listeSalon.css" rel="stylesheet"> 
 </head>
 <body>
-    <a href='./listeSalon.php'>reset page</a>
     <form method="post" id="rechercheSalon"> <!-- recherche de salon -->
         <div>
             <input type="text" name="nomSalon" placeholder="chercher un salon">

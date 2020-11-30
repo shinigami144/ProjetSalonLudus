@@ -950,12 +950,13 @@
           $sql->execute();
           $result = $sql->fetchAll();
           foreach ($result as $user) {
-              return true;
+              echo 1;
+              return;
           }
         } catch(PDOException $e) {
           echo "Error: " . $e->getMessage();
         }      
-        return false;
+        echo 0;
     }
     // ----------------------------- Fonction faite par Aymeric ----------------------------
     function SupprimerUnSalon($idSalon)
@@ -1113,5 +1114,19 @@
     }
   }
   // ------------------------- Fonction faite par Aymeric FIN ----------------------------
+
+  // Affichage de la liste des salons
+  function AfficheStand($idSalon)
+  {
+    include('db.php'); 
+    try {
+        $sql = $conn->prepare('SELECT * FROM `stand` WHERE `acceptationStand` != 0 AND `idSalon` = '.$idSalon);
+        $sql->execute();
+        $result = $sql->fetchAll();
+        return json_encode($result);
+      } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+      }
+  }
 
 ?>
