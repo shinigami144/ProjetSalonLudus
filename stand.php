@@ -108,6 +108,7 @@
             echo'
             <div id="PageAdminStand">
                 <form id="divInformationEntreprise" enctype="multipart/form-data" action="modifStand.php" method="POST">
+                <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTANDFORMMODIF">
                     <div id="stand_image_container">
                         <label for="ALogoEntreprise_UploadBtn">
                             <img src="'.$data[0]['imageStand'].'" id="AlogoEntreprise" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">

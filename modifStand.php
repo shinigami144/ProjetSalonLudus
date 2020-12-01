@@ -4,11 +4,11 @@ if(isset($conn) && ($_POST != NULL)){
     $sql = "UPDATE stand SET nomStand=?,descriptionStand=?,adresseStand=?,imageStand=?,pitchStand=?,siteStand=? WHERE idStand=?"; // ajouter site stand 
     $sql2 = "UPDATE fichier SET nomFichier=?,lienFIchier=? WHERE idStand=?";
     $req = $conn->prepare($sql);
-    //echo $_POST["nomEntreprise"];
-    //echo $_POST['idStand'];
-    //echo $_POST['descriptionEntreprise'];
-    //echo $_POST['adresseEntreprise'];
-    //echo $_POST['siteEntreprise']; // manque site
+    echo $_POST["nomEntreprise"];
+    echo $_POST['idStand'];
+    echo $_POST['descriptionEntreprise'];
+    echo $_POST['adresseEntreprise'];
+    echo $_POST['siteEntreprise']; // manque site
     $pathnameLogo = pathinfo($_FILES["LogoEntreprise_Upload"]["name"]);
     $pathnameBrochure = pathinfo($_FILES['fileToUpload']["name"]);
     //var_dump($pathnameBrochure);
