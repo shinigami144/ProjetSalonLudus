@@ -174,7 +174,7 @@
                 </label>
             </div> 
             <div class="form-group">
-                <label for="condition">J'accepte les conditions d'utilisation et de confidencialité :</label>
+                <label for="condition">J'accepte <a href="conditions.php" target="_blank">les conditions d'utilisation et de confidentialité :</a></label>
                 <input type="checkbox" class="form-control" name="condition" required>
             </div>
             <input type="submit" class="btn btn-primary" value="S'inscrire">

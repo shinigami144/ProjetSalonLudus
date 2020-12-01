@@ -53,6 +53,44 @@
         header('location: pageProfil.php');
     }*/
 
+    if (isset($_POST['ancienmdp']) and isset($_POST['newmdp']) and isset($_POST['confimdp']))
+    {
+        if (!empty($_POST['ancienmdp']) and !empty($_POST['newmdp']) and !empty($_POST['confimdp']))
+        {
+            if(CheckAncienMdp($_POST['ancienmdp']))
+            {
+                if ($_POST['newmdp'] == $_POST['confimdp'])
+                {
+                    if (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{10,}$#',$_POST['confimdp'])) 
+                    {
+                        if(ChangerMdp($_POST['confimdp']))
+                        {
+                            echo "Mot de passe bien changé.";
+                        }
+                        else
+                        {
+                            echo "Problème dans ma fonction AHAH.";
+                        }
+                    }
+                    else
+                    {
+                        echo 'Format du mdp incorrect.';
+                    }
+
+                }
+                else 
+                {
+                    echo "Les deux nouveaux mdp ne correpondent pas.";
+                }
+            }
+            else
+            {
+                echo "Ancien mdp incorrect";
+            }
+        }
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -240,11 +278,11 @@
             <form method="post" id="mdpchange" >
             <h2>Modification du mot de passe</h2>
                 <label for="ancienmdp">Ancien mot de passe :</label>
-                <input type="text" name="ancienmdp" >
+                <input type="password" name="ancienmdp" >
                 <label for="newmdp">Nouveau mot de passe :</label>
-                <input type="text" name="newmdp" >
+                <input type="password" name="newmdp" >
                 <label for="confimdp">Confirmation mot de passe :</label>
-                <input type="text" name="confimdp" >
+                <input type="password" name="confimdp" >
                 <input type="submit" value="Valider">
             </form>
     </div>

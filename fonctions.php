@@ -1129,4 +1129,43 @@
       }
   }
 
+  function CheckAncienMdp($ancienMdp)
+  {
+    include('db.php'); 
+    try {
+        $sql = $conn->prepare('SELECT mdpUtilisateur FROM `utilisateur` WHERE `mailUtilisateur` = "'.$_SESSION['mail'].'"');
+        $sql->execute();
+        $result = $sql->fetchAll();
+        foreach ($result as $user) {
+          $mdpBase = $user['mdpUtilisateur'];
+        }
+        if (password_verify($ancienMdp, $mdpBase))
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+      }
+  }
+
+  function ChangerMdp($nouveauMdp)
+  {
+    include('db.php'); 
+    $mdpCrypte = password_hash($nouveauMdp,PASSWORD_DEFAULT);
+    try {
+      $sql = 'UPDATE `utilisateur` SET `mdpUtilisateur` = "'.$mdpCrypte.'" WHERE `utilisateur`.`mailUtilisateur` = "'.$_SESSION['mail'].'";';
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+      return true;
+    } catch(PDOException $e) {
+      echo $sql . "<br>" . $e->getMessage();
+      return false;
+    }
+  }
+
+
 ?>

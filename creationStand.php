@@ -14,7 +14,7 @@
     <form action="./addStand.php" method="POST">
         <!-- Remplacer la valeur mise par défaut par la valeur en POST de l'id du salon -->
         <?php 
-            $idSalon = 1;
+            $idSalon = $_SESSION['idSalon'];
             echo("<input style='display:none;' name='idSalon' type='text' value='".$idSalon."'>"); 
         ?>
 
