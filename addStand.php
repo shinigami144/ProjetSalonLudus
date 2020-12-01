@@ -1,6 +1,7 @@
 <?php
 require("db.php");
 include('fonctions.php');
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$idSalon = $_POST["idSalon"];
@@ -19,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$idPaysStand = RecupIdPays($pays);
 
 	$acceptationStand = 0;
-	$ouvertStand = 0;
+	$ouvertStand = 1;
 	$stockInfoStand = 0;
 
 	// echo( "
@@ -107,6 +108,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$id = $row["idStand"];
 		}
 		echo $id;
+	}
+
+	$idUtilisateur = $_POST["idUtilisateur"];
+	$droit = 1;
+	$link = "./stand.php?idStand=".$id;
+
+	$req = "INSERT INTO adminstand(
+		idUtilisateur,
+		idStand,
+		droitAStand,
+		lienAStand) 
+		VALUES(
+		".$idUtilisateur.",
+		".$id.",
+		".$droit.",
+		'".$link."')";
+
+	echo($req);
+
+	try
+	{
+		$stmt = $conn->prepare($req);
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+	}
+
+	if(isset($conn))
+	{
+		if ($stmt->execute() === TRUE) 
+		{
+		  echo "New record created successfully";
+		}
+		else
+		{
+			echo $e->getMessage();
+		}
+	}
+	else
+	{
+		echo "Can't connect to DB";
 	}
 
     header("Location: ./stand.php?idStand=".$id);
