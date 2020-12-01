@@ -85,7 +85,7 @@
                         S\'ajouter a la file d\'attente de rendez-vous
                     </button>';
                     if($permission == 2){
-                        echo '<button id="ButtonCallUser" onclick="CallUser()">Call</button>';
+                        echo '<button id="ButtonCallUser"onclick="CallUser()">Call</button>';
                         echo '<button id="ButtonSupressUserInWaitingList" onclick="removeUserFromWaitingList()">Next</button>';
                     }
                     echo'

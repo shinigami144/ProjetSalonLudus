@@ -1,6 +1,3 @@
-var nbFile = 650;
-var timer = setInterval(myTimer, 1000);
-
 
 //Allow the header to be correctly placed at the laoding of the page
 $(document).ready(function(){
@@ -13,15 +10,30 @@ $(document).ready(function(){
 let modal = $("#myModal");
 let span = $(".close");
 
-function myTimer() {
-    if( nbFile == 1){
-        clearInterval(timer);
-        $("#decrementation").html(nbFile);
-        modal.css("display","block");
-    }
-    nbFile--;
-    $("#decrementation").html(nbFile);
-    
+setInterval(CallBDD,150);
+var popUpOnce = 0;
+function CallBDD(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+            if(xhttp.responseText == 1 && popUpOnce==0){
+                //console.log("ALLO");
+                popUp();
+                popUpOnce=1;
+            }
+        }
+    };
+    xhttp.open("GET", "./UserRequestPositionFileAttente.php?id="+sessionStorage.getItem("idUtilisateur"), true);
+    xhttp.send();
+}
+
+function dePopUp(){
+    modal.css("display","none");
+}
+
+function popUp(){
+    modal.css("display","block");
+    setTimeout(dePopUp,5000);
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -45,8 +57,6 @@ $("#buttonSalon").click(function(){
 });
                         
 $("#buttonStands").click(function(){
-    
-    //if()
     iframe.src = "pageSalon.php?id=";
     console.log(iframe);
     

@@ -98,19 +98,35 @@ function SaveChangeButtonDisplay(){
 // initialisation des onchangeListener
 
 function CallUser(){
-    var href="skype:Mail@Mail.fr?call"
-    var text = "skype:";
-    var extend ="?call";
+    console.log("CALL");
+    var date = new Date();
+    var textDate = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear() + "%20" + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+    console.log(date.getDay());
+    var text = "https://teams.microsoft.com/l/meeting/new?subject=Projet%20SIEP&content=test%20lien&attendees=";
+    var extend ="&startTime=";
     var aleph = document.getElementById("ListeFileAttente");
     var beth = aleph.children;
     // premier mail de la liste
     var mail = beth[0].children[2].textContent;
-    if(mail == ""){
+    var standmail = "," + document.getElementById("AemailEntreprise").value;
+    //console.log("mail",mail);
+    if(mail != ""){
         text+= mail;
+        text+=standmail;
         text+= extend;
-        console.log(text);
+        text+=textDate;
+        console.log("text",text);
         window.open(text);
     }
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("debug").innerHTML = xhttp.responseText;
+        }
+    };
+    xhttp.open("GET", "./ChangePositionWhenCall.php?mail="+mail, true);
+    xhttp.send();
+    
 }
 
 

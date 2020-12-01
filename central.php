@@ -6,9 +6,18 @@ $sql = "SELECT idStandFdA FROM utilisateur WHERE mailUtilisateur=?";
 $req = $conn->prepare($sql);
 $req->execute([$_SESSION['mail']]);
 $data = $req->fetchAll();
-echo '<script>
-    var idFile='.$data[0]["idStandFdA"].';
-</script>';
+if($data[0]['idStandFdA'] == null){
+    echo '<script>
+        var idFile=null;
+        sessionStorage.setItem("idUtilisateur","'.$_SESSION['idUtilisateur'].'");
+    </script>';
+}
+else{
+    echo '<script>
+        var idFile='.$data[0]["idStandFdA"].';
+        sessionStorage.setItem("idUtilisateur","'.$_SESSION['idUtilisateur'].'");
+    </script>';
+}
 ?>
 
 <html>
@@ -52,37 +61,10 @@ echo '<script>
       <div class="modal-content">
           <div class="w3-display-container w3-row">
               <div class="w3-col l1">
-                   <span class="close w3-display-topright">&times;</span>
               </div>
               <div class="w3-col l11">
-                <span>C'est votre tour.</span> 
-                  <br>
-      
-              <?php
-              try {
-                  $sql = $conn->prepare('SELECT idStandFdA FROM Utilisateur WHERE mailUtilisateur = "'.$_SESSION['mail'].'"');
-                  $sql->execute();
-                  $result = $sql->fetchAll();
-                  foreach ($result as $idstand) {
-                      $idstandrdv = $idstand['idStandFdA'];
-                  }
-              }catch(PDOException $e) {
-                  echo "Error: " . $e->getMessage();
-              }if(isset($idstandrdv)){
-                  $sql = $conn->prepare('SELECT lienAStand FROM adminstand WHERE idStand = "'.$idstandrdv.'"');
-              $sql->execute();
-              $result = $sql->fetchAll();
-              foreach ($result as $lienstand) {
-                  $lienrdv = $lienstand['lienAStand'];
-              }
-              echo'
-              <a><img src="https://cdn.vox-cdn.com/thumbor/xGx425irVzHq-r8-_vTZrWo-79A=/0x0:1320x880/920x613/filters:focal(555x335:765x545):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/55270365/newskypelogo.1497525155.jpg" style="width:25%;"/>
-            Vous allez etre appelé</a>
-              ';
-              }
-              ?>
+                <span>Vous avez été invité Regarder vos mails</span>
               </div>
-              
             </div>
         </div>
     </div>
@@ -107,9 +89,10 @@ echo '<script>
     <script src="./main.js"> </script>         
     <script>
         function MoveToStand(){
-            document.getElementById('bodyPage').src = "./stand.php?idStand="+idFile;
-            console.log(document.getElementById('bodyPage').src);
-
+            if(idFile !=null){
+                document.getElementById('bodyPage').src = "./stand.php?idStand="+idFile;
+                console.log(document.getElementById('bodyPage').src);
+            }
         }
     </script>
 
