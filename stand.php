@@ -58,7 +58,7 @@
                 <div id="divInformationEntreprise" class="container">
                     <div class="rows">
                       <div class="col-md-12">
-                        <h1 class="text-center text-uppercase"> La Ludus Académie </h1>
+                        <h1 class="text-center text-uppercase"> '.$data[0]["nomStand"].' </h1>
                       </div>
                     </div>
                     <div class="row">
@@ -109,10 +109,15 @@
                             </div>
                               <p id="descriptionEntreprise" contenteditable="false">'.$data[0]['descriptionStand'].'</p>
                               <div id="Brochure">
-                                <a href="./DataFile/Exemple_MainActivity.pdf" download="brochure_stand" id="download_brochure_stand" class="badge badge-light">
-                                  <label for="download_brochure_stand" class="font_general lead">Télécharger la Brochure</label>
-                                  <img src="css/DownloadIcon.png" width=24 height=24 /> <!-- POUR TELECHARGER LA BROCHURE (client) -->
-                                </a>
+                                  ';
+                                  if($brochurelink != null){
+                                    echo' 
+                                    <a href="'.$brochurelink.'" download="brochure_stand" id="download_brochure_stand" class="badge badge-light">
+                                      <label for="download_brochure_stand" class="font_general lead">Télécharger la Brochure</label>
+                                      <img src="css/DownloadIcon.png" width=24 height=24 /> <!-- POUR TELECHARGER LA BROCHURE (client) -->
+                                    </a> ';
+                                  }
+                                echo'
                               </div>
                             </div>
                           </div>
@@ -138,13 +143,14 @@
             echo'
             <div id="PageAdminStand" class="container">
                 <form id="divInformationEntreprise" class="container" enctype="multipart/form-data" action="modifStand.php" method="POST">
+                  <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDADMINSTANDMODIF">
                   <div class="form-row">
                     <div class="col-md-5">
                       <div id="stand_image_container" class="card card-inverse card-primary">
                         <label for="ALogoEntreprise_UploadBtn">
                           <img src="'.$data[0]['imageStand'].'" id="AlogoEntreprise" class="img-fluid" name="LogoEntreprise" alt="Image Avatar" title="Image du Stand">
                         </label>
-                        <input type="file" name="LogoEntreprise_Upload" value="" id="ALogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
+                        <input type="file" name="LogoEntreprise_Upload" value='.$data[0]['imageStand'].' id="ALogoEntreprise_UploadBtn" accept="image/png, image/jpeg, image/jpg" style="display: none;">
                       </div>
                     </div>
                     <div class="col-md-7">

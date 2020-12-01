@@ -21,8 +21,7 @@ picthEntreprise.addEventListener("dblclick",ChangeContentEditable);
 var divAdminStand = document.getElementById("PageAdminStand");
 divAdminStand.style.display = "none"; // force au chargement pour que l'on ne le vois pas ( si je le met dans le CSS il ne se modifie jamais DAVID)
 var buttonSubmitChange = document.getElementById("submitBtnChangeStand");
-buttonSubmitChange.style.display = "none";
-
+buttonSubmitChange.style.display = "block";
 // Appuie sur le bouton submit du form
 var submitBtnModifStand = document.getElementById('submitBtnChangeStand'); // Button Submit
 
