@@ -21,8 +21,7 @@ picthEntreprise.addEventListener("dblclick",ChangeContentEditable);
 var divAdminStand = document.getElementById("PageAdminStand");
 divAdminStand.style.display = "none"; // force au chargement pour que l'on ne le vois pas ( si je le met dans le CSS il ne se modifie jamais DAVID)
 var buttonSubmitChange = document.getElementById("submitBtnChangeStand");
-buttonSubmitChange.style.display = "none";
-
+buttonSubmitChange.style.display = "block";
 // Appuie sur le bouton submit du form
 var submitBtnModifStand = document.getElementById('submitBtnChangeStand'); // Button Submit
 
@@ -89,7 +88,7 @@ function ChangeTelEntreprise(){
 
 
 function SaveChangeButtonDisplay(){
-    
+
     buttonSubmitChange.style.display = "block";
 
 }
@@ -169,7 +168,7 @@ function removeUserFromWaitingList(){
     var beth = aleph.children;
     // premier mail de la liste
     var mail = beth[0].children[2].textContent;
-    
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
@@ -188,12 +187,13 @@ function ChangeMode(){
         divVisiteur.style.display = "block";
         divAdminStand.style.display="none";
         button.textContent = "Passer en mode édition";
-        
+        button.setAttribute('class','btn btn-danger font_ui btn-lg') // PAR DRUCKES LUCAS - MODIFIE LE STYLE DU BOUTON
     }
     else{
         divVisiteur.style.display = "none";
         divAdminStand.style.display="block";
         button.textContent = "voir le preview";
+        button.setAttribute('class','btn btn-success font_ui btn-lg '); // PAR DRUCKES LUCAS - MODIFIE LE STYLE DU BOUTON
     }
-    
+
 }
