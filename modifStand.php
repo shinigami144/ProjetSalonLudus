@@ -65,6 +65,6 @@ if(isset($conn) && ($_POST != NULL)){
 		echo "<script> Connection failed: " . $e->getMessage() . "</script>";
 	}
     //$req->execute([$_POST['nomEntreprise'],$_POST['descriptionEntreprise'],$_POST['idStand']]);
-    //header("Location: ./stand.php?idStand=".$_POST['idStand']);
+    header("Location: ./stand.php?idStand=".$_POST['idStand']);
 }
 ?>

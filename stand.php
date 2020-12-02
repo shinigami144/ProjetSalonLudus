@@ -171,7 +171,7 @@
                           <input type="email" class="form-control font_ui" name="emailEntreprise" value="'.$data2[0]['mailUtilisateur'].'" placeholder="truc@tucr.com" id="AemailEntreprise" readonly pattern="\^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
                         </div>
                         <div class="form-group col-md-4">
-                          <input type="text" class="form-control font_ui" name="siteEntreprise" value="'.$data[0]['siteStand'].'" placeholder="https://www.w3schools.com/" id="AsiteEntreprise" readonly>
+                          <input type="text" class="form-control font_ui" name="siteEntreprise" value="'.$data[0]['siteStand'].'" id="AsiteEntreprise" readonly>
                         </div>
                         <div class="form-group col-md-6">
                           <input type="tel"class="form-control font_ui" name="telephoneEntreprise"  value="'.$data2[0]['telUtilisateur'].'" placeholder="+2486442727" id="AtelEntreprise" pattern="(^[+]|^[0])+[1-9]+[0-9]*$" readonly>
@@ -213,7 +213,7 @@
                     <input style="display:none;" type="number" value="'.$data[0]['idStand'].'" name="idStand" id="IDSTANDSUPRESS">
                     <input class="btn btn-danger btn-lg" type="submit" value="Supprimer le stand">
                 </form>
-            </div
+            </div>
             ';
             echo'<div>
                     <button class="btn btn-danger btn-lg font_ui" id="ButtonChangeModeMOdification" onclick="ChangeMode()">Passer en mode edition</button>

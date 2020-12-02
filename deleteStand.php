@@ -21,6 +21,6 @@ if(isset($conn) && ($_POST != NULL)){
 	{
 		echo "<script> Delete failed: " . $e->getMessage() . "</script>";
 	}
-    header("Location: ./index.php");
+    header("Location: ./pageSalon.php");
 }
 ?>

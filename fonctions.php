@@ -34,11 +34,11 @@
     {
         include('db.php'); 
         try {
-          $sql = $conn->prepare('SELECT nom_fr_fr FROM pays');
+          $sql = $conn->prepare('SELECT nom_fr_fr, idPays FROM pays');
           $sql->execute();
           $result = $sql->fetchAll();
           foreach ($result as $user) {
-              echo '<option value="'.$user['nom_fr_fr'].'">'.$user['nom_fr_fr'].' </option>';
+              echo '<option value="'.$user['idPays'].'">'.$user['nom_fr_fr'].' </option>';
           }
         } catch(PDOException $e) {
           echo "Error: " . $e->getMessage();
@@ -47,17 +47,7 @@
 
     function RecupIdPays($nomPays)
     {
-        include('db.php'); 
-        try {
-          $sql = $conn->prepare('SELECT idPays FROM pays WHERE nom_fr_fr = "'.$nomPays.'"');
-          $sql->execute();
-          $result = $sql->fetchAll();
-          foreach ($result as $user) {
-              return $user['idPays'];
-          }
-        } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
+        return $nomPays;
     }
 
     function SupprimerUnUtilisateur($mail)
@@ -361,7 +351,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -374,7 +364,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -387,7 +377,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateFinSalon` = "'.$dateFin.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateFinSalon` = "'.$dateFin.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -400,7 +390,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `nomSalon` = "'.$nom.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `nomSalon` = "'.$nom.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -413,7 +403,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'" AND `dateDebutSalon` = "'.$dateDebut.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'" AND `dateDebutSalon` = "'.$dateDebut.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -426,7 +416,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'" AND `dateFinSalon` = "'.$dateFin.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'" AND `dateFinSalon` = "'.$dateFin.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -439,7 +429,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'" AND `nomSalon` = "'.$nom.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `villeSalon` = "'.$ville.'" AND `nomSalon` = "'.$nom.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -452,7 +442,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `dateFinSalon` = "'.$dateFin.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `dateFinSalon` = "'.$dateFin.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -465,7 +455,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `nomSalon` = "'.$nom.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `nomSalon` = "'.$nom.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -478,7 +468,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateFinSalon` = "'.$dateFin.'" AND `nomSalon` = "'.$nom.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateFinSalon` = "'.$dateFin.'" AND `nomSalon` = "'.$nom.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -491,7 +481,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateFinSalon` = "'.$dateFin.'" AND `dateDebutSalon` = "'.$dateDebut.'" AND `villeSalon` = "'.$ville.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateFinSalon` = "'.$dateFin.'" AND `dateDebutSalon` = "'.$dateDebut.'" AND `villeSalon` = "'.$ville.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -504,7 +494,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `nomSalon` = "'.$nom.'" AND `dateDebutSalon` = "'.$dateDebut.'" AND `villeSalon` = "'.$ville.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `nomSalon` = "'.$nom.'" AND `dateDebutSalon` = "'.$dateDebut.'" AND `villeSalon` = "'.$ville.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -517,7 +507,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `nomSalon` = "'.$nom.'" AND `dateFinSalon` = "'.$dateFin.'" AND `villeSalon` = "'.$ville.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `nomSalon` = "'.$nom.'" AND `dateFinSalon` = "'.$dateFin.'" AND `villeSalon` = "'.$ville.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -530,7 +520,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `dateFinSalon` = "'.$dateFin.'" AND `villeSalon` = "'.$ville.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `dateFinSalon` = "'.$dateFin.'" AND `villeSalon` = "'.$ville.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -543,7 +533,7 @@
       {
         include('db.php');
         try {
-          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `dateFinSalon` = "'.$dateFin.'" AND `villeSalon` = "'.$ville.'"');
+          $sql = $conn->prepare('SELECT * FROM `salon` WHERE `dateDebutSalon` = "'.$dateDebut.'" AND `dateFinSalon` = "'.$dateFin.'" AND `villeSalon` = "'.$ville.'" AND `idSuperAdmin` IS NOT NULL');
           $sql->execute();
           $result = $sql->fetchAll();
           return json_encode($result);
@@ -1120,7 +1110,7 @@
   {
     include('db.php'); 
     try {
-        $sql = $conn->prepare('SELECT * FROM `stand` WHERE `acceptationStand` != 0 AND `idSalon` = '.$idSalon);
+        $sql = $conn->prepare('SELECT * FROM `stand` WHERE `idSalon` = '.$idSalon);
         $sql->execute();
         $result = $sql->fetchAll();
         return json_encode($result);

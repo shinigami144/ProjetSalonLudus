@@ -23,6 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$ouvertStand = 1;
 	$stockInfoStand = 0;
 
+	// Aymeric et Manon 
+	$descriptionStand = str_replace("'"," ",$descriptionStand);
+	$pitchStand = str_replace("'"," ",$pitchStand);
+	$nomStand = str_replace("'"," ",$nomStand);
+	$adresseStand = str_replace("'"," ",$adresseStand);
+	// FIN Aymeric et Manon 
+
+
 	// echo( "
 	// ID SALON".$idSalon. 
 	// "<br/>"."NOM STAND -> ".$nomStand. 
@@ -63,11 +71,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		'".$ouvertureStand."',
 		'".$fermetureStand."',
 		'".$imageStand."',
-		'".$codePostalStand."',
+		".$codePostalStand.",
 		'".$pitchStand."',
 		'".$siteStand."',
 		'".$villeStand."',
-		'".$idPaysStand."')";
+		".$idPaysStand.")";
 	
 	try
 	{
@@ -80,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	if(isset($conn))
 	{
-		if ($stmt->execute() === TRUE) 
+		if ($stmt->execute()) 
 		{
 		  echo "New record created successfully";
 		}
