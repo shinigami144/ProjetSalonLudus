@@ -10,7 +10,7 @@
     - Mettre le dossier du projet dans le dossier www : C:\Wamp\www
     - Aller sur l'icone de wamp en bas à droit et cliquer sur PhpMyAdmin, entre l'utilisateur root sans mot de passe, puis executer.
     - Verifier que le server courant (en gaut a gauche en dessous du logo PhpMyAdmin) soit bien MySQL et non MariaBD.
-    - Aller dans l'onglet importer (situer dans le menu en haut) -> Choisir un fichier -> selectionner le fichier salonvirtuel.sql
+    - Aller dans l'onglet importer (situer dans le menu en haut) -> Choisir un fichier -> selectionner le fichier salonvirtuel.sql ( qui se trouve dans dossier BDD télécharger sur le git )
     - Pour vous ajouter en tant qu'admin du site, entre la requete suivante dans la table superadmin (dans l'onglet SQL) en remplacent "votre mail" et "votre mdp" par le mail et le mdp que vous désirez : 
     INSERT INTO superadmin(mailSuperAdmin, mdpSuperAdmin) VALUES ("votre mail","votre mdp")
     - Executer la requete.
