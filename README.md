@@ -6,7 +6,7 @@
 
 2. METTRE EN PLACE LA BDD :
     - Installer Wampserver : https://www.wampserver.com/
-    - Lancer Wampserver (check que les 3 services soit actif).
+    - Lancer Wampserver (check que tous les services soit actif).
     - Mettre le dossier du projet dans le dossier www : C:\Wamp\www
     - Aller sur l'icone de wamp en bas à droit et cliquer sur PhpMyAdmin, entre l'utilisateur root sans mot de passe, puis executer.
     - Verifier que le server courant (en gaut a gauche en dessous du logo PhpMyAdmin) soit bien MySQL et non MariaBD.
